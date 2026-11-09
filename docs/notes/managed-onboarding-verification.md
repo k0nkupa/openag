@@ -1,0 +1,29 @@
+# OA-365 (formerly OA-363) managed integration onboarding
+
+Approved scope: specification #5 and the owner-approved implementation plan. Baseline: main `517eeae`. Source work only; no deployment, live credentials, devices or provider accounts changed.
+
+## Implemented behavior
+
+- The daemon creates a stable private connector key automatically, separately from owner access. Google and Composio share it through their existing encrypted stores. Existing key overrides import without rotation; mismatches, unsafe state and missing original keys require recovery. Independently constructed Google ciphertext remains readable and unchanged.
+- A trusted installation app address supplies the Composio callback. Local fallback uses the actual bound loopback port. The browser can reject an origin mismatch but cannot choose a trusted address through Host/forwarded headers or submitted values. Remote HTTPS routing must already exist; no tunnel or DNS change is made.
+- New records save their registered callback. Existing legacy records retain their original redirect configuration until reconnect/refresh records it. Google shares the managed key but keeps its existing provider-specific callback configuration; this slice migrates Composio callback setup only. An established address cannot silently change; in-flight exchanges keep the callback selected at start.
+- The Composio panel reports its state and relevant action, with one concise data-sharing/approval explanation. Legacy Apps, device authority, external-tool approval and no-replay behavior are preserved. Installer re-rendering preserves original Google/Composio configuration.
+- Contributor guidance and the glossary define the same approach for future integrations without adding a connector framework.
+
+## Controlled verification
+
+The initial new acceptance assertion failed on the baseline because Composio required a supplied key. It passed after implementation. Workspace build and standalone managed-onboarding, Composio connection/desk, Google connectors, owner-access, bot-knowledge and App Library checks passed. The managed check includes the real SDK OAuth/MCP/gateway/runner flow with controlled endpoints and no manually configured encryption key. Owner-access starts the actual daemon twice with isolated HOME/data and verifies automatic key reuse, actual-port local setup and installer dry-run preservation.
+
+Coverage includes key permissions, redaction, git exclusion, corrupt/missing/conflicting keys, interrupted publication, concurrent startup, independent legacy ciphertext, local/remote setup, invalid origins, legacy/new registration restart, pinned in-flight callbacks, device binding/revocation/expiry, refresh, disconnect races and external-action approval/no replay. DOM checks cover state labels, submitted browser origin, bad sign-in URLs, cancellation and one callback exchange under StrictMode for both providers. No unit/Jest/Vitest suite ran.
+
+The build briefly failed when adding two sources exceeded the handbook's existing eight-source-per-topic cap. The unnecessary manifest additions were removed; the authoritative Composio documentation remains an existing packaged source. A simultaneous check against the incomplete desk build returned 503; both build and the affected check passed after correcting the manifest. Existing desk bundle-size and parallel fixture HMR-port warnings are not release acceptance failures.
+
+Knowledge sources: docs/composio.md, docs/help/computer-connectors.md, docs/notes/read-connectors.md, docs/backup.md and docs/openag.md; aligned contributor guidance in AGENTS.md/CLAUDE.md. The knowledge integration checks verify the automatic-key and trusted-address explanation reaches API, Ollama, cached ACP/MCP and replacement/default bot configurations from the packaged handbook.
+
+Independent review found interrupted pre-link/empty-directory startup recovery gaps; added exact failing assertions, then safe recovery of a sole validated staged key or fresh empty directory. A private marker prevents replacement after a key has been used. The spec now explicitly retains Google callback configuration while migrating Composio callbacks. Standards and Spec focused follow-ups are clear. Built-in `codex review --base 517eeae` reviewed production commit `3ddf75f` and reported no actionable regressions; its daemon/desk typechecks and whitespace checks passed. MCP-tool startup/shutdown warnings in that review did not prevent completion. Subsequent amendments only record these results, ticket completion and the supporting historical OSS research; production code is unchanged.
+
+## Primary-source check and limits
+
+Checked on 2 November 2026: [Composio Connect](https://docs.composio.dev/docs/composio-connect) documents its shared MCP URL and separate upstream service consent. It recommends SDK/session endpoints for new application builders; this change retains OpenAg's already selected MCP-client path. [MCP authorization](https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization) describes registration mechanisms and provider authorization; no new SDK/framework is introduced here. This does not establish acceptance of a particular loopback or HTTPS callback by Composio.
+
+Real Composio registration, account consent, physical-phone return, public HTTPS routing and deployed acceptance remain unverified and outside this implementation's authority. Private key and encrypted account files need secured host backup; SQLite backup alone is insufficient. Same-OS-user processes are not isolated by these files. Private initialization markers distinguish an interrupted fresh directory from a lost used key. An empty unpublished directory or sole valid staged key recovers automatically; initialized missing-key state and ambiguous staging require recovery. Concurrent startup preserves the published winner.

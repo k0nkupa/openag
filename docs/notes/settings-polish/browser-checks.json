@@ -1,0 +1,62 @@
+{
+  "fixture": "Disposable loopback gateway; no inference or connected accounts",
+  "mobile": [
+    {
+      "page": "Bots",
+      "mainScrollWidth": 375,
+      "mainWidth": 375,
+      "pageScrollWidth": 390,
+      "pageWidth": 390
+    },
+    {
+      "page": "Connectors",
+      "mainScrollWidth": 375,
+      "mainWidth": 375,
+      "pageScrollWidth": 390,
+      "pageWidth": 390
+    },
+    {
+      "page": "Automations",
+      "mainScrollWidth": 375,
+      "mainWidth": 375,
+      "pageScrollWidth": 390,
+      "pageWidth": 390
+    },
+    {
+      "page": "Models",
+      "mainScrollWidth": 375,
+      "mainWidth": 375,
+      "pageScrollWidth": 390,
+      "pageWidth": 390
+    },
+    {
+      "page": "Proactive",
+      "mainScrollWidth": 360,
+      "mainWidth": 360,
+      "pageScrollWidth": 375,
+      "pageWidth": 375
+    },
+    {
+      "page": "Devices",
+      "mainScrollWidth": 390,
+      "mainWidth": 390,
+      "pageScrollWidth": 390,
+      "pageWidth": 390
+    },
+    {
+      "page": "Server",
+      "mainScrollWidth": 375,
+      "mainWidth": 375,
+      "pageScrollWidth": 390,
+      "pageWidth": 390
+    }
+  ],
+  "checks": [
+    "Seven Settings destinations render with semantic navigation",
+    "Server backup settings saved in temporary DB",
+    "Server and Proactive drafts survive task tab switches",
+    "Automation created paused and deleted through confirmation",
+    "Responsibility and history tabs separated",
+    "Missing provider search result shown explicitly"
+  ]
+}

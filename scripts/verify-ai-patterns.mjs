@@ -1,0 +1,117 @@
+// Actual production compositions in a disposable DOM; no model/provider, live data or unit runner.
+import assert from 'node:assert/strict';
+import {createRequire} from 'node:module';
+import {fileURLToPath} from 'node:url';
+const root=fileURLToPath(new URL('../',import.meta.url)),require=createRequire(root+'apps/desk/package.json');
+const {JSDOM}=require('jsdom'),React=require('react'),{act}=React;
+const dom=new JSDOM('<div id="root"></div>',{url:'http://ai-patterns.fixture/',pretendToBeVisual:true}),saved=new Map();
+const globals={window:dom.window,document:dom.window.document,navigator:dom.window.navigator,HTMLElement:dom.window.HTMLElement,Element:dom.window.Element,Node:dom.window.Node,
+  MutationObserver:dom.window.MutationObserver,getComputedStyle:dom.window.getComputedStyle.bind(dom.window),localStorage:dom.window.localStorage,sessionStorage:dom.window.sessionStorage,
+  matchMedia:()=>({matches:false,addEventListener(){},removeEventListener(){}}),requestAnimationFrame:fn=>setTimeout(()=>fn(performance.now()),0),cancelAnimationFrame:clearTimeout,IS_REACT_ACT_ENVIRONMENT:true};
+for(const [key,value] of Object.entries(globals)){saved.set(key,Object.getOwnPropertyDescriptor(globalThis,key));Object.defineProperty(globalThis,key,{configurable:true,value});}
+dom.window.matchMedia=globals.matchMedia;
+let vite,reactRoot;
+try{
+  const {createServer}=await import(require.resolve('vite'));
+  vite=await createServer({configFile:false,root:root+'apps/desk',resolve:{alias:{'@':root+'apps/desk/src'}},server:{middlewareMode:true,hmr:false},appType:'custom'});
+  const {ActivityTrace}=await vite.ssrLoadModule('/src/components/ActivityTrace.tsx');
+  const {ReportedPlan,WorkInspector}=await vite.ssrLoadModule('/src/components/WorkView.tsx');
+  const {MessageCopyButton}=await vite.ssrLoadModule('/src/components/Feed.tsx');
+  const {RecordedOutput,RecordedSources,RecordedFiles,parseRecordedTests,recordedSources}=await vite.ssrLoadModule('/src/components/RecordedEvidence.tsx');
+  const {RequestUsage}=await vite.ssrLoadModule('/src/components/RequestUsage.tsx');
+  const {ApprovalCard}=await vite.ssrLoadModule('/src/components/ApprovalCard.tsx');
+  const {AgentRequestsPanel}=await vite.ssrLoadModule('/src/components/AgentRequestsPanel.tsx');
+  const {StreamProvider}=await vite.ssrLoadModule('/src/stream.tsx');
+  const {createRoot}=require('react-dom/client');reactRoot=createRoot(document.getElementById('root'));
+  const transport={onClose:()=>()=>{},subscribe:async()=>()=>{}};
+  const settle=fn=>act(async()=>{fn?.();await new Promise(resolve=>setImmediate(resolve));});
+  const render=child=>settle(()=>reactRoot.render(React.createElement(StreamProvider,{token:'fixture',rtcTransport:transport,onAuthFailure:()=>{}},child)));
+  const button=text=>[...document.querySelectorAll('button')].find(item=>item.textContent.includes(text));
+  const triggers=()=>[...document.querySelectorAll('[data-slot="trace-collapsible-trigger"]')];
+  const event=(id,type,payload,roomId='main')=>({id,type,payload,roomId,actor:'coder',ts:1700000000000+id});
+  const events=[event(1,'turn_started',{turnId:'turn'}),event(2,'tool_call',{turnId:'turn',toolCallId:'one',tool:'run_shell',args:{command:'pwd'}}),
+    event(3,'tool_result',{turnId:'turn',toolCallId:'one',tool:'run_shell',ok:true,invocationOutcome:'returned',executionOutcome:'unknown',result:{stdout:'/fixture\n',stderr:'check target'}}),event(4,'turn_finished',{turnId:'turn',status:'finished'})];
+  await render(React.createElement(ActivityTrace,{events}));
+  assert.equal(triggers().length,1,'Settled turns start collapsed');assert.ok(document.body.textContent.includes('1 unconfirmed'));
+  assert.equal(document.querySelector('[data-slot="code-block"]'),null,'Closed summaries do not format evidence');
+  await settle(()=>triggers()[0].click());
+  const unknown=triggers().find(item=>item.textContent.includes('effect unconfirmed'));
+  assert.ok(unknown);assert.equal(unknown.querySelector('[data-slot="trace-line"]').dataset.status,undefined,'Returned-but-unconfirmed is not Failed');
+  await settle(()=>unknown.click());
+  assert.equal(document.querySelector('[aria-label="Standard output"]').textContent,'/fixture\n');
+  assert.equal(document.querySelector('[aria-label="Standard error"]').textContent,'check target');
+  assert.ok(document.body.textContent.includes('toolCallId'),'Exact lifecycle evidence remains available');
+  await render(React.createElement(ActivityTrace,{events:[event(5,'turn_started',{turnId:'active'}),event(6,'tool_call',{turnId:'active',toolCallId:'pending',tool:'read_file',args:{path:'file'}})]}));
+  assert.ok(document.querySelector('[data-status="running"]'),'Active operations have a running state');
+  await render(React.createElement(ActivityTrace,{events:[event(7,'tool_call',{turnId:'stale',toolCallId:'lost',tool:'run_shell',args:{command:'pwd'}}),event(8,'turn_finished',{turnId:'stale',status:'interrupted'})]}));
+  assert.ok(document.body.textContent.includes('1 unconfirmed'));assert.equal(document.querySelector('[data-status="running"]'),null,'Interrupted turns do not keep running');
+  await render(React.createElement(ReportedPlan,{plan:[{title:'Read source',state:'completed'},{title:'Make change',state:'in_progress'},{title:'Check result',state:'pending'}]}));
+  assert.ok(document.body.textContent.includes('1 of 3 reported done'));
+  assert.equal(document.querySelectorAll('[data-status="running"]').length,2);assert.equal(document.querySelectorAll('[data-status="pending"]').length,1);
+  assert.ok(document.body.textContent.includes('Reported pending'),'Plan claims remain reported progress');
+  await settle(()=>button('Queue').click());
+  assert.ok(document.body.textContent.includes('To do · 2')&&document.body.textContent.includes('Completed · 1'));
+  assert.equal(document.querySelectorAll('[data-status="pending"]').length,1,'Queue reuses reported states');
+  await render(React.createElement(ReportedPlan,{plan:[]}));assert.ok(document.body.textContent.includes('No plan reported'));
+
+  const tap='TAP version 13\nok 1 - first\nnot ok 2 - second\n# tests 2\n# pass 1\n# fail 1\n';
+  assert.equal(parseRecordedTests(tap).failed,1);
+  for(const invalid of [tap+'# tests 2\n',tap+'# skipped 0\n# skipped 0\n',tap.replace('# pass 1','# pass 3'),'x'.repeat(128001)])assert.equal(parseRecordedTests(invalid),undefined,'Ambiguous or oversized reports are not summaries');
+  await render(React.createElement(RecordedOutput,{stdout:tap,stderr:'Error: fixture\n    at call (/fixture/file.ts:12:4)\nnot a frame'}));
+  assert.ok(document.body.textContent.includes('1 passed · 1 failed'));
+  await settle(()=>button('Reported stack trace').click());assert.ok(document.body.textContent.includes('at call (/fixture/file.ts:12:4)'));
+  const search={source:'brave',results:[{url:'https://example.com/report',title:'Recorded title',description:'Returned description'},{url:'javascript:alert(1)'},{url:'https://user:secret@example.com/'},{url:'https://example.com/report',title:'Recorded title'}]};
+  assert.equal(recordedSources(search).length,1);assert.deepEqual(recordedSources({...search,truncated:true}),[]);assert.deepEqual(recordedSources({results:search.results}),[]);
+  await render(React.createElement(RecordedSources,{value:search}));await settle(()=>button('Search results').click());
+  assert.equal(document.querySelector('a').href,'https://example.com/report');assert.equal(document.querySelector('a').rel,'noopener noreferrer');assert.ok(document.body.textContent.includes('1 source returned'));
+  const write=(id,path,outcome)=>({event:event(id,'tool_result',{executionOutcome:outcome}),history:[event(id-1,'tool_call',{tool:'write_file',args:{path}}),event(id,'tool_result',{executionOutcome:outcome})]});
+  await render(React.createElement(RecordedFiles,{items:[write(100,'src/one.ts','completed'),write(102,'src/two.ts','unknown'),write(104,'a/'.repeat(33)+'deep.ts','completed')]}));
+  await settle(()=>button('Recorded file changes').click());assert.ok(button('one.ts'));assert.ok(!button('two.ts')&&!button('deep.ts'),'Unknown and excessive-depth paths are excluded');
+  await settle(()=>button('one.ts').click());assert.ok(document.body.textContent.includes('write_file'),'Selection shows recorded evidence without a file read');
+  let usageReads=0,usagePage={records:[{manifest:{requestedModel:'fixture/model',context:{requiredCharacters:3200,limit:64000}},evidence:[{status:'returned',usage:{inputTokens:12,outputTokens:4}}]}],nextCursor:null};
+  const usageApi={getRequestManifests:async id=>{assert.equal(id,'usage-turn');usageReads++;return usagePage;}};
+  await render(React.createElement(RequestUsage,{api:usageApi,turnId:'usage-turn'}));assert.equal(usageReads,0,'Usage stays passive until opened');
+  await settle(()=>document.querySelector('[aria-label="Request usage"]').click());assert.equal(usageReads,1);
+  assert.ok(document.body.textContent.includes('Input tokens12')&&document.body.textContent.includes('Output tokens4'));
+  assert.equal(document.querySelector('[role="progressbar"]').getAttribute('aria-valuenow'),'5','Bar measures only the recorded character budget');
+  usagePage={records:[{manifest:{requestedModel:'adapter-default'},evidence:[]}],nextCursor:null};
+  await settle(()=>button('Refresh usage').click());assert.ok(document.body.textContent.includes('Not reported'));assert.equal(document.querySelector('[role="progressbar"]'),null,'Unavailable context does not create a percentage');
+  await render(null);
+  let copied,failCopy=false;
+  Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText:async text=>{if(failCopy)throw Error('denied');copied=text;}}});
+  await render(React.createElement(MessageCopyButton,{text:'**Exact**\nreply'}));
+  await settle(()=>document.querySelector('button').click());assert.equal(copied,'**Exact**\nreply');assert.ok(document.querySelector('[aria-label="Copied"]'));
+  failCopy=true;await settle(()=>document.querySelector('button').click());assert.ok(document.body.textContent.includes('Could not copy. Select the message text'));
+  const decisions=[],approval={id:'review',botId:'coder',roomId:'main',toolName:'run_shell',toolClass:'act-local',payload:{command:'pwd'},canEdit:true,reviewVersion:'review-1',status:'pending'};
+  const review=(id='review')=>React.createElement(ApprovalCard,{key:id,inline:true,approval:{...approval,id},onDecide:async(id,decision)=>{decisions.push({id,decision});}});
+  await render(review());assert.ok(document.querySelector('[data-slot="item"]'),'Simple inline confirmation uses native Item');
+  assert.ok(button('Accept')&&button('Edit')&&button('Respond')&&button('Ignore'));
+  assert.equal(button('Exact proposal').getAttribute('aria-expanded'),'false','Simple payload starts behind disclosure');
+  await settle(()=>button('Ignore').click());assert.deepEqual(decisions.at(-1).decision,{kind:'ignore',reviewVersion:'review-1'});
+  await render(review('accept'));await settle(()=>button('Accept').click());assert.deepEqual(decisions.at(-1).decision,{kind:'accept',reviewVersion:'review-1'});
+  await render(review('edit'));await settle(()=>button('Edit').click());assert.ok(document.querySelector('textarea'),'Existing JSON edit remains reachable');
+  await settle(()=>button('Approve edit').click());assert.deepEqual(decisions.at(-1).decision,{kind:'edit',payload:{command:'pwd'},reviewVersion:'review-1'});
+  await render(review('respond'));await settle(()=>button('Respond').click());assert.ok(document.querySelector('input'),'Existing response input remains reachable');
+  const request={id:'child',revision:1,createdAt:1,originMessageId:1,initiatorBotId:'boss',recipientId:'coder',kind:'consultation',status:'completed',result:'Found <b>literal</b> evidence',delivery:'delivered',deadlineAt:100,receiptIds:['receipt'],pendingInteractionIds:[]};
+  let reads=0;
+  const api={agentRequests:async()=>{reads++;return {requests:[request]};}};
+  const childEvents=[event(9,'turn_started',{turnId:'child'}),event(10,'turn_finished',{turnId:'child',status:'finished'}),event(11,'tool_call',{turnId:'child',toolCallId:'private',tool:'PRIVATE'},'another-room')];
+  await render(React.createElement(AgentRequestsPanel,{api,roomId:'main',events:childEvents,bots:[{id:'coder',name:'Coder'}]}));
+  assert.equal(reads,1);assert.equal(triggers().length,1);assert.ok(document.body.textContent.includes('Answered'));
+  await settle(()=>triggers()[0].click());assert.ok(document.body.textContent.includes('Found <b>literal</b> evidence'));assert.equal(document.querySelector('b'),null);
+  assert.ok(document.body.textContent.includes('Turn updates'));assert.ok(!document.body.textContent.includes('PRIVATE'),'Nested activity stays in the origin room');
+  assert.ok(document.querySelector('a[href*="receipt"]'),'Execution receipts remain linked');
+  const work={id:'parent',roomId:'main',botId:'boss',title:'Parent task',request:'Recorded request',status:'completed',nextStep:'Done',plan:[],progress:{},createdAt:1,updatedAt:1,revision:1};
+  const child={...work,id:'child-work',parentId:'parent',botId:'coder',title:'Child task'};
+  const activityReads=[];
+  const workApi={listWork:async query=>{assert.equal(query.parentId,'parent');return {work:[child],nextCursor:null};},getWorkRuns:async()=>({runs:[],nextCursor:null}),getWorkApprovals:async()=>({approvals:[],nextCursor:null}),
+    whoami:async()=>({kind:'device',access:'limited'}),getWorkActivity:async id=>{activityReads.push(id);return {events:childEvents.slice(0,2),nextCursor:null};}};
+  await render(React.createElement(WorkInspector,{api:workApi,item:work,bots:[],rooms:[],approvals:[],onDecide:async()=>assert.fail('Unexpected approval'),onChanged:()=>assert.fail('Unexpected write')}));
+  assert.deepEqual(activityReads,[],'Closed delegated Work does not read child activity');
+  await settle(()=>button('Child task').click());assert.deepEqual(activityReads,['child-work'],'Expansion reads only the selected authorized Work endpoint');
+  assert.ok(document.body.textContent.includes('Open delegated Work'));
+  console.log('PASS actual grouped activity, Unknown/interruption, command output/evidence, reported plan states, Copy success/refusal, native confirmation decisions/edits and scoped delegated result/activity. No providers or live writes.');
+}finally{
+  if(reactRoot)await act(()=>reactRoot.unmount());await vite?.close();dom.window.close();
+  for(const [key,descriptor] of saved)descriptor?Object.defineProperty(globalThis,key,descriptor):delete globalThis[key];
+}

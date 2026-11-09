@@ -1,0 +1,59 @@
+{
+  "checkpoint": "OA-401",
+  "realAdapters": [
+    {
+      "adapter": "claude",
+      "workspaceSessionReused": "be5f1c90-d12b-4c7c-8419-8d6681b357c4",
+      "readOnlyNewSession": "3748fa32-9f46-4f5b-8a42-d13034a68a1e",
+      "fullAccessSessionReused": "be7eb817-32aa-4e39-b933-99a80675efa0",
+      "turns": [
+        "b0035dc9-7da9-4243-af43-5c2ad8543d4d",
+        "94b5208a-2ce1-43e3-ac8a-8291389310e3",
+        "c794f480-1bf9-4938-9b17-f7b6d323cb0c",
+        "f1f0470d-75c4-43a4-b7e1-f6bf310c9a00"
+      ],
+      "nativeBypass": "refused/unavailable; no daemon fallback",
+      "inheritedMcp": "not started"
+    },
+    {
+      "adapter": "codex",
+      "workspaceSessionReused": "01a1a416-686c-7960-85c8-e9bee2f3ed1b",
+      "readOnlyNewSession": "01a1a416-b6a4-7383-a5b6-a0f3f82b537c",
+      "fullAccessSessionReused": "01a1a416-e79b-77f0-a64a-113e78dd79d9",
+      "turns": [
+        "297e7931-5cc5-4aae-8177-de9aa8c0c82a",
+        "4891449a-c6fc-4d05-8ce7-42da6db8714b",
+        "fb9175c4-cab4-44c8-b9ce-3462233dc61e",
+        "a92317f6-0d77-4962-930e-2700c4e5ec44"
+      ],
+      "nativeBypass": "refused/unavailable; no daemon fallback",
+      "inheritedMcp": "not started"
+    }
+  ],
+  "desk": [
+    "actual Composer slash interception",
+    "three presets",
+    "Full acknowledgement",
+    "Limited refusal",
+    "concurrent draft conflict",
+    "shared stream refresh",
+    "future-only default",
+    "active command cancellation retains Unknown",
+    "overlapping opening/reconnect and changed-agent reads initialize only the selected scope"
+  ],
+  "visual": [
+    "IAB desktop 1280x720",
+    "IAB mobile viewport 390x844",
+    "keyboard focus scrolls controls into view",
+    "Escape dismisses and returns focus",
+    "warning checkbox accessible name verified"
+  ],
+  "limits": [
+    "Controlled preview only, not deployed desk",
+    "No live hosted API acceptance",
+    "No remote business writes",
+    "No deployment",
+    "Not read/network/process isolation"
+  ],
+  "review": "Initial built-in findings corrected: scope-bound draft initialization and explicit unconfined/credential warning. Final review in ticket Log."
+}

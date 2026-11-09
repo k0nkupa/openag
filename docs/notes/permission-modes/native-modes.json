@@ -1,0 +1,106 @@
+{
+  "scope": "Raw ACP only; not OpenAg gateway, policy, receipt or filesystem-confinement acceptance",
+  "directory": "<owned-temporary-data>",
+  "adapters": [
+    {
+      "adapter": "claude",
+      "packageVersion": "0.97.0",
+      "stage": "settled",
+      "calls": [
+        {
+          "label": "confined-candidate",
+          "mode": "default",
+          "sessionId": "2feff53b-7da7-4da5-8dfb-3e46ff6c9d3f",
+          "target": "<owned-temporary-data>/claude/workspace/inside.txt",
+          "toolCallIds": [
+            "toolu_01Xz61g8rrS8DLNYerNejmhk"
+          ],
+          "permissionRequestIds": [
+            "toolu_01Xz61g8rrS8DLNYerNejmhk"
+          ],
+          "stopReason": "end_turn",
+          "targetWritten": false,
+          "markerMatches": false,
+          "permissionRequests": 1,
+          "toolCalls": 1,
+          "executedWithoutAuthorizationCallback": false
+        },
+        {
+          "label": "full-access-candidate",
+          "mode": "bypassPermissions",
+          "sessionId": "2feff53b-7da7-4da5-8dfb-3e46ff6c9d3f",
+          "target": "<owned-temporary-data>/claude/outside.txt",
+          "toolCallIds": [
+            "toolu_01WTtW4yjTuzekwKAcqrX2Sa"
+          ],
+          "permissionRequestIds": [],
+          "stopReason": "end_turn",
+          "targetWritten": true,
+          "markerMatches": true,
+          "permissionRequests": 0,
+          "toolCalls": 1,
+          "executedWithoutAuthorizationCallback": true
+        }
+      ],
+      "sessionId": "2feff53b-7da7-4da5-8dfb-3e46ff6c9d3f",
+      "availableModes": [
+        "default",
+        "acceptEdits",
+        "plan",
+        "auto",
+        "bypassPermissions"
+      ],
+      "sameSession": true,
+      "directMappingPreservesGate": false
+    },
+    {
+      "adapter": "codex",
+      "packageVersion": "2.3.0",
+      "stage": "settled",
+      "calls": [
+        {
+          "label": "confined-candidate",
+          "mode": "workspace-write",
+          "sessionId": "01a1a34a-7ba2-79d0-b97d-ac48d970ecf8",
+          "target": "<owned-temporary-data>/codex/workspace/inside.txt",
+          "toolCallIds": [
+            "exec-dd5c00b6-ec7e-4b88-a564-fd4548c632f6"
+          ],
+          "permissionRequestIds": [],
+          "stopReason": "end_turn",
+          "targetWritten": true,
+          "markerMatches": true,
+          "permissionRequests": 0,
+          "toolCalls": 1,
+          "executedWithoutAuthorizationCallback": true
+        },
+        {
+          "label": "full-access-candidate",
+          "mode": "agent-full-access",
+          "sessionId": "01a1a34a-7ba2-79d0-b97d-ac48d970ecf8",
+          "target": "<owned-temporary-data>/codex/outside.txt",
+          "toolCallIds": [
+            "exec-d28c2bf2-656d-4df2-8400-41f03058616c"
+          ],
+          "permissionRequestIds": [],
+          "stopReason": "end_turn",
+          "targetWritten": true,
+          "markerMatches": true,
+          "permissionRequests": 0,
+          "toolCalls": 1,
+          "executedWithoutAuthorizationCallback": true
+        }
+      ],
+      "sessionId": "01a1a34a-7ba2-79d0-b97d-ac48d970ecf8",
+      "availableModes": [
+        "read-only",
+        "workspace-write",
+        "agent",
+        "agent-full-access"
+      ],
+      "sameSession": true,
+      "directMappingPreservesGate": false
+    }
+  ],
+  "directNativeMappingCompatible": false
+}

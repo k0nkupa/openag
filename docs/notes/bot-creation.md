@@ -1,0 +1,24 @@
+# New bot (OA-345)
+
+Owner and Full-access devices can use the plus on the right of the sidebar’s **Agents** heading. It opens the shared creation sheet and preserve the same draft when dismissed and reopened. Limited devices cannot create bots. The right-side sheet takes a name (40 characters), optional description (200), instructions (8,000) and model configuration. Names can repeat. The daemon assigns a unique lowercase handle, using a suffix on collision and `bot` when a name cannot form a usable handle or is reserved. The bot ID is that stable handle; renaming does not change it. `@everyone` remains reserved for addressing all members. Built-in actor names such as `user`, `slack`, `owner`, `primary`, `daemon`, `scheduler`, `system` and `poll` are also reserved so bot messages cannot be confused with human or system messages.
+
+Opening the sheet automatically loads available models into the shared searchable picker, grouped by source. Choose a model and supported effort; there is no adapter/provider dropdown or refresh step. Claude Code and Codex use ACP; hosted providers and Ollama use API. See [model picker](model-picker.md). Supported model and reasoning validation is shared with model settings. Discovery checks setup/catalogues, creates no model turn, and does not establish inference acceptance. ACP creation discovery uses a temporary work/log directory without OpenAg MCP access, cleaned after the probe settles. Credentials, CLI installation and sign-in remain administrator-managed; no credential form is provided. A conflicting administrator per-handle model override blocks creation with an actionable reason.
+
+## Creation and recovery
+
+- `GET /bots/creation/targets` lists supported targets without discovery.
+- `POST /bots/creation/discover` takes a UUID `requestId`, target and optional model. Its cached catalogue token is bound to that request, selected model and catalogue generation; it has no five-minute expiry.
+- `POST /bots` takes that request ID, text fields, target, model, snapshot ID and reasoning. The daemon validates/redacts text and commits the bot, creation receipt and `bot_created` configuration audit atomically. Instructions are not in the list response or audit. Existing policy defaults apply: local/external actions Ask and secrets Deny; locked classes retain their normal protections.
+- `GET /bots/creation/requests/:requestId` returns the created bot or null. All four routes require owner access. The `bots` API segment already prevents static shadowing.
+- Repeating the same creation returns the same bot, including after restart and catalogue refresh. Reusing its request ID with changed content is refused. Deliberately creating another same-name bot uses a new request ID and gets a different handle. The receipt stores a one-way hash of normalized submitted content, not a second copy of instructions.
+- The sheet blocks double submits and keeps its draft on errors. An uncertain response triggers status readback; if readback fails, editing and creation stay blocked until a status check succeeds. No automatic create retry is sent. A missing receipt permits retry with the same request ID; choices are validated against the current cached catalogue before submitting; a changed generation requires review.
+
+Creation does not add a room or membership, open a direct chat, run a turn, create Work, designate a default bot, copy another bot's memory/skills or grant additional permissions. The bot appears in Agents; the shared catalogue makes it available for room selection. The New room member picker remains OA-346. After creation, the desk opens the new agent’s direct conversation through the existing explicit chat action; this can create its direct room but runs no turn. Bot settings are in that conversation’s side panel.
+
+## Verification
+
+Run `pnpm -r build`, then `node --experimental-strip-types scripts/verify-bot-creation.mjs`. This checks the real gateway/storage with temporary data and controlled model discovery. Bot-model, default-bot, conversation-model and handbook checks cover existing callers and delivered guidance. Browser acceptance uses a temporary gateway and controlled ACP/provider transport. No unit/Jest/Vitest runners, live bot creation or real provider/model calls are required for these checks.
+
+Real runtime/policy acceptance is a separate manual gate requiring applicable authority. Source and controlled acceptance do not establish deployment or live inference acceptance. Bot deletion, management tools, room creation are outside this ticket.
+
+Model and reasoning choices now come from the persistent catalogue; no discovery runs during open, selection or creation. Creation tokens bind the current catalogue generation to the creation request, without a five-minute expiry. Existing-agent runtime switching is covered by [model selection](model-picker.md).

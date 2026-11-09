@@ -1,0 +1,3 @@
+# Keep server interactions separate from action approvals and Work questions
+
+A remote tool can ask the owner for information while its invocation is still running. Store this as a server interaction attached to that invocation, rather than ending the turn with a Work question or creating another action receipt. This preserves the distinction between a tool approval, provider participation and evidence of an external effect. A response cannot resume a dead invocation or authorize a replay; after restart the interaction is interrupted; uncertainty remains historical evidence without an acknowledgement requirement.

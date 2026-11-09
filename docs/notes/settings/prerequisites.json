@@ -1,0 +1,106 @@
+{
+  "source": "released OA-329 build on 4747",
+  "ownerLoginFull": true,
+  "ownerEditPersistedAndRestored": true,
+  "modelRun": false,
+  "walk": [
+    {
+      "size": "desktop",
+      "page": "Bots",
+      "document": 1440,
+      "heading": "Bots",
+      "viewport": 1440
+    },
+    {
+      "size": "desktop",
+      "page": "Connectors",
+      "document": 1440,
+      "heading": "Connectors",
+      "viewport": 1440
+    },
+    {
+      "size": "desktop",
+      "page": "Automations",
+      "document": 1440,
+      "heading": "Automations",
+      "viewport": 1440
+    },
+    {
+      "size": "desktop",
+      "page": "Models",
+      "document": 1440,
+      "heading": "Models",
+      "viewport": 1440
+    },
+    {
+      "size": "desktop",
+      "page": "Proactive",
+      "document": 1440,
+      "heading": "Proactive",
+      "viewport": 1440
+    },
+    {
+      "size": "desktop",
+      "page": "Memory & Skills",
+      "document": 1440,
+      "heading": "Memory & Skills",
+      "viewport": 1440
+    },
+    {
+      "size": "desktop",
+      "page": "Server & devices",
+      "document": 1440,
+      "heading": "Server & devices",
+      "viewport": 1440
+    },
+    {
+      "size": "phone",
+      "page": "Bots",
+      "document": 390,
+      "heading": "Bots",
+      "viewport": 390
+    },
+    {
+      "size": "phone",
+      "page": "Connectors",
+      "document": 390,
+      "heading": "Connectors",
+      "viewport": 390
+    },
+    {
+      "size": "phone",
+      "page": "Automations",
+      "document": 390,
+      "heading": "Automations",
+      "viewport": 390
+    },
+    {
+      "size": "phone",
+      "page": "Models",
+      "document": 390,
+      "heading": "Models",
+      "viewport": 390
+    },
+    {
+      "size": "phone",
+      "page": "Proactive",
+      "document": 390,
+      "heading": "Proactive",
+      "viewport": 390
+    },
+    {
+      "size": "phone",
+      "page": "Memory & Skills",
+      "document": 390,
+      "heading": "Memory & Skills",
+      "viewport": 390
+    },
+    {
+      "size": "phone",
+      "page": "Server & devices",
+      "document": 390,
+      "heading": "Server & devices",
+      "viewport": 390
+    }
+  ]
+}

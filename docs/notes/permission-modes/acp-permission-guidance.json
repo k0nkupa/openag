@@ -1,0 +1,287 @@
+{
+  "ticket": "OA-458",
+  "date": "2026-11-05",
+  "scope": "Local source and disposable gateway/runner/MCP journeys through installed subscription adapters. No deployment, installed skill copy or business-provider acceptance.",
+  "baseline": {
+    "command": "node scripts/verify-daemon-execution.mjs --real --adapter codex",
+    "model": "gpt-6.1-sol",
+    "result": "passed before runtime guidance change",
+    "limit": "Clean-history baseline did not reproduce the live refusal; it does not prove all models or retained conversations behaved correctly."
+  },
+  "realAcceptance": {
+    "command": "node scripts/verify-daemon-execution.mjs --real",
+    "result": "passed",
+    "requestScope": "Copy/read requests specify a bounded exact command but name no tool; write-denial and native-only probes explicitly select their intended boundary.",
+    "retainedHistory": "A mistaken read-only reply is linked to a completed participating turn and asserted eligible for conversation history before adapter dispatch.",
+    "adapters": [
+      {
+        "adapter": "claude",
+        "model": "sonnet",
+        "retainedHistoryVerified": true,
+        "checks": [
+          {
+            "check": "full-fresh.txt",
+            "preset": "full-access",
+            "revision": 2,
+            "session": "2d07f0cf-67a8-47d8-8ada-795c7ce14cf7",
+            "turnId": "0cc9cb8a-c80a-4ca4-89bd-9f809d5fa01b",
+            "toolCallId": "14b5fac9-5378-4c60-9aa1-1fb9154250e9",
+            "receiptId": "5fc0ec74-56cc-452a-96d1-c80b101da238",
+            "outcome": "completed",
+            "targetVerified": true
+          },
+          {
+            "check": "full-reused.txt",
+            "preset": "full-access",
+            "revision": 2,
+            "session": "2d07f0cf-67a8-47d8-8ada-795c7ce14cf7",
+            "turnId": "cb708ed4-965c-47b5-8bfa-efab6b7db7cc",
+            "toolCallId": "b6e4e8d2-0231-4727-a756-2155399b2f73",
+            "receiptId": "aebc1b9b-c109-45ec-b397-25055155898e",
+            "outcome": "completed",
+            "targetVerified": true
+          },
+          {
+            "check": "workspace-fresh.txt",
+            "preset": "workspace-write",
+            "revision": 3,
+            "session": "3d54f162-df6d-422d-b136-da0c9836ac46",
+            "turnId": "a72116cf-82af-46fc-bd77-3f69e291a652",
+            "toolCallId": "28d70111-b1ea-4235-9ea1-e866c757aa25",
+            "receiptId": "5e50b335-5149-41da-be1b-8b92d2b60a20",
+            "outcome": "completed",
+            "targetVerified": true
+          },
+          {
+            "check": "workspace-reused.txt",
+            "preset": "workspace-write",
+            "revision": 3,
+            "session": "3d54f162-df6d-422d-b136-da0c9836ac46",
+            "turnId": "c411723b-a733-438d-a25c-16cef06a7ab6",
+            "toolCallId": "545c2a6d-9b54-459d-bf18-6028d5d78fda",
+            "receiptId": "1fb46432-a723-4edd-84c9-6e7348279fe3",
+            "outcome": "completed",
+            "targetVerified": true
+          },
+          {
+            "check": "workspace-outside",
+            "preset": "workspace-write",
+            "revision": 3,
+            "session": "3d54f162-df6d-422d-b136-da0c9836ac46",
+            "turnId": "df00e74c-277e-43c3-ad40-fa1b9a558dca",
+            "toolCallId": "5c11c139-eaca-472e-9ca4-d694021df6e7",
+            "receiptId": "017a904e-60b0-45d2-8321-9ed5b095f90c",
+            "outcome": "failed",
+            "targetVerified": true
+          },
+          {
+            "check": "read-only-fresh",
+            "preset": "read-only",
+            "revision": 4,
+            "session": "16b4f9b5-7011-49d7-8c65-2d7aa7d8047e",
+            "turnId": "77326d8a-64be-4fce-ac2d-4d77e989aee6",
+            "toolCallId": "a9a41a45-4a5d-47c8-9576-1c7a7ab4b34b",
+            "receiptId": "0a0def8e-7047-49c5-befc-91d19604ddd6",
+            "outcome": "completed",
+            "targetVerified": true
+          },
+          {
+            "check": "read-only-reused",
+            "preset": "read-only",
+            "revision": 4,
+            "session": "16b4f9b5-7011-49d7-8c65-2d7aa7d8047e",
+            "turnId": "785edef9-da21-4703-8535-797ab7bb461c",
+            "toolCallId": "9fe288f5-5226-4c1d-8652-b4ab17c2f30c",
+            "receiptId": "eee32b66-5a15-4fde-98fc-37f0a5de4f8a",
+            "outcome": "completed",
+            "targetVerified": true
+          },
+          {
+            "check": "read-only-write",
+            "preset": "read-only",
+            "revision": 4,
+            "session": "16b4f9b5-7011-49d7-8c65-2d7aa7d8047e",
+            "turnId": "66f12bf2-b13f-4d43-ab7f-7cf5fc3ef5c7",
+            "toolCallId": "ba040096-87f0-4b02-8eaa-e34cbe4a798d",
+            "receiptId": "5bfb79cb-59db-4dd9-8f38-cebf9301cbc6",
+            "outcome": "failed",
+            "targetVerified": true
+          },
+          {
+            "check": "full-after-revision.txt",
+            "preset": "full-access",
+            "revision": 5,
+            "session": "22698e07-b308-4091-a269-c08445705a74",
+            "turnId": "3c26c334-0693-469e-b919-5fdbebd339eb",
+            "toolCallId": "89918abf-4020-4489-830b-02ef743fd915",
+            "receiptId": "5efdb5e8-bb63-450c-9ce0-de2a8a2aaed6",
+            "outcome": "completed",
+            "targetVerified": true
+          },
+          {
+            "check": "native-negative",
+            "session": "22698e07-b308-4091-a269-c08445705a74",
+            "turnId": "fffb826c-9087-4e28-b297-4e137f001d16",
+            "targetVerified": true
+          }
+        ]
+      },
+      {
+        "adapter": "codex",
+        "model": "gpt-6.1-terra",
+        "retainedHistoryVerified": true,
+        "checks": [
+          {
+            "check": "full-fresh.txt",
+            "preset": "full-access",
+            "revision": 2,
+            "session": "01a1a7ec-c118-72c2-9bf1-18e04b7f76c6",
+            "turnId": "4eef0a7a-bd9c-4570-99a4-07e0b4d99042",
+            "toolCallId": "d707ecab-7a91-4e71-a6f6-ca407a9a8b72",
+            "receiptId": "e1aff720-c0a3-4d85-9323-e9a4ed9f8da0",
+            "outcome": "completed",
+            "targetVerified": true
+          },
+          {
+            "check": "full-reused.txt",
+            "preset": "full-access",
+            "revision": 2,
+            "session": "01a1a7ec-c118-72c2-9bf1-18e04b7f76c6",
+            "turnId": "c827f5b0-9526-4199-bac8-f28355826ecd",
+            "toolCallId": "799061ee-3b93-423b-baa4-3fcb45659aa4",
+            "receiptId": "f92cb95d-0c0d-4083-80bf-f818e452c5fe",
+            "outcome": "completed",
+            "targetVerified": true
+          },
+          {
+            "check": "workspace-fresh.txt",
+            "preset": "workspace-write",
+            "revision": 3,
+            "session": "01a1a7ed-00dc-7820-8395-1f30811ca30a",
+            "turnId": "4d3ee292-7509-4c5d-ae64-7bef2d156bcd",
+            "toolCallId": "b8e6b70a-138a-4bd3-a3e9-a0ce1efc9573",
+            "receiptId": "789b9b1d-e475-4833-9947-6a582a6d2d64",
+            "outcome": "completed",
+            "targetVerified": true
+          },
+          {
+            "check": "workspace-reused.txt",
+            "preset": "workspace-write",
+            "revision": 3,
+            "session": "01a1a7ed-00dc-7820-8395-1f30811ca30a",
+            "turnId": "aafe2114-19cf-483f-847c-090900710483",
+            "toolCallId": "2d9e4dbf-16af-40a8-bb12-c1ba78e115e5",
+            "receiptId": "469d9193-57f2-4dc3-bb07-a57a86ce34b0",
+            "outcome": "completed",
+            "targetVerified": true
+          },
+          {
+            "check": "workspace-outside",
+            "preset": "workspace-write",
+            "revision": 3,
+            "session": "01a1a7ed-00dc-7820-8395-1f30811ca30a",
+            "turnId": "43fc1857-b6ea-4c4e-a056-63aec965c700",
+            "toolCallId": "93b6e675-c208-4c90-88b4-445d019af9c9",
+            "receiptId": "2eabfecf-ea74-4069-bb22-7d2329ff210d",
+            "outcome": "failed",
+            "targetVerified": true
+          },
+          {
+            "check": "read-only-fresh",
+            "preset": "read-only",
+            "revision": 4,
+            "session": "01a1a7ed-4fa4-71a3-95c4-47e648a0baf0",
+            "turnId": "a229942e-b068-462e-a10f-141d578aa58b",
+            "toolCallId": "b4d64eb0-90ed-4dde-b960-375db8863291",
+            "receiptId": "cbd8210f-9e73-4f1a-a366-ebbbbb3867a9",
+            "outcome": "completed",
+            "targetVerified": true
+          },
+          {
+            "check": "read-only-reused",
+            "preset": "read-only",
+            "revision": 4,
+            "session": "01a1a7ed-4fa4-71a3-95c4-47e648a0baf0",
+            "turnId": "779df923-d43b-4a32-b744-8397f836baec",
+            "toolCallId": "021d9844-4b49-4f1b-8c8a-c4afd4f47e3f",
+            "receiptId": "42127654-3590-4e66-953d-adabdb9c92ce",
+            "outcome": "completed",
+            "targetVerified": true
+          },
+          {
+            "check": "read-only-write",
+            "preset": "read-only",
+            "revision": 4,
+            "session": "01a1a7ed-4fa4-71a3-95c4-47e648a0baf0",
+            "turnId": "070677a4-b885-452f-90b8-7f3fa66e0ef7",
+            "toolCallId": "29998b88-5414-46ba-8201-81fdf09c7e9b",
+            "receiptId": "76d76093-6e63-4982-9ead-cdde3a3a82f4",
+            "outcome": "failed",
+            "targetVerified": true
+          },
+          {
+            "check": "full-after-revision.txt",
+            "preset": "full-access",
+            "revision": 5,
+            "session": "01a1a7ed-8e9f-76a2-b090-c2701c1e3c66",
+            "turnId": "856f70e6-4c65-4a4d-844a-f23bacc1b8ae",
+            "toolCallId": "7e734975-2cbc-4ede-8ca9-16b4c5b0d5f2",
+            "receiptId": "d9453004-645d-48f7-b7f6-b4cdbf921460",
+            "outcome": "completed",
+            "targetVerified": true
+          },
+          {
+            "check": "native-negative",
+            "session": "01a1a7ed-8e9f-76a2-b090-c2701c1e3c66",
+            "turnId": "523ce375-115c-42e5-8912-f26059e61923",
+            "targetVerified": true
+          }
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "command": "pnpm -r build",
+      "result": "passed; signin-relay wrangler deploy was dry-run only"
+    },
+    {
+      "command": "node scripts/build-knowledge.mjs",
+      "result": "passed after final help wording correction"
+    },
+    {
+      "command": "node scripts/verify-bot-knowledge.mjs",
+      "result": "passed four integration groups; controlled API/Ollama and fresh/cached ACP/MCP handbook and guidance delivery; no live providers"
+    },
+    {
+      "command": "node --check scripts/verify-daemon-execution.mjs",
+      "result": "passed"
+    },
+    {
+      "command": "node --check scripts/verify-bot-knowledge.mjs",
+      "result": "passed"
+    },
+    {
+      "command": "git diff --check",
+      "result": "passed"
+    }
+  ],
+  "review": {
+    "local": "Standards and Spec source reviews passed after correcting an ineligible history fixture and adapter-specific help wording.",
+    "builtin": "codex review --uncommitted with read-only developer instructions: exit 0; no substantive introduced defects in runtime guidance, acceptance harness, documentation or glossary.",
+    "scope": "Uncommitted source, harness, help and glossary. This evidence record and final ticket result were recorded after source review."
+  },
+  "knowledgeSources": [
+    "docs/help/approvals.md",
+    "docs/notes/acp.md",
+    "docs/notes/permission-sessions.md",
+    "apps/daemon/src/permissions.ts",
+    "apps/daemon/src/tools/execution.ts"
+  ],
+  "limits": [
+    "No unit/Jest/Vitest runners executed.",
+    "No deployment or installed-daemon change.",
+    "No real Accredo skill installation or managed skill-writer acceptance.",
+    "A passing bounded journey does not guarantee every model response will follow the guidance."
+  ]
+}

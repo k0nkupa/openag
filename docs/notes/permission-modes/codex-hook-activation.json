@@ -1,0 +1,59 @@
+{
+  "scope": "Raw ACP only; not OpenAg gateway, policy, receipt or filesystem-confinement acceptance",
+  "experiment": "pre-tool hook denial and failure",
+  "directory": "<owned-temporary-data>",
+  "adapters": [
+    {
+      "adapter": "codex",
+      "packageVersion": "2.3.0",
+      "stage": "settled",
+      "calls": [
+        {
+          "label": "hook-deny",
+          "mode": "agent-full-access",
+          "sessionId": "01a1a34f-7bcf-7411-b785-3cf6397680b6",
+          "target": "<owned-temporary-data>/codex/workspace/hook-denied.txt",
+          "toolCallIds": [
+            "exec-ee616626-00f0-4829-80bd-34e9c4e35023"
+          ],
+          "permissionRequestIds": [],
+          "stopReason": "end_turn",
+          "targetWritten": true,
+          "markerMatches": true,
+          "permissionRequests": 0,
+          "toolCalls": 1,
+          "executedWithoutAuthorizationCallback": true
+        },
+        {
+          "label": "hook-failure",
+          "mode": "agent-full-access",
+          "sessionId": "01a1a34f-7bcf-7411-b785-3cf6397680b6",
+          "target": "<owned-temporary-data>/codex/workspace/hook-failed.txt",
+          "toolCallIds": [
+            "exec-7f75194f-111f-4dc8-9490-556d48fd67b9"
+          ],
+          "permissionRequestIds": [],
+          "stopReason": "end_turn",
+          "targetWritten": true,
+          "markerMatches": true,
+          "permissionRequests": 0,
+          "toolCalls": 1,
+          "executedWithoutAuthorizationCallback": true
+        }
+      ],
+      "sessionId": "01a1a34f-7bcf-7411-b785-3cf6397680b6",
+      "availableModes": [
+        "read-only",
+        "workspace-write",
+        "agent",
+        "agent-full-access"
+      ],
+      "sameSession": true,
+      "directMappingPreservesGate": false,
+      "hookAudit": [],
+      "hookDenialEnforced": false,
+      "hookFailureClosed": false
+    }
+  ],
+  "directNativeMappingCompatible": false
+}

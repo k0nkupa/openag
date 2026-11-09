@@ -1,0 +1,24 @@
+{
+  "real": true,
+  "contractAudit": true,
+  "groups": 14,
+  "contractGaps": [
+    {
+      "adapter": "claude",
+      "feature": "server-requested user approval (elicitation)",
+      "status": "gap",
+      "openagApprovals": 1,
+      "remoteExecutions": 1,
+      "effectConfirmed": false
+    },
+    {
+      "adapter": "codex",
+      "feature": "server-requested user approval (elicitation)",
+      "status": "gap",
+      "openagApprovals": 1,
+      "remoteExecutions": 1,
+      "effectConfirmed": false
+    }
+  ],
+  "liveProviderCalls": 0
+}

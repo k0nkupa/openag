@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!-- Template. scripts/install-service.sh fills every value marked REPLACED with plutil; do not load this file directly. -->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.openag.daemon</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>REPLACED-node</string>
+    <string>REPLACED-repo/apps/daemon/dist/main.js</string>
+  </array>
+
+  <key>WorkingDirectory</key>
+  <string>REPLACED-repo</string>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>OPENAG_DATA</key>
+    <string>REPLACED</string>
+    <key>OPENAG_PORT</key>
+    <string>REPLACED</string>
+    <key>PATH</key>
+    <string>REPLACED</string>
+  </dict>
+
+  <key>RunAtLoad</key>
+  <true/>
+  <key>KeepAlive</key>
+  <true/>
+  <!-- Minimum seconds between launches; a killed daemon is back well inside 10s. -->
+  <key>ThrottleInterval</key>
+  <integer>5</integer>
+
+  <key>StandardOutPath</key>
+  <string>REPLACED/logs/openagd.out.log</string>
+  <key>StandardErrorPath</key>
+  <string>REPLACED/logs/openagd.err.log</string>
+</dict>
+</plist>

@@ -1,0 +1,34 @@
+{
+  "checkpoint": "OA-402",
+  "migration": 34,
+  "checks": [
+    "Existing denials, decisions, receipt fields and event order retained",
+    "Configured bot-less database requires adoption",
+    "Fresh database starts Workspace Write",
+    "Owner/Full explicit adoption; Limited private-review/adoption refusal",
+    "Stale consent snapshot rejected; Full acknowledgement mandatory",
+    "Read-only legacy view/archive; category APIs return 410",
+    "Actual adoption React flow; pending reviews expire without replay",
+    "Unknown evidence/fences and inspection epoch retained",
+    "Adopted state/archive survive restart",
+    "Actual disposable command after deliberate Workspace selection",
+    "Typed result validation is Not-run; runtime cancellation settles within bounded wait",
+    "All standalone category consumers migrated",
+    "A delayed pre-adoption GET cannot restore the adoption panel after successful consent"
+  ],
+  "coverage": [
+    "Gateway/session/control/receipt and Recovery integration",
+    "Controlled capability and default-bot API/Ollama/cached ACP delivery",
+    "30 controlled adapter identity flows",
+    "16 controlled remote MCP groups",
+    "App library, Apps, skills, automations, 20 controlled Apple read tools",
+    "Results, Work, attention, secretary investigation, model recovery and bot creation"
+  ],
+  "limits": [
+    "No unit/Jest/Vitest runners",
+    "No live API/provider business writes",
+    "No deployed installation change",
+    "Real adapter final campaign acceptance is OA-403"
+  ],
+  "review": "Initial consumer/native fixture findings corrected; final result recorded in the removed ticket log (git history)."
+}

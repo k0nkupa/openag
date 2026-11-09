@@ -1,0 +1,178 @@
+[
+  {
+    "slug": "overview",
+    "title": "OpenAg overview",
+    "summary": "What OpenAg does, your profile, the default bot, navigation and safety.",
+    "sources": [
+      "docs/openag.md",
+      "docs/notes/default-bot.md",
+      "docs/notes/owner-access.md",
+      "docs/notes/devices.md",
+      "docs/notes/settings-polish.md",
+      "apps/daemon/src/capabilities.ts",
+      "docs/README.md",
+      "docs/local-deployment.md"
+    ]
+  },
+  {
+    "slug": "bots-models",
+    "title": "Bots and models",
+    "summary": "Bot creation, unique handles, model selection, runtime reports and permissions.",
+    "sources": [
+      "apps/daemon/src/botmodels.ts",
+      "apps/daemon/src/model-catalogue.ts",
+      "apps/desk/src/components/BotModelSettings.tsx",
+      "docs/notes/bot-creation.md",
+      "apps/daemon/src/botcreation.ts",
+      "apps/desk/src/components/NewBotSheet.tsx",
+      "docs/notes/model-picker.md",
+      "docs/notes/avatars/README.md"
+    ]
+  },
+  {
+    "slug": "conversations",
+    "title": "Chats and rooms",
+    "summary": "Direct chats, guest mentions, bounded agent consultations, routing, context and Request details.",
+    "sources": [
+      "docs/notes/conversation-model.md",
+      "docs/notes/provider-routing.md",
+      "docs/notes/hosted-context.md",
+      "docs/notes/hosted-outcomes.md",
+      "docs/notes/model-retries.md",
+      "docs/notes/conversation-rendering.md",
+      "docs/notes/request-provenance.md",
+      "docs/notes/chat-interactions.md"
+    ]
+  },
+  {
+    "slug": "room-creation",
+    "title": "Create a room",
+    "summary": "Named rooms, member and lead selection, access and uncertain creation recovery.",
+    "sources": [
+      "docs/notes/room-creation.md",
+      "apps/daemon/src/roomcreation.ts",
+      "apps/daemon/src/db/migrations/029_room_creation.sql",
+      "apps/desk/src/components/NewRoomSheet.tsx"
+    ]
+  },
+  {
+    "slug": "work",
+    "title": "Work and ordinary chat",
+    "summary": "Explicit approved Work creation, separate start, visibility and execution history.",
+    "sources": [
+      "apps/daemon/src/runtimes/runner.ts",
+      "apps/daemon/src/work.ts",
+      "apps/desk/src/work-visibility.ts",
+      "docs/notes/explicit-work.md",
+      "docs/ops.md",
+      "docs/notes/execution-ownership.md",
+      "docs/notes/chat-interactions.md"
+    ]
+  },
+  {
+    "slug": "approvals",
+    "title": "Approvals and permissions",
+    "summary": "Session modes, explicit review, execution limits and upgrade adoption.",
+    "sources": [
+      "apps/daemon/src/policy.ts",
+      "apps/daemon/src/approvals.ts",
+      "docs/notes/action-receipts.md",
+      "docs/notes/mcp-server.md",
+      "apps/daemon/src/capabilities.ts",
+      "docs/notes/mcp-lifecycle.md",
+      "apps/daemon/src/mcp/composio-contract.ts",
+      "docs/notes/chat-interactions.md"
+    ]
+  },
+  {
+    "slug": "memory-skills",
+    "title": "Memory and skills",
+    "summary": "Personal notes, recall, reusable workflows and product help.",
+    "sources": [
+      "apps/daemon/src/memory.ts",
+      "apps/daemon/src/skills.ts",
+      "apps/daemon/src/tools/skills.ts",
+      "apps/daemon/src/reflection-apply.ts",
+      "docs/notes/skills.md",
+      "docs/notes/settings-polish.md",
+      "apps/desk/src/unsaved-changes.ts",
+      "apps/desk/src/route.ts"
+    ]
+  },
+  {
+    "slug": "proactive",
+    "title": "Proactive features and automations",
+    "summary": "Heartbeat, reflection, brief, schedules, missed-check history and external triggers.",
+    "sources": [
+      "apps/daemon/src/heartbeat.ts",
+      "apps/daemon/src/brief.ts",
+      "apps/daemon/src/reflection.ts",
+      "docs/notes/reflection.md",
+      "apps/daemon/src/automations.ts",
+      "apps/daemon/src/responsibilities.ts",
+      "docs/notes/responsibilities.md",
+      "docs/notes/automations/README.md"
+    ]
+  },
+  {
+    "slug": "computer-connectors",
+    "title": "Computer and integrations",
+    "summary": "Computer control, human takeover, connectors and administrator setup.",
+    "sources": [
+      "docs/notes/cua.md",
+      "docs/apps.md",
+      "apps/daemon/src/mcp.ts",
+      "apps/daemon/src/capabilities.ts",
+      "docs/notes/read-connectors.md",
+      "docs/composio.md",
+      "docs/notes/mcp-lifecycle.md",
+      "apps/daemon/src/mcp/client.ts"
+    ]
+  },
+  {
+    "slug": "mcp-servers",
+    "title": "MCP servers",
+    "summary": "Custom MCP servers: adding, checking, secrets, local commands, OAuth sign-in, private networks.",
+    "sources": [
+      "apps/daemon/src/mcp-servers.ts",
+      "apps/daemon/src/mcp-check.ts",
+      "apps/daemon/src/mcp-forwarding.ts",
+      "docs/notes/mcp.md",
+      "apps/desk/src/components/McpServerSettings.tsx",
+      "apps/desk/src/components/McpServerDialog.tsx",
+      "docs/notes/desk-integrations-ux.md",
+      "apps/daemon/src/mcp-oauth.ts"
+    ]
+  },
+  {
+    "slug": "dictation",
+    "title": "Composer dictation",
+    "summary": "Dictation setup, recording, draft editing, cancellation and connection limits.",
+    "sources": [
+      "docs/notes/composer-dictation.md",
+      "apps/daemon/src/transcription.ts",
+      "apps/desk/src/hooks/useDictation.ts"
+    ]
+  },
+  {
+    "slug": "agent-requests",
+    "title": "Agent requests",
+    "summary": "Consult an existing agent or address a guest in a direct chat; context, limits and cancellation.",
+    "sources": [
+      "docs/notes/agent-requests.md",
+      "apps/daemon/src/agent-requests.ts",
+      "apps/daemon/src/tools/agents.ts",
+      "apps/desk/src/components/AgentRequestsPanel.tsx"
+    ]
+  },
+  {
+    "slug": "conversation-forks",
+    "title": "Existing conversation forks",
+    "summary": "Existing forked rooms remain available; chat checkpoint creation is removed.",
+    "sources": [
+      "docs/notes/conversation-forks.md",
+      "apps/daemon/src/conversation-forks.ts",
+      "apps/desk/src/components/Feed.tsx"
+    ]
+  }
+]

@@ -1,0 +1,120 @@
+{
+  "checkpoint": "OA-403",
+  "date": "2026-11-04",
+  "scope": "Local source and temporary data only; no deployment",
+  "realAdapters": [
+    {
+      "adapter": "claude",
+      "workspaceSessionReused": "15043a85-c45d-4e7c-b144-14c31b02d5ea",
+      "readOnlyNewSession": "bcc65a5b-1bac-43c8-afa8-07af8cfcb330",
+      "fullAccessSessionReused": "6a339730-d635-4417-97f7-f284cefec3f1",
+      "turns": [
+        "3e93232f-b250-4f8a-9417-209f0e13c558",
+        "92665b9c-3a21-4cf5-bbd4-698eaa668718",
+        "d2cbf0b5-b9b1-4678-98f9-b9f25368d07d",
+        "75e37590-7378-4daa-9c41-a8cfda334bea"
+      ],
+      "nativeBypass": "refused/unavailable",
+      "inheritedMcp": "not started"
+    },
+    {
+      "adapter": "codex",
+      "workspaceSessionReused": "01a1a460-343d-7a92-9fb9-8dbb6b85fae5",
+      "readOnlyNewSession": "01a1a460-821d-7f72-8359-557efa13d7de",
+      "fullAccessSessionReused": "01a1a460-ac46-7d50-93fa-4967fcca0698",
+      "turns": [
+        "1ad5a862-f5c3-4652-a246-0da77955b198",
+        "5ddca035-560c-42f7-b2d9-4cf5ee289236",
+        "25f0cf17-e1e1-437d-aced-6a7bd5d7d877",
+        "4eec3475-eb30-4573-9853-ee6d5afe75a8"
+      ],
+      "nativeBypass": "refused/unavailable",
+      "inheritedMcp": "not started"
+    }
+  ],
+  "controlledProviders": {
+    "count": 14,
+    "includes": [
+      "Ollama",
+      "DeepSeek API"
+    ],
+    "coverage": "actual SDK transport \u2192 shared gateway/policy \u2192 daemon executor \u2192 disposable target readback",
+    "liveHostedApiAcceptance": false
+  },
+  "desk": {
+    "implementation": "full compiled desk \u2192 real gateway/runner \u2192 macOS executor",
+    "viewports": [
+      "1280x720 desktop",
+      "390x844 mobile"
+    ],
+    "journey": [
+      "Read Only command write refused",
+      "Workspace Write in-workspace command completed",
+      "Workspace Write outside command refused",
+      "one exact unconfined escalation accepted with boundary visible",
+      "Full access outside command automatic",
+      "Never explicit review refused without pending request or receipt",
+      "local /permission opens picker without posting"
+    ],
+    "readback": {
+      "mode": "full-access",
+      "approvals": [],
+      "targets": {
+        "permission-ui.txt": true,
+        "../permission-ui-outside.txt": true,
+        "../permission-ui-reviewed.txt": true,
+        "../permission-ui-never.txt": false
+      },
+      "receipts": [
+        {
+          "tool_name": "run_shell",
+          "decision": "automatic",
+          "outcome": "failed",
+          "human": 0
+        },
+        {
+          "tool_name": "run_shell",
+          "decision": "automatic",
+          "outcome": "completed",
+          "human": 0
+        },
+        {
+          "tool_name": "run_shell",
+          "decision": "automatic",
+          "outcome": "failed",
+          "human": 0
+        },
+        {
+          "tool_name": "run_shell",
+          "decision": "accepted",
+          "outcome": "completed",
+          "human": 1
+        },
+        {
+          "tool_name": "run_shell",
+          "decision": "automatic",
+          "outcome": "completed",
+          "human": 0
+        }
+      ]
+    },
+    "assertions": "five settled receipts; exactly one genuine human approval; no pending or Unknown; never target absent"
+  },
+  "worlds": "real confined file readback, actual App and stdio/HTTP MCP fixtures; computer guards/queue/takeover, delegation, nested failure and independent ceiling checks",
+  "integrationClaims": {
+    "discovery": "controlled contracts verified; no live business discovery",
+    "authenticatedProviderRead": "controlled fixtures verified; live business-provider reads unverified",
+    "providerPrompt": "real subscription model prompts verified; business-provider consent unverified",
+    "write": "disposable local writes verified; remote business writes not exercised"
+  },
+  "limits": [
+    "macOS filesystem write confinement only; unsupported hosts refuse confined execution",
+    "No read/network/process-visibility isolation",
+    "Opaque MCP/App/computer input and managed writers require interactive Full access",
+    "Process-group cancellation best effort; uncertain effects remain Unknown without replay",
+    "No unit/Jest/Vitest executed",
+    "No deployment, push, merge or live installation change"
+  ],
+  "uncertaintyRegression": "Actual interrupted disposable command retains partial file and Unknown receipt; changed command and other opaque tool refused across conversations and restart; historical local-class shell receipts remain fenced; explicit inspection never replays.",
+  "review": "Cumulative source review found cross-conversation shell uncertainty bypass. External-effect metadata and legacy-receipt fencing corrected; actual gateway regression passed; final separate built-in source review found no remaining substantive defects."
+}

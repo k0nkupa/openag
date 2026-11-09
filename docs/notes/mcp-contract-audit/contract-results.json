@@ -1,0 +1,183 @@
+{
+  "source": "f0fce62a4b2284408a44102c0e5b85ccddf970f6",
+  "scope": "installed SDK 1.32.2 / protocol 2025-11-25; stateful loopback HTTP, synthetic tools, temporary state",
+  "rows": [
+    {
+      "name": "stateful HTTP initialize/version/session/tool invocation",
+      "status": "pass",
+      "required": true,
+      "observed": {
+        "protocol": "2025-11-25",
+        "capabilities": {}
+      }
+    },
+    {
+      "name": "negotiates supported protocol 2025-11-25",
+      "status": "pass",
+      "required": true
+    },
+    {
+      "name": "negotiates supported protocol 2025-06-18",
+      "status": "pass",
+      "required": true
+    },
+    {
+      "name": "negotiates supported protocol 2025-03-26",
+      "status": "pass",
+      "required": true
+    },
+    {
+      "name": "negotiates supported protocol 2024-11-05",
+      "status": "pass",
+      "required": true
+    },
+    {
+      "name": "negotiates supported protocol 2024-10-07",
+      "status": "pass",
+      "required": true
+    },
+    {
+      "name": "unsupported negotiated protocol fails closed",
+      "status": "pass",
+      "required": true
+    },
+    {
+      "name": "paginated catalogue follows nextCursor",
+      "status": "pass",
+      "required": true
+    },
+    {
+      "name": "cyclic pagination refuses an incomplete catalogue",
+      "status": "gap",
+      "required": true,
+      "detail": "repeated empty cursor was silently accepted as a complete connected catalogue"
+    },
+    {
+      "name": "all remote input schemas enforced before execution",
+      "status": "gap",
+      "required": true,
+      "detail": "Missing expected rejection."
+    },
+    {
+      "name": "structured-only output survives projection",
+      "status": "gap",
+      "required": true,
+      "detail": "structuredContent was silently discarded"
+    },
+    {
+      "name": "unsupported media is explicitly marked",
+      "status": "pass",
+      "required": true,
+      "observed": {
+        "limit": "remote media/resources are markers, not usable media"
+      }
+    },
+    {
+      "name": "tool errors retain bounded complete rejection evidence",
+      "status": "gap",
+      "required": true,
+      "detail": "provider rejection detail discarded at 120 characters"
+    },
+    {
+      "name": "JSON-RPC errors fail without automatic replay",
+      "status": "pass",
+      "required": true
+    },
+    {
+      "name": "HTTP 401 fails without replay or reconnect execution",
+      "status": "pass",
+      "required": true
+    },
+    {
+      "name": "HTTP 403 fails without replay or reconnect execution",
+      "status": "pass",
+      "required": true
+    },
+    {
+      "name": "HTTP 404 fails without replay or reconnect execution",
+      "status": "pass",
+      "required": true
+    },
+    {
+      "name": "HTTP 503 fails without replay or reconnect execution",
+      "status": "pass",
+      "required": true
+    },
+    {
+      "name": "malformed JSON response fails without replay",
+      "status": "pass",
+      "required": true
+    },
+    {
+      "name": "advertised output schema rejects invalid structured output",
+      "status": "pass",
+      "required": true
+    },
+    {
+      "name": "task-only tools are diagnosed before being offered as synchronous calls",
+      "status": "gap",
+      "required": true,
+      "detail": "task-required tool is offered without a task execution path"
+    },
+    {
+      "name": "concurrent calls remain independently correlated",
+      "status": "pass",
+      "required": true
+    },
+    {
+      "name": "caller cancellation reaches an in-flight remote call",
+      "status": "gap",
+      "required": true,
+      "detail": "execution context AbortSignal was not propagated to the MCP request\n\nfalse !== true\n"
+    },
+    {
+      "name": "timeout bounds waiting and never replays",
+      "status": "pass",
+      "required": true
+    },
+    {
+      "name": "tools/list_changed refreshes or invalidates the catalogue",
+      "status": "gap",
+      "required": true,
+      "detail": "removed tool remains offered after tools/list_changed"
+    },
+    {
+      "name": "explicit reload refreshes the catalogue",
+      "status": "pass",
+      "required": true
+    },
+    {
+      "name": "disconnect disables stale executors",
+      "status": "pass",
+      "required": true
+    },
+    {
+      "name": "generic client supports explicit user elicitation",
+      "status": "gap",
+      "required": true,
+      "detail": "generic MCP client does not advertise/implement elicitation"
+    },
+    {
+      "name": "managed client supports explicit user elicitation",
+      "status": "gap",
+      "required": true,
+      "detail": "managed Composio client does not advertise/implement elicitation"
+    },
+    {
+      "name": "unsupported roots requests fail closed without filesystem disclosure",
+      "status": "pass",
+      "required": true
+    },
+    {
+      "name": "unsupported sampling requests fail closed without model use",
+      "status": "pass",
+      "required": true
+    }
+  ],
+  "summary": {
+    "pass": 22,
+    "gaps": 9
+  },
+  "liveProviderCalls": 0,
+  "sourceScope": "Audited deployed-source baseline; only audit fixtures/report changed in this checkout."
+}

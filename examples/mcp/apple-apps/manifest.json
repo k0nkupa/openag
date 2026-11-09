@@ -1,0 +1,108 @@
+{
+  "id": "apple-apps",
+  "name": "Apple apps",
+  "version": "1.0.0",
+  "description": "Read and search Apple apps on the daemon Mac. No send, edit, delete, mode-switch or arbitrary script tools.",
+  "tools": [
+    {
+      "name": "list-emails",
+      "description": "List Mail messages",
+      "class": "read"
+    },
+    {
+      "name": "read-email",
+      "description": "Read a Mail message",
+      "class": "read"
+    },
+    {
+      "name": "search-emails",
+      "description": "Search Mail messages",
+      "class": "search"
+    },
+    {
+      "name": "list-folders",
+      "description": "List Mail folders",
+      "class": "read"
+    },
+    {
+      "name": "list-events",
+      "description": "List upcoming Calendar events",
+      "class": "read"
+    },
+    {
+      "name": "list-calendars",
+      "description": "List calendars",
+      "class": "read"
+    },
+    {
+      "name": "list-contacts",
+      "description": "List contacts",
+      "class": "read"
+    },
+    {
+      "name": "search-contacts",
+      "description": "Search contacts",
+      "class": "search"
+    },
+    {
+      "name": "read-contact",
+      "description": "Read contact",
+      "class": "read"
+    },
+    {
+      "name": "list-reminder-lists",
+      "description": "List reminder lists",
+      "class": "read"
+    },
+    {
+      "name": "list-reminders",
+      "description": "List reminders",
+      "class": "read"
+    },
+    {
+      "name": "search-reminders",
+      "description": "Search reminders",
+      "class": "search"
+    },
+    {
+      "name": "list-note-folders",
+      "description": "List note folders",
+      "class": "read"
+    },
+    {
+      "name": "list-notes",
+      "description": "List notes",
+      "class": "read"
+    },
+    {
+      "name": "read-note",
+      "description": "Read note",
+      "class": "read"
+    },
+    {
+      "name": "search-notes",
+      "description": "Search notes",
+      "class": "search"
+    },
+    {
+      "name": "list-chats",
+      "description": "List chats",
+      "class": "read"
+    },
+    {
+      "name": "read-messages",
+      "description": "Read messages",
+      "class": "read"
+    },
+    {
+      "name": "list-safari-tabs",
+      "description": "List safari tabs",
+      "class": "read"
+    },
+    {
+      "name": "get-current-safari-url",
+      "description": "Get current safari url",
+      "class": "read"
+    }
+  ]
+}

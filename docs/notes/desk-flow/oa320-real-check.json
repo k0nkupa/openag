@@ -1,0 +1,39 @@
+{
+  "adapter": "@agentclientprotocol/codex-acp@2.3.0",
+  "runtime": "real installed Codex subscription adapter",
+  "scope": "separate loopback daemon, fresh temporary SQLite and bot workspace; no live service changes",
+  "beforeApproval": {
+    "fileExists": false,
+    "workspaceFiles": []
+  },
+  "afterApproval": {
+    "file": "oa320-check.txt",
+    "content": "OA-320 real adapter check\n",
+    "workspaceFiles": [
+      "oa320-check.txt"
+    ]
+  },
+  "events": [
+    {
+      "id": 7,
+      "type": "approval_requested",
+      "status": null
+    },
+    {
+      "id": 8,
+      "type": "approval_decided",
+      "status": "accepted"
+    },
+    {
+      "id": 9,
+      "type": "tool_result",
+      "status": "completed"
+    },
+    {
+      "id": 11,
+      "type": "turn_finished",
+      "status": "finished"
+    }
+  ],
+  "pendingApprovals": 0
+}

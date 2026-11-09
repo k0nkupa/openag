@@ -1,0 +1,22 @@
+{
+  "result": "passed",
+  "checks": [
+    "owner/full/limited review",
+    "no HTTP install or secrets",
+    "digest and machine mismatch",
+    "unsafe target and config permissions",
+    "App local setup/detection/fresh enable",
+    "real local App execution",
+    "idempotence and data-preserving pause",
+    "changed code, package size/file caps and overwrite refusal",
+    "MCP config conflict and backup",
+    "real stdio handshake and policy-gated clock",
+    "MCP disable preserves code and unrelated config",
+    "publication fault cleanup/retry and concurrent user-data preservation",
+    "disabled code freshness",
+    "legacy MCP symlink/shared-directory compatibility",
+    "tampered MCP refuses startup",
+    "secret-free local audit"
+  ],
+  "temporaryDirectory": "/var/folders/x4/cs8jlkqs3hzgh5v1jcx1kk1r0000gn/T/openag-library-Z37Zb6"
+}

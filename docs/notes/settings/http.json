@@ -1,0 +1,18 @@
+{
+  "result": "passed",
+  "checks": [
+    "schema validation and 401/403/409 boundaries",
+    "owner/full/limited capabilities retained",
+    "lost-save committed state versus refused write",
+    "env-only absent provider status and unreachable Ollama",
+    "OpenRouter unavailable and controlled failure lead fallback",
+    "explicit mention bypasses router",
+    "digest-bound CLI local app installation and real example process execution",
+    "conversation → Work → saved proposal → pending exact approval → actual process restart → stale review refusal → exact write → completed receipt → empty Needs you",
+    "automation local delivery and run history",
+    "saved settings, proposals, approvals and installed identity survive restart/reconnect"
+  ],
+  "manualModel": "separate gate",
+  "physicalDevice": "open by owner choice",
+  "dir": "/var/folders/x4/cs8jlkqs3hzgh5v1jcx1kk1r0000gn/T/openag-settings-bBeSN5"
+}

@@ -1,0 +1,122 @@
+{
+  "scope": "Raw ACP only; not OpenAg gateway, policy, receipt or filesystem-confinement acceptance",
+  "experiment": "pre-tool hook denial and failure",
+  "directory": "<owned-temporary-data>",
+  "adapters": [
+    {
+      "adapter": "claude",
+      "packageVersion": "0.97.0",
+      "stage": "settled",
+      "calls": [
+        {
+          "label": "hook-deny",
+          "mode": "bypassPermissions",
+          "sessionId": "2d761585-d01b-4ddb-a136-3d10fb5c0e10",
+          "target": "<owned-temporary-data>/claude/workspace/hook-denied.txt",
+          "toolCallIds": [
+            "toolu_01McGpvUK7bwssXbxegHJ1n2"
+          ],
+          "permissionRequestIds": [],
+          "stopReason": "end_turn",
+          "targetWritten": false,
+          "markerMatches": false,
+          "permissionRequests": 0,
+          "toolCalls": 1,
+          "executedWithoutAuthorizationCallback": false
+        },
+        {
+          "label": "hook-failure",
+          "mode": "bypassPermissions",
+          "sessionId": "2d761585-d01b-4ddb-a136-3d10fb5c0e10",
+          "target": "<owned-temporary-data>/claude/workspace/hook-failed.txt",
+          "toolCallIds": [
+            "toolu_01WYxDe5MUim9ikBf3LEQJTN"
+          ],
+          "permissionRequestIds": [],
+          "stopReason": "end_turn",
+          "targetWritten": true,
+          "markerMatches": true,
+          "permissionRequests": 0,
+          "toolCalls": 1,
+          "executedWithoutAuthorizationCallback": true
+        }
+      ],
+      "sessionId": "2d761585-d01b-4ddb-a136-3d10fb5c0e10",
+      "availableModes": [
+        "default",
+        "acceptEdits",
+        "plan",
+        "auto",
+        "bypassPermissions"
+      ],
+      "sameSession": true,
+      "directMappingPreservesGate": false,
+      "hookAudit": [
+        {
+          "tool": "Bash",
+          "id": "toolu_01McGpvUK7bwssXbxegHJ1n2",
+          "phase": "deny"
+        },
+        {
+          "tool": "Bash",
+          "id": "toolu_01WYxDe5MUim9ikBf3LEQJTN",
+          "phase": "failed"
+        }
+      ],
+      "hookDenialEnforced": true,
+      "hookFailureClosed": false
+    },
+    {
+      "adapter": "codex",
+      "packageVersion": "2.3.0",
+      "stage": "settled",
+      "calls": [
+        {
+          "label": "hook-deny",
+          "mode": "agent-full-access",
+          "sessionId": "01a1a34d-2e6c-7e60-aaff-9e597f01c2a4",
+          "target": "<owned-temporary-data>/codex/workspace/hook-denied.txt",
+          "toolCallIds": [
+            "exec-9f388f55-bda7-4ae3-8bc8-a4dd7875af91"
+          ],
+          "permissionRequestIds": [],
+          "stopReason": "end_turn",
+          "targetWritten": true,
+          "markerMatches": true,
+          "permissionRequests": 0,
+          "toolCalls": 1,
+          "executedWithoutAuthorizationCallback": true
+        },
+        {
+          "label": "hook-failure",
+          "mode": "agent-full-access",
+          "sessionId": "01a1a34d-2e6c-7e60-aaff-9e597f01c2a4",
+          "target": "<owned-temporary-data>/codex/workspace/hook-failed.txt",
+          "toolCallIds": [
+            "exec-d4a8d58c-4ab8-4569-a238-137f37367c8d"
+          ],
+          "permissionRequestIds": [],
+          "stopReason": "end_turn",
+          "targetWritten": true,
+          "markerMatches": true,
+          "permissionRequests": 0,
+          "toolCalls": 1,
+          "executedWithoutAuthorizationCallback": true
+        }
+      ],
+      "sessionId": "01a1a34d-2e6c-7e60-aaff-9e597f01c2a4",
+      "availableModes": [
+        "read-only",
+        "workspace-write",
+        "agent",
+        "agent-full-access"
+      ],
+      "sameSession": true,
+      "directMappingPreservesGate": false,
+      "hookAudit": [],
+      "hookDenialEnforced": false,
+      "hookFailureClosed": false
+    }
+  ],
+  "directNativeMappingCompatible": false
+}

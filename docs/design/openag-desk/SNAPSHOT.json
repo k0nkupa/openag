@@ -1,0 +1,22 @@
+{
+  "captured": "2026-10-31",
+  "productionRevision": "a4ec875e646c058e57d3460c8cda01175fd51780",
+  "source": "$HOME/.codex/visualizations/2026/10/31/01a19075-e81b-7e60-a630-313a5d553fdf/openag-desk-prototype",
+  "scope": "Frozen UI reference; no production migration",
+  "changesFromSource": [
+    "Standalone dev/preview port 5191 instead of 5190",
+    "Isolated pnpm workspace and reference README added"
+  ],
+  "sourceFolders": [
+    "src",
+    "public"
+  ],
+  "sourceFiles": [
+    "package.json",
+    "pnpm-lock.yaml",
+    "components.json",
+    "tsconfig.json",
+    "vite.config.ts",
+    "index.html"
+  ]
+}

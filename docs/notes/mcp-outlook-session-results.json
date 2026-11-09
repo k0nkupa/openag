@@ -1,0 +1,145 @@
+{
+  "target": "Existing Outlook account minimal profile",
+  "source": "working-tree",
+  "scope": "Real adapters and actual Composio; fixed read target only after the live uncertainty fence is clear",
+  "adapters": [
+    {
+      "adapter": "claude",
+      "metadataJourney": "passed",
+      "providerReadJourney": "passed",
+      "reason": "Actual minimal Outlook profile matched the discovered account on fresh and reused sessions",
+      "upstreamTools": [
+        "COMPOSIO_SEARCH_TOOLS",
+        "COMPOSIO_GET_TOOL_SCHEMAS",
+        "COMPOSIO_MULTI_EXECUTE_TOOL",
+        "COMPOSIO_MULTI_EXECUTE_TOOL"
+      ],
+      "schemaSlugs": [
+        "OUTLOOK_GET_PROFILE"
+      ],
+      "schemaHash": "529312fdae369d8cdf4d049ab1e7b87df76e46583a4a070dc709406d14a5d267",
+      "discoveryBound": true,
+      "proposalTargetVerified": true,
+      "providerCompared": true,
+      "verifiedReads": [
+        {
+          "round": 1,
+          "providerLogId": "log_ZYXnqffVf4fi",
+          "fieldsVerified": [
+            "id",
+            "mail"
+          ]
+        },
+        {
+          "round": 2,
+          "providerLogId": "log_LOeEy2nJDJpz",
+          "fieldsVerified": [
+            "id",
+            "mail"
+          ]
+        }
+      ],
+      "acpSessionReused": true,
+      "nativeToolEvents": 0,
+      "providerPromptResponses": 2,
+      "rawReplyCount": 4
+    },
+    {
+      "adapter": "codex",
+      "metadataJourney": "passed",
+      "providerReadJourney": "passed",
+      "reason": "Actual minimal Outlook profile matched the discovered account on fresh and reused sessions",
+      "upstreamTools": [
+        "COMPOSIO_SEARCH_TOOLS",
+        "COMPOSIO_GET_TOOL_SCHEMAS",
+        "COMPOSIO_MULTI_EXECUTE_TOOL",
+        "COMPOSIO_MULTI_EXECUTE_TOOL"
+      ],
+      "schemaSlugs": [
+        "OUTLOOK_GET_PROFILE"
+      ],
+      "schemaHash": "529312fdae369d8cdf4d049ab1e7b87df76e46583a4a070dc709406d14a5d267",
+      "discoveryBound": true,
+      "proposalTargetVerified": true,
+      "providerCompared": true,
+      "verifiedReads": [
+        {
+          "round": 1,
+          "providerLogId": "log_gNF1UGaK0R0K",
+          "fieldsVerified": [
+            "id",
+            "mail"
+          ]
+        },
+        {
+          "round": 2,
+          "providerLogId": "log_UYR_1UbLn3tr",
+          "fieldsVerified": [
+            "id",
+            "mail"
+          ]
+        }
+      ],
+      "acpSessionReused": true,
+      "nativeToolEvents": 0,
+      "providerPromptResponses": 2,
+      "rawReplyCount": 4
+    }
+  ],
+  "outlookCalls": 4,
+  "credentialRefreshes": 0,
+  "sourceReceiptChanged": false,
+  "catalogue": [
+    "mcp.composio-connect.COMPOSIO_GET_TOOL_SCHEMAS",
+    "mcp.composio-connect.COMPOSIO_MANAGE_CONNECTIONS",
+    "mcp.composio-connect.COMPOSIO_MULTI_EXECUTE_TOOL",
+    "mcp.composio-connect.COMPOSIO_PROXY_EXECUTE",
+    "mcp.composio-connect.COMPOSIO_REMOTE_BASH_TOOL",
+    "mcp.composio-connect.COMPOSIO_REMOTE_WORKBENCH",
+    "mcp.composio-connect.COMPOSIO_SEARCH_TOOLS",
+    "mcp.composio-connect.COMPOSIO_SUBMIT_FEEDBACK",
+    "mcp.composio-connect.COMPOSIO_WAIT_FOR_CONNECTIONS",
+    "mcp.composio-connect.COMPOSIO_MANAGE_SKILL",
+    "mcp.composio-connect.COMPOSIO_SEARCH_SKILLS",
+    "mcp.composio-connect.COMPOSIO_USE_SKILL"
+  ],
+  "verdict": "provider-read-passed",
+  "providerLogConfirmation": [
+    {
+      "adapter": "claude",
+      "round": 1,
+      "providerLogId": "log_ZYXnqffVf4fi",
+      "status": "success",
+      "requestId": "mcp_98025580-5c4",
+      "workflowMatched": true,
+      "profileMatched": true
+    },
+    {
+      "adapter": "claude",
+      "round": 2,
+      "providerLogId": "log_LOeEy2nJDJpz",
+      "status": "success",
+      "requestId": "mcp_83933e59-148",
+      "workflowMatched": true,
+      "profileMatched": true
+    },
+    {
+      "adapter": "codex",
+      "round": 1,
+      "providerLogId": "log_gNF1UGaK0R0K",
+      "status": "success",
+      "requestId": "mcp_6f632dc1-f8a",
+      "workflowMatched": true,
+      "profileMatched": true
+    },
+    {
+      "adapter": "codex",
+      "round": 2,
+      "providerLogId": "log_UYR_1UbLn3tr",
+      "status": "success",
+      "requestId": "mcp_8ebe3160-345",
+      "workflowMatched": true,
+      "profileMatched": true
+    }
+  ]
+}

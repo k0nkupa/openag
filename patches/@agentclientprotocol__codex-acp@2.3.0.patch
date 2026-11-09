@@ -1,0 +1,16 @@
+diff --git a/dist/index.js b/dist/index.js
+index f44e3aa831b7229ee6a2a681d45f6aa4ee2271b6..31ea3559376872b970690f1d6407454b5d89f725 100755
+--- a/dist/index.js
++++ b/dist/index.js
+@@ -40305,7 +40305,10 @@ var CodexAcpClient = class _CodexAcpClient {
+     return {
+       config: {
+         ...configWithWorkspaceRoots,
+-        "mcp_servers": Object.fromEntries(serversToConfigure.map((mcp) => [mcp.name, toCodexMcpServerConfig(normalizeMcpServer(mcp.server))]))
++        "mcp_servers": {
++          ...(process.env["OPENAG_DAEMON_EXECUTION"] === "1" ? configWithWorkspaceRoots["mcp_servers"] : {}),
++          ...Object.fromEntries(serversToConfigure.map((mcp) => [mcp.name, toCodexMcpServerConfig(normalizeMcpServer(mcp.server))]))
++        }
+       },
+       skippedMcpServers
+     };

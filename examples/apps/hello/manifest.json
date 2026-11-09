@@ -1,0 +1,26 @@
+{
+  "id": "hello",
+  "name": "Hello (example app)",
+  "version": "1.0.0",
+  "description": "Example app: tells the time and keeps a small note file in its own data folder.",
+  "tools": [
+    {
+      "name": "time",
+      "description": "Returns the current date and time on this machine.",
+      "class": "read",
+      "input": { "type": "object", "properties": {}, "required": [] },
+      "exec": { "argv": ["node", "tool.mjs", "time"], "timeoutSec": 10 }
+    },
+    {
+      "name": "note",
+      "description": "Appends one short line to this app's own notes file and returns how many notes it holds.",
+      "class": "act-local",
+      "input": {
+        "type": "object",
+        "properties": { "text": { "type": "string", "maxLength": 200, "description": "The note to append." } },
+        "required": ["text"]
+      },
+      "exec": { "argv": ["node", "tool.mjs", "note"], "timeoutSec": 10 }
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+// Disposable built-desk visual fixture. Recorded examples only; no tests or providers execute.
+import {createRequire} from 'node:module';
+import {startUsabilityFixture} from './desk-usability-fixture.mjs';
+const fixture=await startUsabilityFixture({includeWork:true});
+const emit=(type,payload,actor='boss')=>fixture.ledger.append('main',actor,type,payload);
+const turnId='recorded-preview';
+const require=createRequire(new URL('../apps/daemon/package.json',import.meta.url));
+const Database=require('better-sqlite3'),db=new Database(fixture.dir+'/openag.db');
+db.prepare("INSERT INTO turns(id,room_id,bot_id,status,state_json,created_at,updated_at) VALUES(?,'main','boss','finished','{}',?,?)").run(turnId,Date.now(),Date.now());
+const {createRoom,addMember}=await import('../apps/daemon/dist/rooms.js');
+createRoom(db,{id:'empty-preview',name:'Empty preview',leadBotId:'boss'});addMember(db,'empty-preview','boss');
+const request=emit('message',{text:'Show the recorded file, search and command evidence.'},'user');
+db.prepare("INSERT INTO work(id,room_id,bot_id,request_id,title,request,status,next_step,plan_json,created_at,updated_at) VALUES('a36c1f65-3c59-4ad7-9ef4-d73fa4d99480','main','boss',?,'Recorded plan','Synthetic plan example','completed','Recorded example complete',?,?,?)").run(request.id,JSON.stringify([{title:'Read source',state:'completed'},{title:'Make change',state:'in_progress'},{title:'Check result',state:'pending'}]),Date.now(),Date.now());
+db.close();
+emit('turn_started',{turnId});
+emit('request_prepared',{turnId,manifestId:'preview-request',step:1,boundary:'api',requestedModel:'Recorded example',messages:[],messageOverflow:0,toolCount:3,sourceOverflow:0,context:{sources:[],historyOmitted:0,requiredCharacters:3200,limit:64000}});
+emit('request_attempt',{turnId,manifestId:'preview-request',attempt:1,status:'returned',usage:{inputTokens:1250,outputTokens:240}});
+emit('tool_call',{turnId,toolCallId:'file',tool:'write_file',args:{path:'src/components/Example.tsx',content:'Recorded example'}});
+emit('tool_result',{turnId,toolCallId:'file',tool:'write_file',ok:true,executionOutcome:'completed',result:{ok:true}});
+emit('tool_call',{turnId,toolCallId:'search',tool:'brave_search',args:{query:'recorded example'}});
+emit('tool_result',{turnId,toolCallId:'search',tool:'brave_search',ok:true,result:{untrusted:true,source:'brave',results:[{url:'https://ui.shadcn.com/docs/ai-elements',title:'AI Elements',description:'Recorded search example. No search or provider was called.'}]}});
+emit('tool_call',{turnId,toolCallId:'shell',tool:'run_shell',args:{command:'recorded-example'}});
+emit('tool_result',{turnId,toolCallId:'shell',tool:'run_shell',ok:true,executionOutcome:'completed',result:{stdout:'TAP version 13\nok 1 - recorded example\nnot ok 2 - recorded failure\n# tests 2\n# pass 1\n# fail 1\n',stderr:'Error: Recorded example\n    at example (/fixture/example.ts:12:4)'}});
+emit('turn_finished',{turnId,status:'finished'});
+emit('bot_output',{turnId,text:'The recorded evidence is ready. Expand the activity above for file changes, returned sources and command output.'});
+console.log(JSON.stringify({url:fixture.url+'/#/room/main',pairingCode:fixture.pairCode(),note:'Disposable UI fixture, synthetic recorded evidence only'}));
+for(const signal of ['SIGINT','SIGTERM'])process.once(signal,()=>void fixture.close().then(()=>process.exit()));

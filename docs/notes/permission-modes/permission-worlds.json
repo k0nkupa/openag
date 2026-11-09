@@ -1,0 +1,50 @@
+{
+  "checkpoint": "OA-400",
+  "realAdapters": [
+    {
+      "adapter": "claude",
+      "sameSession": "f675002e-4517-441d-9970-09c63c6573de",
+      "turns": [
+        "f4b7d2b7-f5da-4206-b043-8630e8ab2d37",
+        "4cb33001-083d-4275-bca6-56c10918b265",
+        "b858ab2e-33cd-44ca-819b-9482ef2c0770",
+        "85547d68-80ec-4ce0-b484-1199afad2904"
+      ],
+      "persistedGatewayModes": true,
+      "nativeBypass": "no observed effect or fallback",
+      "inheritedMcp": "not started"
+    },
+    {
+      "adapter": "codex",
+      "sameSession": "01a1a40f-3c1c-7143-a4b0-c3a09993cbeb",
+      "turns": [
+        "99309eab-6f3a-4206-8d31-41a9c3da21dd",
+        "87834aef-d5af-42ed-9a1f-70f3cc49a3c1",
+        "61a5b4a0-73ac-4585-824d-db13c5f2fffc",
+        "64ddb8b0-c95b-4cbf-93bb-ab4fc35fb931"
+      ],
+      "persistedGatewayModes": true,
+      "nativeBypass": "no observed effect or fallback",
+      "inheritedMcp": "not started"
+    }
+  ],
+  "controlledProviders": 14,
+  "worlds": [
+    "macOS command/file confinement",
+    "simulated unsupported-host refusal",
+    "actual App",
+    "actual stdio and HTTP MCP",
+    "reviewed managed read contracts",
+    "controlled computer driver and Cua CLI guard",
+    "revision-bound delegated scope"
+  ],
+  "limits": [
+    "No live hosted API acceptance",
+    "No live remote computer backend acceptance",
+    "No business provider writes",
+    "No deployment",
+    "No read/network/process isolation",
+    "Already admitted effects are not undone by mode changes"
+  ],
+  "unitRunners": "prohibited and not run"
+}

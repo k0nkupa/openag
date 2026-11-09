@@ -1,0 +1,84 @@
+// Standalone integration checks: disposable SQLite, real gateway, actual React composition. No unit runner.
+import assert from 'node:assert/strict';
+import { mkdtempSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { createRequire } from 'node:module';
+import { fileURLToPath } from 'node:url';
+const root=fileURLToPath(new URL('../',import.meta.url)),dir=mkdtempSync(join(tmpdir(),'openag-settings-check-'));
+const load=name=>import(root+'apps/daemon/dist/'+name+'.js');
+const {openDb}=await load('db/index'),{createLedger}=await load('ledger'),{createBackups}=await load('backup');
+const {createRoom,createBot}=await load('rooms'),{createAuth}=await load('auth'),{createApprovals}=await load('approvals'),{createGateway}=await load('gateway');
+let db=openDb(dir),vite;
+try {
+ createBot(db,{id:'bot',name:'Bot',runtime:'api'});createRoom(db,{id:'_system',leadBotId:'bot'});
+ let ledger=createLedger(db),backups=createBackups({db,ledger,dataDir:dir,env:{}});
+ assert.equal(backups.status().last,null);
+ const success=await backups.run();assert.equal(success.ok,true);
+ db.close();db=openDb(dir);ledger=createLedger(db);backups=createBackups({db,ledger,dataDir:dir,env:{}});
+ assert.equal(backups.status().last.ok,true);assert.equal(backups.status().last.name,success.name);assert.equal(backups.status().backups.length,1);
+ const realBackup=db.backup;db.backup=async()=>{throw Error('controlled failure');};
+ assert.equal((await backups.run()).ok,false);db.backup=realBackup;
+ db.close();db=openDb(dir);ledger=createLedger(db);backups=createBackups({db,ledger,dataDir:dir,env:{}});
+ assert.equal(backups.status().last.ok,false,'Latest failed attempt survives restart');assert.equal(backups.status().backups.length,1,'A retained file is not proof the latest attempt succeeded');
+ const auth=createAuth({db,ownerToken:'controlled-settings-owner'}),approvals=createApprovals(db,ledger);
+ const app=createGateway({db,ledger,auth,approvals,dataDir:dir,backups,dispatch(){}});
+ assert.equal((await app.request('/backups',{headers:{authorization:'Bearer controlled-settings-owner'}})).status,200);
+ const limited=auth.createDevice('Limited','owner','limited');
+ assert.equal((await app.request('/backups/run',{method:'POST',headers:{authorization:'Bearer '+limited.token}})).status,403);
+ assert.equal((await app.request('/settings/backup',{method:'PUT',headers:{authorization:'Bearer '+limited.token,'content-type':'application/json'},body:'{"enabled":true,"time":"04:00","keep":7}'})).status,200,'Existing Limited schedule-setting authority is retained');
+ // Legacy file-only installs stay unknown rather than being inferred successful.
+ db.prepare("DELETE FROM events WHERE room_id='_system' AND json_extract(payload_json,'$.action')='backup'").run();
+ assert.equal(createBackups({db,dataDir:dir,env:{}}).status().last,null);
+ console.log('PASS backup success/failure restart history, retained-file uncertainty and Full/Limited API boundaries');
+ const require=createRequire(root+'apps/desk/package.json'),React=require('react'),{renderToStaticMarkup}=require('react-dom/server');
+ const {JSDOM}=require('jsdom');const dom=new JSDOM('<div id="slack-root"></div>',{url:'http://settings.fixture/#/settings',pretendToBeVisual:true});
+ globalThis.window=dom.window;globalThis.document=dom.window.document;globalThis.localStorage=dom.window.localStorage;
+ const {createServer}=await import(require.resolve('vite'));
+ vite=await createServer({configFile:false,root:root+'apps/desk',resolve:{alias:{'@':root+'apps/desk/src'}},server:{middlewareMode:true,hmr:false},appType:'custom'});
+ const {SettingsLayout,SettingsHeader}=await vite.ssrLoadModule('/src/components/SettingsLayout.tsx');
+ const page=renderToStaticMarkup(React.createElement(SettingsLayout,{route:{kind:'settings'}},React.createElement(SettingsHeader,{id:'check',title:'Settings',description:'Controlled check'})));
+ const html=new JSDOM(page).window.document;
+ assert.equal(html.querySelectorAll('nav[aria-label="Settings"] a').length,5);assert.equal(html.querySelectorAll('nav[aria-label="Settings"] [role="button"]').length,0);assert.equal(html.querySelector('[aria-current="page"]').textContent,'Server');
+ const {AutomationsTable}=await vite.ssrLoadModule('/src/components/AutomationsTable.tsx');
+ const table=renderToStaticMarkup(React.createElement(AutomationsTable,{rows:[{id:'sample',name:'Weekly',prompt:'Full purpose remains accessible',botId:'bot',roomId:'main',triggerKind:'cron',scheduleCron:'0 9 * * 1',enabled:false,lastStatus:'failed',hookEvents:[]}],actions:()=>null}));
+ assert.ok(table.includes('data-slot="table"'));assert.ok(table.includes('Mondays at 09:00'));assert.ok(table.includes('Failed'));assert.ok(table.includes('Paused'));assert.ok(table.includes('Full purpose remains accessible'));
+ const {SettingsView}=await vite.ssrLoadModule('/src/components/SettingsView.tsx');
+ const server=renderToStaticMarkup(React.createElement(SettingsView,{api:{}}));
+ assert.ok(server.includes('Overview'));assert.ok(server.includes('Operations'));assert.ok(server.includes('Connection'));assert.ok(server.includes('Appearance'));
+ assert.ok(!server.includes('None yet'),'Unloaded backup status must not claim no backup exists');
+ console.log('PASS five semantic settings navigation links, shared heading, shadcn automation table and truthful unloaded Server status');
+ // Render the real Slack form against this isolated gateway; no Slack transport is installed.
+ for(const key of ['HTMLElement','Element','Node','MutationObserver'])globalThis[key]=dom.window[key];
+ for(const key of ['getComputedStyle','requestAnimationFrame','cancelAnimationFrame'])globalThis[key]=dom.window[key].bind(dom.window);
+ globalThis.matchMedia=dom.window.matchMedia=()=>({matches:false,addEventListener(){},removeEventListener(){}});
+ Object.defineProperty(globalThis,'navigator',{value:dom.window.navigator,configurable:true});
+ globalThis.IS_REACT_ACT_ENVIRONMENT=true;
+ const {createRoot}=require('react-dom/client'),{fireEvent}=require('@testing-library/react'),{act}=React;
+ const {SlackPanel}=await vite.ssrLoadModule('/src/components/SlackPanel.tsx'),{createApi}=await vite.ssrLoadModule('/src/api.ts');
+ const mounted=createRoot(document.getElementById('slack-root'));
+ const settle=async check=>{const end=Date.now()+5000;while(!check()){assert.ok(Date.now()<end,'Slack form convergence');await act(async()=>new Promise(resolve=>setTimeout(resolve,20)));}};
+ const button=text=>[...document.querySelectorAll('button')].find(el=>el.textContent===text&&!el.closest('[hidden]'));
+ const apiFor=token=>createApi(token,()=>assert.fail('Unexpected authentication failure'),(path,init)=>app.request(path,init));
+ try {
+  await act(async()=>mounted.render(React.createElement(SlackPanel,{api:apiFor('controlled-settings-owner')})));
+  await settle(()=>document.getElementById('slack-room'));
+  assert.equal(document.querySelector('[data-slot="badge"]').textContent,'Needs setup');
+  assert.equal(button('Connection activity').getAttribute('aria-expanded'),'false');
+  await act(async()=>button('Connection activity').click());
+  assert.equal(button('Connection activity').getAttribute('aria-expanded'),'true');
+  await act(async()=>{fireEvent.change(document.getElementById('slack-room'),{target:{value:'  main  '}});fireEvent.change(document.getElementById('slack-channel'),{target:{value:'  C0123456789  '}});fireEvent.change(document.getElementById('slack-users'),{target:{value:'U0123456789, U0987654321\nU0987654321'}});});
+  await act(async()=>button('Save Slack settings').click());
+  await settle(()=>document.querySelector('[role="status"]')?.textContent==='Saved.');
+  const read=await app.request('/settings',{headers:{authorization:'Bearer controlled-settings-owner'}});
+  const slack=(await read.json()).settings.slack;
+  assert.deepEqual(slack,{enabled:false,roomId:'main',channelId:'C0123456789',allowedUsers:['U0123456789','U0987654321']});
+  await act(async()=>mounted.render(React.createElement(SlackPanel,{key:'limited',api:apiFor(limited.token)})));
+  await settle(()=>document.getElementById('slack-room'));
+  await act(async()=>button('Save Slack settings').click());
+  await settle(()=>document.querySelector('[role="alert"]')?.textContent.includes('Only a Full access device'));
+  assert.equal(document.getElementById('slack-channel').value,'C0123456789');
+  console.log('PASS actual Slack form: semantic setup badge, collapsed diagnostics, parsed save/readback and Limited refusal; no Slack transport or external calls');
+ } finally {await act(async()=>mounted.unmount());}
+ dom.window.close();
+} finally {await vite?.close();db.close();rmSync(dir,{recursive:true,force:true});}

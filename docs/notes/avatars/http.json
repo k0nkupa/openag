@@ -1,0 +1,16 @@
+{
+  "result": "passed",
+  "checks": [
+    "legacy shapes/colours and absent animation retained",
+    "12 characters, legacy inputs and 14 colours",
+    "automatic colour/motion/reset roundtrip",
+    "invalid input rejected",
+    "owner/full/limited permissions and mixed-patch refusal",
+    "instruction privacy and sanitized stream audit",
+    "saved appearance after actual temporary restart",
+    "real runner approval/completion/failure and ACP-shaped failed/unknown outcomes",
+    "actual process restart settles interrupted Work",
+    "deferred child Work settles after more than three seconds",
+    "real local WebRTC avatar refresh notice, hidden-audit privacy and management refusal"
+  ]
+}

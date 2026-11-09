@@ -1,0 +1,802 @@
+{
+  "ticket": "OA-464",
+  "date": "2026-11-05",
+  "baseCommit": "57d7708",
+  "scope": "Local uncommitted source and disposable acceptance only. This task did not modify the installed default bot/service. No unit/Jest/Vitest, commit, merge or deployment.",
+  "instructionVersion": "c22da6ae6a5111592a13cfdd5900712dd54a9b8db33f807d78654450f88c9c04",
+  "capture": [
+    {
+      "adapter": "claude",
+      "instructionVersion": "c22da6ae6a5111592a13cfdd5900712dd54a9b8db33f807d78654450f88c9c04",
+      "privilegedBridge": true,
+      "userNotPromoted": true,
+      "nativeExecutionAbsent": true
+    },
+    {
+      "adapter": "codex",
+      "instructionVersion": "c22da6ae6a5111592a13cfdd5900712dd54a9b8db33f807d78654450f88c9c04",
+      "privilegedBridge": true,
+      "userNotPromoted": true,
+      "nativeExecutionAbsent": true
+    }
+  ],
+  "skillJourneys": [
+    {
+      "adapter": "claude",
+      "slug": "fixture-package",
+      "instructionVersion": "c22da6ae6a5111592a13cfdd5900712dd54a9b8db33f807d78654450f88c9c04",
+      "lifecycle": [
+        {
+          "method": "session/new",
+          "sessionId": null,
+          "instructionVersion": "c22da6ae6a5111592a13cfdd5900712dd54a9b8db33f807d78654450f88c9c04"
+        },
+        {
+          "method": "session/new",
+          "sessionId": null,
+          "instructionVersion": "c22da6ae6a5111592a13cfdd5900712dd54a9b8db33f807d78654450f88c9c04"
+        },
+        {
+          "method": "session/resume",
+          "sessionId": "3760779a-a130-42eb-b8a1-b2a88d17b5ab",
+          "instructionVersion": "c22da6ae6a5111592a13cfdd5900712dd54a9b8db33f807d78654450f88c9c04"
+        }
+      ],
+      "checks": [
+        {
+          "turnId": "6abce696-5141-4c09-929e-6b4eb72064cb",
+          "sessionId": "3760779a-a130-42eb-b8a1-b2a88d17b5ab",
+          "tools": [
+            {
+              "tool": "run_shell",
+              "receiptId": "f18163e5-0ed2-4564-abc8-a6900cfa9eaf",
+              "outcome": "completed"
+            },
+            {
+              "tool": "skill_save",
+              "receiptId": "421cb507-3b2f-440b-be0b-a4c599d127a2",
+              "outcome": "completed"
+            },
+            {
+              "tool": "run_shell",
+              "receiptId": "c1028a02-2261-4e67-af68-449fb6416b99",
+              "outcome": "completed"
+            },
+            {
+              "tool": "run_shell",
+              "receiptId": "2a83fb16-0c22-43be-940b-f9b69894ab21",
+              "outcome": "completed"
+            },
+            {
+              "tool": "skill_list",
+              "receiptId": "75ccab02-52a1-4d76-a2ad-a85379bb88d4",
+              "outcome": "completed"
+            },
+            {
+              "tool": "skill_load",
+              "receiptId": "747cc763-cad5-4f2a-ad10-ac42a3c9b301",
+              "outcome": "completed"
+            }
+          ],
+          "stage": "fresh-install"
+        },
+        {
+          "turnId": "dc62ed1a-35f5-4238-930e-beb7aa55a6dd",
+          "sessionId": "3760779a-a130-42eb-b8a1-b2a88d17b5ab",
+          "tools": [
+            {
+              "tool": "skill_load",
+              "receiptId": "24f51adc-b3d0-41f0-97d5-527da0e431a6",
+              "outcome": "completed"
+            },
+            {
+              "tool": "run_shell",
+              "receiptId": "8ef5fe0b-471b-406b-bef2-447b5445043b",
+              "outcome": "completed"
+            }
+          ],
+          "stage": "reused-reference"
+        },
+        {
+          "turnId": "dc62ed1a-35f5-4238-930e-beb7aa55a6dd",
+          "sessionId": "3760779a-a130-42eb-b8a1-b2a88d17b5ab",
+          "tools": [
+            {
+              "tool": "skill_load",
+              "receiptId": "721ead59-0946-4cdb-8569-965404bbda6b",
+              "outcome": "completed"
+            },
+            {
+              "tool": "run_shell",
+              "receiptId": "28e231c0-c370-4999-b976-f41c7431a7df",
+              "outcome": "completed"
+            }
+          ],
+          "stage": "resumed-reference"
+        }
+      ],
+      "sourceFiles": 3,
+      "resourceFiles": 2,
+      "resourceBytes": 123,
+      "sourceInstructionBodyPreserved": true,
+      "allResourceBytesMatch": true,
+      "catalogueIdentity": "agent:bot:fixture-package",
+      "managedVersion": 1,
+      "referenceReadObservedOnReuseAndResume": true,
+      "readOnlyStagesPreserveWholeInstallation": true,
+      "resumeSurface": "Trusted Runner.run continuation of persisted state after closing and recreating the real adapter process; observed session/resume, not fresh history replay."
+    },
+    {
+      "adapter": "claude",
+      "slug": "accredo",
+      "instructionVersion": "c22da6ae6a5111592a13cfdd5900712dd54a9b8db33f807d78654450f88c9c04",
+      "lifecycle": [
+        {
+          "method": "session/new",
+          "sessionId": null,
+          "instructionVersion": "c22da6ae6a5111592a13cfdd5900712dd54a9b8db33f807d78654450f88c9c04"
+        },
+        {
+          "method": "session/new",
+          "sessionId": null,
+          "instructionVersion": "c22da6ae6a5111592a13cfdd5900712dd54a9b8db33f807d78654450f88c9c04"
+        },
+        {
+          "method": "session/resume",
+          "sessionId": "2e1afa6a-b18a-4fea-9766-2865fb81d684",
+          "instructionVersion": "c22da6ae6a5111592a13cfdd5900712dd54a9b8db33f807d78654450f88c9c04"
+        }
+      ],
+      "checks": [
+        {
+          "turnId": "fa2db66b-98de-4287-a974-320d3cd5dd03",
+          "sessionId": "2e1afa6a-b18a-4fea-9766-2865fb81d684",
+          "tools": [
+            {
+              "tool": "run_shell",
+              "receiptId": "2b53253d-a0f3-4b5d-ac56-064700f25f5c",
+              "outcome": "completed"
+            },
+            {
+              "tool": "run_shell",
+              "receiptId": "a05c0349-48ca-4e45-8b0e-ca14c12aff59",
+              "outcome": "completed"
+            },
+            {
+              "tool": "skill_save",
+              "receiptId": "77dbcbd4-b342-4b69-85d7-eec30c1f1add",
+              "outcome": "completed"
+            },
+            {
+              "tool": "run_shell",
+              "receiptId": "fdac4070-a6bc-4811-bc01-e4a5f8c1e06c",
+              "outcome": "completed"
+            },
+            {
+              "tool": "run_shell",
+              "receiptId": "0e768865-dc6a-4a4e-a203-14d57bc00a2f",
+              "outcome": "completed"
+            },
+            {
+              "tool": "skill_list",
+              "receiptId": "9574d4c6-ab4f-43dd-abf8-a6c709d91a3e",
+              "outcome": "completed"
+            },
+            {
+              "tool": "skill_load",
+              "receiptId": "9e60ca3d-abe0-4b17-89c3-1e5681bd418d",
+              "outcome": "completed"
+            }
+          ],
+          "stage": "fresh-install"
+        },
+        {
+          "turnId": "456e6011-a8f1-4e2e-802e-c8819a7a6193",
+          "sessionId": "2e1afa6a-b18a-4fea-9766-2865fb81d684",
+          "tools": [
+            {
+              "tool": "skill_load",
+              "receiptId": "7c03d433-b1e9-4077-9ae0-42a3ee7bfb2a",
+              "outcome": "completed"
+            },
+            {
+              "tool": "run_shell",
+              "receiptId": "651b48fd-c572-4504-988f-62b43dea544f",
+              "outcome": "completed"
+            }
+          ],
+          "stage": "reused-reference"
+        },
+        {
+          "turnId": "456e6011-a8f1-4e2e-802e-c8819a7a6193",
+          "sessionId": "2e1afa6a-b18a-4fea-9766-2865fb81d684",
+          "tools": [
+            {
+              "tool": "skill_load",
+              "receiptId": "697a0037-991f-4418-9939-5d955475bce2",
+              "outcome": "completed"
+            },
+            {
+              "tool": "run_shell",
+              "receiptId": "24e4da1c-b225-4b5a-bcc3-ba7d488fd178",
+              "outcome": "completed"
+            }
+          ],
+          "stage": "resumed-reference"
+        }
+      ],
+      "sourceFiles": 5448,
+      "resourceFiles": 5447,
+      "resourceBytes": 35041581,
+      "sourceInstructionBodyPreserved": true,
+      "allResourceBytesMatch": true,
+      "catalogueIdentity": "agent:bot:accredo",
+      "managedVersion": 1,
+      "referenceReadObservedOnReuseAndResume": true,
+      "readOnlyStagesPreserveWholeInstallation": true,
+      "resumeSurface": "Trusted Runner.run continuation of persisted state after closing and recreating the real adapter process; observed session/resume, not fresh history replay."
+    },
+    {
+      "adapter": "codex",
+      "slug": "fixture-package",
+      "instructionVersion": "c22da6ae6a5111592a13cfdd5900712dd54a9b8db33f807d78654450f88c9c04",
+      "lifecycle": [
+        {
+          "method": "session/new",
+          "sessionId": null,
+          "instructionVersion": "c22da6ae6a5111592a13cfdd5900712dd54a9b8db33f807d78654450f88c9c04"
+        },
+        {
+          "method": "session/new",
+          "sessionId": null,
+          "instructionVersion": "c22da6ae6a5111592a13cfdd5900712dd54a9b8db33f807d78654450f88c9c04"
+        },
+        {
+          "method": "session/resume",
+          "sessionId": "01a1a82e-5c77-72c1-a475-0b97ef647537",
+          "instructionVersion": "c22da6ae6a5111592a13cfdd5900712dd54a9b8db33f807d78654450f88c9c04"
+        }
+      ],
+      "checks": [
+        {
+          "turnId": "84d32b60-d07c-4693-8b89-606c467bdbae",
+          "sessionId": "01a1a82e-5c77-72c1-a475-0b97ef647537",
+          "tools": [
+            {
+              "tool": "run_shell",
+              "receiptId": "d2837e71-88e2-4791-9302-640be925750e",
+              "outcome": "completed"
+            },
+            {
+              "tool": "run_shell",
+              "receiptId": "0dd1e7f3-8f23-4282-a24b-5825460c4bc0",
+              "outcome": "completed"
+            },
+            {
+              "tool": "skill_save",
+              "receiptId": "564b020e-ce0d-4fdf-8d1f-d21f413fc225",
+              "outcome": "completed"
+            },
+            {
+              "tool": "run_shell",
+              "receiptId": "3744ab81-79b8-4c65-9e5b-90ae0e7eb659",
+              "outcome": "completed"
+            },
+            {
+              "tool": "skill_list",
+              "receiptId": "351eb936-b108-4d3a-828c-c481bdc81b89",
+              "outcome": "completed"
+            },
+            {
+              "tool": "run_shell",
+              "receiptId": "ab01b398-d76c-464d-b641-91187b9e8405",
+              "outcome": "completed"
+            },
+            {
+              "tool": "skill_load",
+              "receiptId": "14fe675d-71c1-4353-8c89-112730b2522f",
+              "outcome": "completed"
+            }
+          ],
+          "stage": "fresh-install"
+        },
+        {
+          "turnId": "e13cac43-1ab1-4129-a27e-4edb2a28abbb",
+          "sessionId": "01a1a82e-5c77-72c1-a475-0b97ef647537",
+          "tools": [
+            {
+              "tool": "skill_load",
+              "receiptId": "98f304d8-9f5c-4aaa-a31e-b8ac195094f0",
+              "outcome": "completed"
+            },
+            {
+              "tool": "run_shell",
+              "receiptId": "c8a8c03b-6467-4408-acb9-9a68dea2aaf5",
+              "outcome": "completed"
+            }
+          ],
+          "stage": "reused-reference"
+        },
+        {
+          "turnId": "e13cac43-1ab1-4129-a27e-4edb2a28abbb",
+          "sessionId": "01a1a82e-5c77-72c1-a475-0b97ef647537",
+          "tools": [
+            {
+              "tool": "skill_load",
+              "receiptId": "6b3bef91-791d-45ad-889c-e921641baeca",
+              "outcome": "completed"
+            },
+            {
+              "tool": "run_shell",
+              "receiptId": "52faa629-a0bf-4fef-8f0d-3eb3f66ef39b",
+              "outcome": "completed"
+            }
+          ],
+          "stage": "resumed-reference"
+        }
+      ],
+      "sourceFiles": 3,
+      "resourceFiles": 2,
+      "resourceBytes": 123,
+      "sourceInstructionBodyPreserved": true,
+      "allResourceBytesMatch": true,
+      "catalogueIdentity": "agent:bot:fixture-package",
+      "managedVersion": 1,
+      "referenceReadObservedOnReuseAndResume": true,
+      "readOnlyStagesPreserveWholeInstallation": true,
+      "resumeSurface": "Trusted Runner.run continuation of persisted state after closing and recreating the real adapter process; observed session/resume, not fresh history replay."
+    },
+    {
+      "adapter": "codex",
+      "slug": "accredo",
+      "instructionVersion": "c22da6ae6a5111592a13cfdd5900712dd54a9b8db33f807d78654450f88c9c04",
+      "lifecycle": [
+        {
+          "method": "session/new",
+          "sessionId": null,
+          "instructionVersion": "c22da6ae6a5111592a13cfdd5900712dd54a9b8db33f807d78654450f88c9c04"
+        },
+        {
+          "method": "session/new",
+          "sessionId": null,
+          "instructionVersion": "c22da6ae6a5111592a13cfdd5900712dd54a9b8db33f807d78654450f88c9c04"
+        },
+        {
+          "method": "session/resume",
+          "sessionId": "01a1a830-2c8f-7c10-9823-dc1ec993a471",
+          "instructionVersion": "c22da6ae6a5111592a13cfdd5900712dd54a9b8db33f807d78654450f88c9c04"
+        }
+      ],
+      "checks": [
+        {
+          "turnId": "b85e962c-999c-4a70-801d-fc151b36af6e",
+          "sessionId": "01a1a830-2c8f-7c10-9823-dc1ec993a471",
+          "tools": [
+            {
+              "tool": "run_shell",
+              "receiptId": "16f5c1af-b36e-436a-9363-2982dda8becc",
+              "outcome": "completed"
+            },
+            {
+              "tool": "run_shell",
+              "receiptId": "3fe797b4-75dc-44c3-a02a-257bfc4de072",
+              "outcome": "completed"
+            },
+            {
+              "tool": "run_shell",
+              "receiptId": "bb420dea-d4de-41be-a20c-1bace3f6a909",
+              "outcome": "completed"
+            },
+            {
+              "tool": "skill_save",
+              "receiptId": "34ca5d4d-82d6-45fb-a7c4-4a62c209ec5e",
+              "outcome": "completed"
+            },
+            {
+              "tool": "run_shell",
+              "receiptId": "ea440405-efd7-4ed0-868e-46b150459d6a",
+              "outcome": "completed"
+            },
+            {
+              "tool": "skill_list",
+              "receiptId": "a493a739-5323-4c15-bcd7-7e601e50d00c",
+              "outcome": "completed"
+            },
+            {
+              "tool": "skill_load",
+              "receiptId": "0dfc9cde-1c8c-4226-8701-5860234885dc",
+              "outcome": "completed"
+            }
+          ],
+          "stage": "fresh-install"
+        },
+        {
+          "turnId": "2c636f68-b1db-45a7-a258-45d99d6b0de5",
+          "sessionId": "01a1a830-2c8f-7c10-9823-dc1ec993a471",
+          "tools": [
+            {
+              "tool": "skill_load",
+              "receiptId": "67ebf921-e86c-4e22-aff3-b78639c08843",
+              "outcome": "completed"
+            },
+            {
+              "tool": "run_shell",
+              "receiptId": "01784e69-d946-4371-a20a-a78ea70cc39f",
+              "outcome": "completed"
+            }
+          ],
+          "stage": "reused-reference"
+        },
+        {
+          "turnId": "2c636f68-b1db-45a7-a258-45d99d6b0de5",
+          "sessionId": "01a1a830-2c8f-7c10-9823-dc1ec993a471",
+          "tools": [
+            {
+              "tool": "skill_load",
+              "receiptId": "b0505520-9c94-4c1a-8450-9a1dcf5845bc",
+              "outcome": "completed"
+            },
+            {
+              "tool": "run_shell",
+              "receiptId": "16c64df1-d4ad-40c1-ab66-ec405b27f236",
+              "outcome": "completed"
+            }
+          ],
+          "stage": "resumed-reference"
+        }
+      ],
+      "sourceFiles": 5448,
+      "resourceFiles": 5447,
+      "resourceBytes": 35041581,
+      "sourceInstructionBodyPreserved": true,
+      "allResourceBytesMatch": true,
+      "catalogueIdentity": "agent:bot:accredo",
+      "managedVersion": 1,
+      "referenceReadObservedOnReuseAndResume": true,
+      "readOnlyStagesPreserveWholeInstallation": true,
+      "resumeSurface": "Trusted Runner.run continuation of persisted state after closing and recreating the real adapter process; observed session/resume, not fresh history replay."
+    }
+  ],
+  "boundaryJourneys": [
+    {
+      "adapter": "claude",
+      "model": "sonnet",
+      "retainedHistoryVerified": true,
+      "checks": [
+        {
+          "check": "full-fresh.txt",
+          "preset": "full-access",
+          "revision": 2,
+          "session": "2c94b42e-bef5-49d8-9161-a2113e29d59c",
+          "turnId": "b5895270-411f-477c-91c6-21f42ca2e586",
+          "toolCallId": "33ebce4f-f968-4e68-a80b-ad7b763ea55b",
+          "receiptId": "7658595b-254f-41e4-bb0d-cf95b6ebd6dc",
+          "outcome": "completed",
+          "targetVerified": true
+        },
+        {
+          "check": "full-reused.txt",
+          "preset": "full-access",
+          "revision": 2,
+          "session": "2c94b42e-bef5-49d8-9161-a2113e29d59c",
+          "turnId": "d2c9cb0f-7472-4f4f-bd70-8e664261980f",
+          "toolCallId": "9bb806ec-3fa0-434f-b8d1-3c297d4b21b3",
+          "receiptId": "a67e8801-5748-4301-b232-b8e9783b04dc",
+          "outcome": "completed",
+          "targetVerified": true
+        },
+        {
+          "check": "workspace-fresh.txt",
+          "preset": "workspace-write",
+          "revision": 3,
+          "session": "53278af1-ebeb-4d81-ae3c-9d5ec60ce5b7",
+          "turnId": "4a2158e1-d2dc-4a72-9e00-1a18afdc684b",
+          "toolCallId": "076b59fc-1e5a-4e89-b4bf-75457f85e276",
+          "receiptId": "a48033e2-a68d-4c77-afe1-87a8d16a757f",
+          "outcome": "completed",
+          "targetVerified": true
+        },
+        {
+          "check": "workspace-reused.txt",
+          "preset": "workspace-write",
+          "revision": 3,
+          "session": "53278af1-ebeb-4d81-ae3c-9d5ec60ce5b7",
+          "turnId": "1ca98845-65c9-4461-928d-07ca86eca34a",
+          "toolCallId": "6efec99d-2840-4428-98f8-8f5f15149f29",
+          "receiptId": "3e33cf7b-1802-48a2-a557-3a103ad71256",
+          "outcome": "completed",
+          "targetVerified": true
+        },
+        {
+          "check": "workspace-outside",
+          "preset": "workspace-write",
+          "revision": 3,
+          "session": "53278af1-ebeb-4d81-ae3c-9d5ec60ce5b7",
+          "turnId": "330b230d-6e3c-461a-8dcf-182d20d4bfa7",
+          "toolCallId": "660c0343-517e-4754-83eb-b3b06e2f297b",
+          "receiptId": "7e159f32-c5e8-491a-bf00-a8c597e2f7c4",
+          "outcome": "failed",
+          "targetVerified": true
+        },
+        {
+          "check": "read-only-fresh",
+          "preset": "read-only",
+          "revision": 4,
+          "session": "9425fa2e-f7a4-4387-919f-e8c2d9e80ae0",
+          "turnId": "82f68a30-257e-4710-871d-616e20cf1d3e",
+          "toolCallId": "8fff3be1-ed5a-4b1a-89f8-4ab7c7f053a2",
+          "receiptId": "4264e8a9-66d5-4242-a9c3-356ca4674eda",
+          "outcome": "completed",
+          "targetVerified": true
+        },
+        {
+          "check": "read-only-reused",
+          "preset": "read-only",
+          "revision": 4,
+          "session": "9425fa2e-f7a4-4387-919f-e8c2d9e80ae0",
+          "turnId": "208fc060-1fc7-4a8d-a175-4ed716f45990",
+          "toolCallId": "430d6254-1f56-4690-ae1e-d0edeeb13a00",
+          "receiptId": "73aed272-a6dc-4d21-9fa2-6529f6d296c2",
+          "outcome": "completed",
+          "targetVerified": true
+        },
+        {
+          "check": "read-only-write",
+          "preset": "read-only",
+          "revision": 4,
+          "session": "9425fa2e-f7a4-4387-919f-e8c2d9e80ae0",
+          "turnId": "91d68cde-30a7-4e64-9a50-c4640b3ea2d1",
+          "toolCallId": "bec9b9a9-376e-4baf-bcfb-883c6bf7d3fd",
+          "receiptId": "296ea793-27b4-474a-8547-6c31763a95ea",
+          "outcome": "failed",
+          "targetVerified": true
+        },
+        {
+          "check": "full-after-revision.txt",
+          "preset": "full-access",
+          "revision": 5,
+          "session": "77d05b70-159b-49e3-a61a-38504a20271e",
+          "turnId": "13a452c1-f980-41c7-b926-78ce4016afc1",
+          "toolCallId": "f26508ee-5fbe-454a-82c2-e7ca98ac8faa",
+          "receiptId": "d6c77b54-df7f-43e4-b7a6-4031348f9270",
+          "outcome": "completed",
+          "targetVerified": true
+        },
+        {
+          "check": "native-negative",
+          "session": "77d05b70-159b-49e3-a61a-38504a20271e",
+          "turnId": "4cd50e4a-9f03-4444-a327-66cbdd881464",
+          "targetVerified": true
+        }
+      ]
+    },
+    {
+      "adapter": "codex",
+      "model": "gpt-6.1-terra",
+      "retainedHistoryVerified": true,
+      "checks": [
+        {
+          "check": "full-fresh.txt",
+          "preset": "full-access",
+          "revision": 2,
+          "session": "01a1a82f-e875-7703-9b80-1b292b0bd34f",
+          "turnId": "1d2d15bd-be00-4fe0-9829-854c8d7a985b",
+          "toolCallId": "f57ec6bc-b640-4a87-b823-7488b9f0240b",
+          "receiptId": "81b6a154-10e9-4c87-89ca-311dd2a33cfc",
+          "outcome": "completed",
+          "targetVerified": true
+        },
+        {
+          "check": "full-reused.txt",
+          "preset": "full-access",
+          "revision": 2,
+          "session": "01a1a82f-e875-7703-9b80-1b292b0bd34f",
+          "turnId": "0b33e8aa-7d7e-457f-873e-c10c1970ff72",
+          "toolCallId": "4aeef343-b0a2-4e61-a6e3-48fde38be209",
+          "receiptId": "f24b9cb2-d55a-440d-851f-72a949441066",
+          "outcome": "completed",
+          "targetVerified": true
+        },
+        {
+          "check": "workspace-fresh.txt",
+          "preset": "workspace-write",
+          "revision": 3,
+          "session": "01a1a830-184b-7873-ae7a-406430198cfd",
+          "turnId": "87bbc7dc-f1f9-4678-a862-dcb67c09c1d6",
+          "toolCallId": "824ab8b4-f695-42d4-8a96-0edeb652c7aa",
+          "receiptId": "b6ad21ba-eb78-4a32-a92b-6de3d124a4fe",
+          "outcome": "completed",
+          "targetVerified": true
+        },
+        {
+          "check": "workspace-reused.txt",
+          "preset": "workspace-write",
+          "revision": 3,
+          "session": "01a1a830-184b-7873-ae7a-406430198cfd",
+          "turnId": "a10f86a4-c636-4a37-b80b-0ed30c74233b",
+          "toolCallId": "e7ae80f5-4e06-4e9f-a1ba-714ff1a50bef",
+          "receiptId": "e4b5c4e7-2e12-4e05-91b4-9395751a6539",
+          "outcome": "completed",
+          "targetVerified": true
+        },
+        {
+          "check": "workspace-outside",
+          "preset": "workspace-write",
+          "revision": 3,
+          "session": "01a1a830-184b-7873-ae7a-406430198cfd",
+          "turnId": "694655c4-157a-43d1-ad4c-5f867d0a398d",
+          "toolCallId": "197519a3-1790-4611-86d3-96b429422b2a",
+          "receiptId": "138a11ca-ba18-4e13-98bb-0bbbdb3ba640",
+          "outcome": "failed",
+          "targetVerified": true
+        },
+        {
+          "check": "read-only-fresh",
+          "preset": "read-only",
+          "revision": 4,
+          "session": "01a1a830-5a1d-74c0-b841-93b2ea95da90",
+          "turnId": "70b7f67d-dba7-42cf-a651-1ab3e43cd75d",
+          "toolCallId": "581f8ced-20bf-49c7-9e6d-e963c351e0cd",
+          "receiptId": "96be2418-d539-4624-bae7-cffe432279d3",
+          "outcome": "completed",
+          "targetVerified": true
+        },
+        {
+          "check": "read-only-reused",
+          "preset": "read-only",
+          "revision": 4,
+          "session": "01a1a830-5a1d-74c0-b841-93b2ea95da90",
+          "turnId": "fad170b6-67f0-4a92-8ef1-e88a616797c4",
+          "toolCallId": "f7e19d57-0738-4447-b6db-e874c6e7f837",
+          "receiptId": "63328b89-4bab-43dd-a5aa-f049464c9c49",
+          "outcome": "completed",
+          "targetVerified": true
+        },
+        {
+          "check": "read-only-write",
+          "preset": "read-only",
+          "revision": 4,
+          "session": "01a1a830-5a1d-74c0-b841-93b2ea95da90",
+          "turnId": "14e41afe-a6b2-4395-9201-e651e39f7453",
+          "toolCallId": "71344a02-7157-4c8f-849b-96b15d166dc0",
+          "receiptId": "4d28bb8c-c41c-4964-9068-a6a21b43dbc5",
+          "outcome": "failed",
+          "targetVerified": true
+        },
+        {
+          "check": "full-after-revision.txt",
+          "preset": "full-access",
+          "revision": 5,
+          "session": "01a1a830-a4cb-7a52-9c01-09a2f4d76e2c",
+          "turnId": "62cab691-4740-4a21-890e-585a705b8b1b",
+          "toolCallId": "ce699c1c-9171-48a6-bd02-c0d53ccaef8e",
+          "receiptId": "2a2b82f0-0af8-4e49-a25b-cc76d77b4b26",
+          "outcome": "completed",
+          "targetVerified": true
+        },
+        {
+          "check": "native-negative",
+          "session": "01a1a830-a4cb-7a52-9c01-09a2f4d76e2c",
+          "turnId": "79db855a-e494-4701-9153-fab101def7b8",
+          "targetVerified": true
+        }
+      ]
+    }
+  ],
+  "validation": [
+    {
+      "command": "pnpm -r build",
+      "result": "passed",
+      "covers": "workspace build; relay dry-run only"
+    },
+    {
+      "command": "node scripts/verify-acp-permission-context.mjs",
+      "result": "passed",
+      "covers": "both actual adapters; complete bridge in privileged model request, user data separate, native execution tools absent"
+    },
+    {
+      "command": "node scripts/verify-acp-instruction-lifecycle.mjs",
+      "result": "passed",
+      "covers": "both controlled peers; fresh/reused/resumed, missing/changed bridge, permission revision, turn ceilings, missing support, failed-resume stop, conflicting Claude carrier"
+    },
+    {
+      "command": "node scripts/verify-acp-skill-install.mjs --real",
+      "result": "passed",
+      "covers": "both actual adapters; fixture and actual Accredo package; complete managed installation and observed reference use across fresh/reused/resumed sessions"
+    },
+    {
+      "command": "node scripts/verify-daemon-execution.mjs --real",
+      "result": "passed",
+      "covers": "both actual adapters; ten filesystem/native/MCP/session checkpoints each"
+    },
+    {
+      "command": "node scripts/verify-acp-continuity.mjs",
+      "result": "passed",
+      "covers": "eight controlled continuity groups"
+    },
+    {
+      "command": "node scripts/verify-bot-knowledge.mjs",
+      "result": "passed",
+      "covers": "four controlled delivery/policy groups"
+    },
+    {
+      "command": "node scripts/verify-acp-tool-identity.mjs",
+      "result": "passed",
+      "covers": "thirty controlled approval flows"
+    },
+    {
+      "command": "node scripts/verify-shared-skills.mjs",
+      "result": "passed",
+      "covers": "shared/managed package and authority contracts"
+    },
+    {
+      "command": "node scripts/verify-permission-worlds.mjs",
+      "result": "passed",
+      "covers": "filesystem/App/MCP/computer/turn/delegation world checks"
+    },
+    {
+      "command": "node scripts/verify-uploads.mjs",
+      "result": "passed",
+      "covers": "upload and ACP/API/Ollama delivery"
+    },
+    {
+      "command": "node scripts/verify-remote-mcp.mjs",
+      "result": "passed",
+      "covers": "sixteen controlled MCP groups; no business provider"
+    },
+    {
+      "command": "node scripts/verify-work.mjs",
+      "result": "passed",
+      "covers": "controlled lifecycle/cancellation/recovery without replay"
+    },
+    {
+      "command": "node scripts/verify-model-catalogue.mjs",
+      "result": "passed",
+      "covers": "controlled metadata persistence and bot runtime switch"
+    },
+    {
+      "command": "node --check <changed standalone scripts>",
+      "result": "passed",
+      "covers": "passed"
+    },
+    {
+      "command": "git diff --check",
+      "result": "passed",
+      "covers": "passed"
+    }
+  ],
+  "reviews": {
+    "localStandardsSpec": "Focused reviews passed after correcting body, actual reference-read and result evidence.",
+    "builtin": "codex review --uncommitted first found unchecked discovery/loading and possible rewrite during reference verification. Fixed both; focused repeat exited0 with no substantive remaining defects.",
+    "scope": "Runtime, tool contracts, harnesses and documentation; this generated evidence and final ticket results were recorded after source review."
+  },
+  "earlierTrials": {
+    "sourceCaptureBefore": "Actual Codex capture failed because no complete bridge was present in privileged model content.",
+    "knownStops": [
+      "Expected missing destination was treated as a failed read preflight.",
+      "Source description exceeded managed schema and was rejected before execution.",
+      "Bash-only syntax was rejected by POSIX /bin/sh before copy execution.",
+      "Claude attempted an unqualified tool alias; strict checker rejected it."
+    ],
+    "resolution": "Clarified existing managed metadata/resource and shell/name contracts without changing executor authority or input limits. Every new actual trial used a different disposable installation; no uncertain effect was retried.",
+    "checkerCorrections": [
+      "Excluded ancillary Claude title generation from main-turn request capture.",
+      "Required complete privileged bridge, not just a marker.",
+      "Compared source instruction body and required returned installed identities.",
+      "Required correlated successful installed-reference reads and unchanged complete package during reuse/resume.",
+      "Rejected outer ACP/MCP failures as well as nested daemon failures."
+    ]
+  },
+  "limits": [
+    "Source/request capture is separate from real subscription-adapter effects.",
+    "No installed default-bot or live Accredo installation was performed.",
+    "No ERP/provider business operations, plugin integrations or package scripts were executed.",
+    "One bounded successful journey does not guarantee all future model generations.",
+    "Private temporary databases, raw controlled captures and copied packages remain outside the repository for inspection."
+  ],
+  "installedServiceObservation": {
+    "release": "<releases>/avatar-idle-20261105",
+    "containsThisBridge": false,
+    "scope": "Read-only final observation; another chat updated the service during this task. This task performed no deployment."
+  }
+}

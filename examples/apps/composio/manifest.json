@@ -1,0 +1,39 @@
+{
+  "id": "composio",
+  "name": "Composio bridge (optional)",
+  "version": "1.0.0",
+  "description": "Optional bridge to Composio's hosted tool catalogue. Does nothing without COMPOSIO_API_KEY in the daemon's environment. First-party Apps and MCP are enough for OpenAg; this is only a convenience.",
+  "requires": ["COMPOSIO_API_KEY"],
+  "tools": [
+    {
+      "name": "find_tools",
+      "description": "Search Composio's tool catalogue (by text and optionally a toolkit slug such as github). Returns slugs and descriptions only. Sends the query to Composio.",
+      "class": "act-external",
+      "input": {
+        "type": "object",
+        "properties": {
+          "query": { "type": "string", "maxLength": 200 },
+          "toolkit": { "type": "string", "maxLength": 60, "description": "Optional toolkit slug, e.g. github" },
+          "limit": { "type": "integer", "minimum": 1, "maximum": 25 }
+        },
+        "required": ["query"]
+      },
+      "exec": { "argv": ["node", "tool.mjs", "find"], "timeoutSec": 30, "env": ["COMPOSIO_API_KEY"] }
+    },
+    {
+      "name": "run_tool",
+      "description": "Run ONE Composio tool by its slug (for example GITHUB_CREATE_AN_ISSUE) with a JSON object of arguments. This acts on your connected accounts at Composio: every call asks for approval.",
+      "class": "act-external",
+      "input": {
+        "type": "object",
+        "properties": {
+          "tool_slug": { "type": "string", "maxLength": 100 },
+          "arguments_json": { "type": "string", "maxLength": 4000, "description": "A JSON object with the tool's arguments." },
+          "connected_account_id": { "type": "string", "maxLength": 100 }
+        },
+        "required": ["tool_slug"]
+      },
+      "exec": { "argv": ["node", "tool.mjs", "run"], "timeoutSec": 60, "env": ["COMPOSIO_API_KEY"] }
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "observedOn": "2026-11-03 Pacific/Auckland",
+  "evidence": "Authenticated passive GET /mcp/servers from the running OpenAg daemon. No remote Composio tools/call, provider data read, receipt change or sign-in operation. This is the daemon cached offered catalogue, not a fresh upstream tools/list or a complete schema snapshot.",
+  "serverId": "composio-connect",
+  "state": "connected",
+  "version": "0.1.0",
+  "tools": [
+    {
+      "name": "mcp.composio-connect.COMPOSIO_GET_TOOL_SCHEMAS",
+      "class": "act-external"
+    },
+    {
+      "name": "mcp.composio-connect.COMPOSIO_MANAGE_CONNECTIONS",
+      "class": "act-external"
+    },
+    {
+      "name": "mcp.composio-connect.COMPOSIO_MULTI_EXECUTE_TOOL",
+      "class": "act-external"
+    },
+    {
+      "name": "mcp.composio-connect.COMPOSIO_PROXY_EXECUTE",
+      "class": "act-external"
+    },
+    {
+      "name": "mcp.composio-connect.COMPOSIO_REMOTE_BASH_TOOL",
+      "class": "act-external"
+    },
+    {
+      "name": "mcp.composio-connect.COMPOSIO_REMOTE_WORKBENCH",
+      "class": "act-external"
+    },
+    {
+      "name": "mcp.composio-connect.COMPOSIO_SEARCH_TOOLS",
+      "class": "search"
+    },
+    {
+      "name": "mcp.composio-connect.COMPOSIO_SUBMIT_FEEDBACK",
+      "class": "act-external"
+    },
+    {
+      "name": "mcp.composio-connect.COMPOSIO_WAIT_FOR_CONNECTIONS",
+      "class": "act-external"
+    },
+    {
+      "name": "mcp.composio-connect.COMPOSIO_MANAGE_SKILL",
+      "class": "act-external"
+    },
+    {
+      "name": "mcp.composio-connect.COMPOSIO_SEARCH_SKILLS",
+      "class": "act-external"
+    },
+    {
+      "name": "mcp.composio-connect.COMPOSIO_USE_SKILL",
+      "class": "act-external"
+    }
+  ]
+}

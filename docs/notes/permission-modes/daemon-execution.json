@@ -1,0 +1,72 @@
+{
+  "scope": "OA-398 fixture-selected daemon filesystem boundaries; not persisted public modes",
+  "platform": "darwin",
+  "realAdapters": [
+    {
+      "adapter": "claude",
+      "sameSession": "e0211b00-9118-4492-8b69-a732d0e6b111",
+      "cases": [
+        {
+          "description": "workspace-write, daemon effect observed",
+          "turnId": "b8f9710a-4499-42e4-b232-378ff62dcbad"
+        },
+        {
+          "description": "workspace-write, filesystem write refused",
+          "turnId": "f8a60fca-d009-4b98-96ca-edcf83fc23b1"
+        },
+        {
+          "description": "read-only, filesystem write refused",
+          "turnId": "b6e5ef8e-d514-4f5d-b0e3-d5330b93203d"
+        },
+        {
+          "description": "danger-full-access, daemon effect observed",
+          "turnId": "5aa0ef01-95a6-4890-80ab-8518772cd71c"
+        }
+      ],
+      "nativeProbe": "no file effect; no daemon fallback",
+      "inheritedNativeMcp": "never started"
+    },
+    {
+      "adapter": "codex",
+      "sameSession": "01a1a39d-17bf-7201-8de1-f6d031e7eed3",
+      "cases": [
+        {
+          "description": "workspace-write, daemon effect observed",
+          "turnId": "30b1ae0c-3211-4b4c-b863-928685ad4b70"
+        },
+        {
+          "description": "workspace-write, filesystem write refused",
+          "turnId": "e56a2a7f-9a5e-4667-bfa6-2161389d4b73"
+        },
+        {
+          "description": "read-only, filesystem write refused",
+          "turnId": "9c632447-95f4-4055-8f9a-cd33c08f6a02"
+        },
+        {
+          "description": "danger-full-access, daemon effect observed",
+          "turnId": "5a190705-4cf4-4c6f-8215-b7f8a8fdbf5d"
+        }
+      ],
+      "nativeProbe": "no file effect; no daemon fallback",
+      "inheritedNativeMcp": "never started"
+    }
+  ],
+  "controlledProviderTransports": [
+    "ollama/fixture",
+    "deepseek/deepseek-v4-flash",
+    "openai/gpt-5",
+    "anthropic/claude-opus-4-6",
+    "google/gemini-2.5-pro",
+    "openrouter/openai/gpt-5",
+    "groq/openai/gpt-oss-120b",
+    "nebius/Qwen/Qwen3.8-27B",
+    "xai/grok-4.6",
+    "alibaba/qwen3.8-flash",
+    "mistral/magistral-small-latest",
+    "cerebras/gpt-oss-120b",
+    "deepinfra/deepseek-ai/DeepSeek-V4-Pro",
+    "perplexity/sonar-pro"
+  ],
+  "hostedApiAcceptance": false,
+  "productionEnabled": false
+}

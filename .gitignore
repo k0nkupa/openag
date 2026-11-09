@@ -1,0 +1,10 @@
+node_modules
+dist
+.env
+*.db*
+
+/examples/mcp/apple-apps/calendar-reader
+/examples/mcp/apple-apps/calendar-build.json
+
+/apps/signin-relay/.wrangler
+/apps/signin-relay/worker-configuration.d.ts

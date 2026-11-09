@@ -1,0 +1,51 @@
+// Actual desk component and gateway/runner; temporary data, controlled model transport and stream notifications.
+import assert from 'node:assert/strict';
+import {mkdtempSync,rmSync} from 'node:fs';
+import {tmpdir} from 'node:os';
+import {join} from 'node:path';
+import {randomUUID} from 'node:crypto';
+import {createRequire} from 'node:module';
+import {fileURLToPath} from 'node:url';
+import {startFixture} from './bot-models-fixture.mjs';
+const dir=mkdtempSync(join(tmpdir(),'openag-bot-models-')),token=randomUUID(),f=await startFixture(dir,token);
+const rootPath=fileURLToPath(new URL('../',import.meta.url)),require=createRequire(rootPath+'apps/desk/package.json');
+const {JSDOM}=require('jsdom'),dom=new JSDOM('<div id="root"></div>',{url:f.url+'/#/room/main',pretendToBeVisual:true});
+for(const key of ['window','document','HTMLElement','Element','Node','MutationObserver','localStorage','sessionStorage'])globalThis[key]=dom.window[key];
+for(const key of ['getComputedStyle','requestAnimationFrame','cancelAnimationFrame'])globalThis[key]=dom.window[key].bind(dom.window);
+Object.defineProperty(globalThis,'navigator',{value:dom.window.navigator,configurable:true});globalThis.IS_REACT_ACT_ENVIRONMENT=true;
+globalThis.ResizeObserver=class{observe(){}unobserve(){}disconnect(){}};
+globalThis.matchMedia=dom.window.matchMedia=()=>({matches:false,addEventListener(){},removeEventListener(){}});
+let socket;globalThis.WebSocket=class{constructor(){socket=this;}close(){}};
+const {createServer}=await import(require.resolve('vite'));
+const vite=await createServer({configFile:false,root:rootPath+'apps/desk',resolve:{alias:{'@':rootPath+'apps/desk/src'}},server:{middlewareMode:true,hmr:false},appType:'custom'});
+const React=require('react'),{act}=React,{createRoot}=require('react-dom/client'),{fireEvent}=require('@testing-library/react');
+const root=createRoot(document.getElementById('root'));
+const {RequestDetails}=await vite.ssrLoadModule('/src/components/RequestDetails.tsx'),{StreamProvider}=await vite.ssrLoadModule('/src/stream.tsx'),{createApi}=await vite.ssrLoadModule('/src/api.ts');
+let fail=false,reads=0;
+const api=createApi(token,()=>{throw Error('Unexpected auth failure');},(path,init)=>{if(path.includes('/request-manifests')){reads++;if(fail)return Promise.resolve(Response.json({error:'Controlled trace outage'},{status:503}));}return fetch(f.url+path,init);});
+const wait=async(check,label)=>{const end=Date.now()+5000;while(!check()){assert.ok(Date.now()<end,label);await act(async()=>new Promise(resolve=>setTimeout(resolve,20)));}};
+const button=name=>[...document.querySelectorAll('button')].find(b=>b.textContent===name);
+const click=async name=>{const b=button(name);assert.ok(b,name);await act(async()=>fireEvent.click(b));};
+let mounts=0;
+async function mount(turnId){await act(async()=>root.render(React.createElement(StreamProvider,{token,onAuthFailure(){}},React.createElement(RequestDetails,{key:turnId+'-'+(++mounts),api,turnId}))));await click('Request details');}
+try{
+ const finished=new Promise((resolve,reject)=>{const off=f.ledger.subscribe('main',event=>{if(event.type==='turn_finished'&&event.actor==='local'){off();clearTimeout(timer);resolve(event.payload.turnId);}});const timer=setTimeout(()=>{off();reject(Error('Gateway turn deadline'));},5000);});
+ const posted=await fetch(f.url+'/rooms/main/messages',{method:'POST',headers:{authorization:'Bearer '+token,'content-type':'application/json'},body:JSON.stringify({text:'@local Inspect the request metadata.'})});assert.equal(posted.status,202);
+ const turnId=await finished;await mount(turnId);await wait(()=>document.body.textContent.includes('Returned'),'Request summary loads through gateway');
+ assert.ok(document.body.textContent.includes('Step 1'));assert.equal(button('Technical details').getAttribute('aria-expanded'),'false','Metadata starts collapsed');
+ await click('Context');assert.ok(document.body.textContent.includes('JavaScript string-length units'));
+ const before=reads;await act(async()=>socket.onmessage({data:JSON.stringify({id:999,roomId:'main',actor:'local',type:'request_attempt',payload:{turnId,manifestId:'safe-refresh-reference'}})}));
+ await wait(()=>reads>before,'Safe cross-device notification refreshes private endpoint');
+ let stored;await act(async()=>{stored=(await(await fetch(f.url+'/turns/'+turnId+'/request-manifests',{headers:{authorization:'Bearer '+token}})).json()).records[0].manifest;});
+ const appendSteps=(from,to)=>{for(let step=from;step<=to;step++)f.ledger.append('main','local','request_prepared',{...stored,manifestId:randomUUID(),step});};
+ appendSteps(2,26);await mount(turnId);await wait(()=>button('Earlier steps'),'Paginated inspector');await click('Earlier steps');await wait(()=>document.querySelector('[aria-label="Step 1"]'),'Older page loaded');
+ appendSteps(27,51);await act(async()=>socket.onmessage({data:JSON.stringify({id:1000,roomId:'main',actor:'local',type:'request_prepared',payload:{turnId,manifestId:'safe-refresh'}})}));
+ await wait(()=>document.querySelector('[aria-label="Step 51"]'),'Refresh catches up to new page');assert.ok(document.querySelector('[aria-label="Step 1"]'),'Refresh preserves loaded older page');
+ assert.equal(document.querySelectorAll('section[aria-label^="Step "]').length,51,'Burst refresh leaves no missing middle page');
+ fail=true;await act(async()=>socket.onopen());await wait(()=>document.body.textContent.includes('Controlled trace outage'),'Actionable read error');assert.ok(!document.body.textContent.includes('Step 1'),'Stale details cleared on failed read');
+ fail=false;await click('Retry');await wait(()=>document.querySelector('[aria-label="Step 51"]'),'Retry reads evidence without dispatch');
+ assert.equal(f.db.prepare('SELECT count(*) n FROM turns').get().n,1,'Inspection never dispatches a turn');
+ const historical=randomUUID();f.db.prepare("INSERT INTO turns(id,room_id,bot_id,status,state_json,created_at,updated_at) VALUES(?,'main','local','finished','{}',?,?)").run(historical,Date.now(),Date.now());
+ await mount(historical);await wait(()=>document.body.textContent.includes('Not recorded'),'Historical empty state');
+ console.log('PASS desk/gateway: actual runtime trace, expandable context, safe refresh, outage/retry without replay and historical Not recorded.');
+}finally{await act(async()=>root.unmount());await vite.close();dom.window.close();await f.close();rmSync(dir,{recursive:true,force:true});}

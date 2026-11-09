@@ -1,0 +1,36 @@
+{
+  "result": "passed",
+  "method": "CUA real browser against disposable daemon and synthetic data",
+  "desktop": {
+    "width": 1440,
+    "height": 960
+  },
+  "phone": {
+    "width": 390,
+    "height": 844,
+    "documentWidth": 390,
+    "dialogWidth": 358
+  },
+  "pickerLabelPx": 12,
+  "triggerSvgPx": 56,
+  "editorDepthSlices": 25,
+  "smallAvatarSvgCount": 1,
+  "checks": [
+    "save/cancel/reset/shuffle and automatic colour",
+    "failed save retains draft; retry and double-click guard",
+    "limited avatar-only edit and two-client appearance refresh",
+    "delayed initial settings guard and out-of-order list responses",
+    "keyboard/Home and native pointer drag turning",
+    "whole-body distinct matrix3d transforms; preserve-3d wrappers",
+    "saved motion-off and system reduced-motion body/eye/gaze/turn overrides",
+    "light/dark desktop and phone containment",
+    "real Work lifecycle thinking/waiting/happy expiry",
+    "ignored, failed and ACP-shaped unknown outcomes stay neutral",
+    "fast Work cards mounting after completion share live marker",
+    "late child settlement celebrates at actual completion",
+    "interrupted recovery and reconnect completion backfill do not replay",
+    "slow Work HTTP refresh: older working card still shows live completion and then neutral",
+    "live settlement revision does not lose completion across duplicate metadata updates"
+  ],
+  "capturedConsoleWarningsOrErrors": 0
+}

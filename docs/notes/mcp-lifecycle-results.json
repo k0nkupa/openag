@@ -1,0 +1,216 @@
+{
+  "scope": "Temporary stores and synthetic HTTP MCP tools; no Outlook/provider execution, live receipt changes or deployment",
+  "contract": {
+    "source": "working-tree",
+    "scope": "installed SDK 1.32.2 / protocol 2025-11-25; stateful loopback HTTP, synthetic tools, temporary state",
+    "rows": [
+      {
+        "name": "stateful HTTP initialize/version/session/tool invocation",
+        "status": "pass",
+        "required": true,
+        "observed": {
+          "protocol": "2025-11-25",
+          "capabilities": {
+            "elicitation": {
+              "form": {},
+              "url": {}
+            }
+          }
+        }
+      },
+      {
+        "name": "negotiates supported protocol 2025-11-25",
+        "status": "pass",
+        "required": true
+      },
+      {
+        "name": "negotiates supported protocol 2025-06-18",
+        "status": "pass",
+        "required": true
+      },
+      {
+        "name": "negotiates supported protocol 2025-03-26",
+        "status": "pass",
+        "required": true
+      },
+      {
+        "name": "negotiates supported protocol 2024-11-05",
+        "status": "pass",
+        "required": true
+      },
+      {
+        "name": "negotiates supported protocol 2024-10-07",
+        "status": "pass",
+        "required": true
+      },
+      {
+        "name": "unsupported negotiated protocol fails closed",
+        "status": "pass",
+        "required": true
+      },
+      {
+        "name": "paginated catalogue follows nextCursor",
+        "status": "pass",
+        "required": true
+      },
+      {
+        "name": "cyclic pagination refuses an incomplete catalogue",
+        "status": "pass",
+        "required": true
+      },
+      {
+        "name": "all remote input schemas enforced before execution",
+        "status": "pass",
+        "required": true
+      },
+      {
+        "name": "structured-only output survives projection",
+        "status": "pass",
+        "required": true
+      },
+      {
+        "name": "unsupported media is explicitly marked",
+        "status": "pass",
+        "required": true,
+        "observed": {
+          "limit": "remote media/resources are markers, not usable media"
+        }
+      },
+      {
+        "name": "tool errors retain bounded complete rejection evidence",
+        "status": "pass",
+        "required": true
+      },
+      {
+        "name": "JSON-RPC errors fail without automatic replay",
+        "status": "pass",
+        "required": true
+      },
+      {
+        "name": "HTTP 401 fails without replay or reconnect execution",
+        "status": "pass",
+        "required": true
+      },
+      {
+        "name": "HTTP 403 fails without replay or reconnect execution",
+        "status": "pass",
+        "required": true
+      },
+      {
+        "name": "HTTP 404 fails without replay or reconnect execution",
+        "status": "pass",
+        "required": true
+      },
+      {
+        "name": "HTTP 503 fails without replay or reconnect execution",
+        "status": "pass",
+        "required": true
+      },
+      {
+        "name": "malformed JSON response fails without replay",
+        "status": "pass",
+        "required": true
+      },
+      {
+        "name": "advertised output schema rejects invalid structured output",
+        "status": "pass",
+        "required": true
+      },
+      {
+        "name": "task-only tools are diagnosed before being offered as synchronous calls",
+        "status": "pass",
+        "required": true
+      },
+      {
+        "name": "concurrent calls remain independently correlated",
+        "status": "pass",
+        "required": true
+      },
+      {
+        "name": "caller cancellation reaches an in-flight remote call",
+        "status": "pass",
+        "required": true
+      },
+      {
+        "name": "queued caller cancellation settles before the preceding remote invocation",
+        "status": "pass",
+        "required": true
+      },
+      {
+        "name": "timeout bounds waiting and never replays",
+        "status": "pass",
+        "required": true
+      },
+      {
+        "name": "tools/list_changed refreshes or invalidates the catalogue",
+        "status": "pass",
+        "required": true
+      },
+      {
+        "name": "catalogue refresh preserves an already dispatched invocation and rejects stale executors",
+        "status": "pass",
+        "required": true
+      },
+      {
+        "name": "explicit reload refreshes the catalogue",
+        "status": "pass",
+        "required": true
+      },
+      {
+        "name": "disconnect disables stale executors",
+        "status": "pass",
+        "required": true
+      },
+      {
+        "name": "generic client supports explicit user elicitation",
+        "status": "pass",
+        "required": true
+      },
+      {
+        "name": "generic delayed JSON reply honors configured invocation timeout",
+        "status": "pass",
+        "required": true
+      },
+      {
+        "name": "managed client supports explicit user elicitation and delayed JSON replies",
+        "status": "pass",
+        "required": true
+      },
+      {
+        "name": "unsupported roots requests fail closed without filesystem disclosure",
+        "status": "pass",
+        "required": true
+      },
+      {
+        "name": "unsupported sampling requests fail closed without model use",
+        "status": "pass",
+        "required": true
+      }
+    ],
+    "summary": {
+      "pass": 34,
+      "gaps": 0
+    },
+    "liveProviderCalls": 0
+  },
+  "controlledAdapters": {
+    "real": false,
+    "contractAudit": true,
+    "groups": 18,
+    "contractGaps": [],
+    "liveProviderCalls": 0
+  },
+  "realAdapters": {
+    "real": true,
+    "contractAudit": true,
+    "groups": 14,
+    "contractGaps": [],
+    "liveProviderCalls": 0
+  },
+  "additionalVerification": {
+    "deskGatewayStreamGroups": 4,
+    "explicitWork": "passed",
+    "unitRunners": "not run under latest owner instructions",
+    "browserPhoneLayout": "not checked; browser control disabled"
+  }
+}

@@ -1,0 +1,408 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/geist";
+@import "@fontsource-variable/geist-mono";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme inline {
+  --font-heading: var(--font-sans);
+  --font-sans: var(--sans);
+  --font-mono: var(--mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+@layer base {
+:root {
+  color-scheme: light;
+  /* shadcn neutral theme; legacy names alias the same semantic roles. */
+  --ground: oklch(1 0 0); --surface-1: oklch(1 0 0); --surface-2: oklch(0.97 0 0); --surface-3: oklch(0.97 0 0);
+  --border: oklch(0.922 0 0); --border-strong: oklch(0.922 0 0); --control-border: oklch(0.708 0 0);
+  --ink: oklch(0.145 0 0); --ink-2: oklch(0.205 0 0); --ink-3: oklch(0.556 0 0); --muted-foreground: oklch(0.556 0 0); --on-ink: oklch(0.985 0 0);
+  --attention: #b45309; --attention-surface: #fef6e7; --attention-border: #f0c46a;
+  --online: #15803d; --driving: #2563eb; --danger: #dc2626;
+  --shadow-popover: 0 16px 40px rgba(0, 0, 0, 0.55);
+  --sans: "Geist Variable", Geist, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "Geist Mono Variable", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --avatar-red: #e0574f; --avatar-orange: #e8923a; --avatar-yellow: #e6b93a; --avatar-green: #6fcf8e;
+  --avatar-mint: #7ed69b; --avatar-teal: #5fbfa5; --avatar-blue: #5b8def; --avatar-violet: #7b6cf0; --avatar-pink: #d65db1;
+
+  --bg: var(--ground);
+  --fg: var(--ink);
+  --mute: var(--muted-foreground);
+  --line: var(--border);
+  --card: var(--surface-1);
+  --accent: var(--surface-3);
+  --accent-fg: var(--on-ink);
+  --accent-soft: var(--surface-3);
+  --warn: var(--attention);
+  --focus: var(--ring);
+  --radius: 12px;
+  --background: var(--ground);
+  --foreground: var(--ink);
+  --card-foreground: var(--ink);
+  --popover: var(--surface-1);
+  --popover-foreground: var(--ink);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: var(--on-ink);
+  --secondary: var(--surface-2);
+  --secondary-foreground: var(--ink);
+  --muted: var(--surface-2);
+  --accent-foreground: var(--ink);
+  --destructive: var(--danger);
+  --input: var(--border-strong);
+  --ring: oklch(0.708 0 0);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: var(--ink);
+  --sidebar-primary: var(--ink);
+  --sidebar-primary-foreground: var(--on-ink);
+  --sidebar-accent: var(--surface-3);
+  --sidebar-accent-foreground: var(--ink);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
+  --chart-1: var(--driving);
+  --chart-2: var(--online);
+  --chart-3: var(--attention);
+  --chart-4: var(--avatar-violet);
+  --chart-5: var(--avatar-teal);
+  --target: 44px;
+}
+
+:root[data-theme="dark"] {
+    color-scheme: dark;
+    --ground: oklch(0.145 0 0); --surface-1: oklch(0.205 0 0); --surface-2: oklch(0.269 0 0); --surface-3: oklch(0.269 0 0);
+    --border: oklch(1 0 0 / 10%); --border-strong: oklch(1 0 0 / 15%); --control-border: oklch(0.556 0 0);
+    --ink: oklch(0.985 0 0); --ink-2: oklch(0.985 0 0); --ink-3: oklch(0.708 0 0); --muted-foreground: oklch(0.708 0 0); --on-ink: oklch(0.205 0 0);
+    --primary: oklch(0.922 0 0); --ring: oklch(0.556 0 0); --sidebar: oklch(0.205 0 0);
+    --attention: #f5b547; --attention-surface: #16130d; --attention-border: #5a4318;
+    --online: #4ade80; --driving: #60a5fa; --danger: #f87171;
+}
+
+* { box-sizing: border-box; border-color: var(--border); outline-color: color-mix(in oklab, var(--ring) 50%, transparent); }
+
+html, body { margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font: 14px/1.5 var(--sans);
+  min-width: 0;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
+h1 { font-size: 24px; line-height: 32px; font-weight: 600; letter-spacing: -0.01em; margin: 0 0 12px; }
+h2 { font-size: 16px; line-height: 24px; font-weight: 600; margin: 0 0 8px; }
+p { margin: 0 0 8px; }
+
+a { color: var(--ink); text-underline-offset: 2px; }
+
+:focus-visible:not([data-slot]) { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+.error { color: var(--destructive); margin: 6px 0 0; min-height: 0; }
+
+}
+
+/* Keep the existing desk below utilities while screens move to shadcn. */
+@layer components {
+/* Login */
+
+/* Shell: header, then (rooms strip + content + bottom tabs) on narrow, (left nav + content) from 860px */
+
+/* Room: thread + status rail (rail drops below the thread on narrow screens) */
+.bot-avatar { position: relative; flex: 0 0 auto; display: inline-block; }
+
+/* Inbox */
+
+/* Settings / Computer */
+.kv { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 6px 16px; margin: 0; }
+.kv dt { color: var(--mute); }
+.kv dd { margin: 0; overflow-wrap: anywhere; }
+
+/* Wide screens: left nav beside the content; the status rail joins from 1180px. */
+@media (min-width: 860px) {
+  /* The window is the frame: the top bar and the nav stay put, only the content scrolls. */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}
+
+/* Computer view: screenshots are 1280px wide; scale them to the card instead of overflowing it. */
+
+/* Nightly reflection */
+
+/* Skills (read-only) */
+
+/* Automations */
+.automations { min-width: 0; }
+.hint { color: var(--mute); font-size: 13px; margin: 6px 0 0; overflow-wrap: anywhere; }
+
+/* Apps panel */
+
+/* Owner actions and operations forms */
+
+/* Section pages */
+.page-intro { color: var(--muted-foreground); font-size: 13px; margin: -4px 0 16px; }
+.page-head { min-height: 52px; display: flex; align-items: center; flex-wrap: wrap; gap: 4px 12px; padding: 8px 24px; border-bottom: 1px solid var(--border); }
+.page-head h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 600;
+    letter-spacing: -.025em; }
+
+/* Inline approval (in the thread) */
+
+/* Ledger */
+
+/* Rail computer tile */
+
+/* Thinking indicator: shown while a bot's turn is running */
+@keyframes orbit-spin { to { transform: rotate(360deg); } }
+
+/* @mention picker above the composer */
+
+/* Phone (design: Phone Inbox, Phone Room) */
+@media (max-width: 859px) {
+}
+
+/* Bot settings */
+
+/* Settings area */
+.settings-main { min-width: 0; max-width: 940px; padding: 20px 16px 32px; display: flex; flex-direction: column; gap: 32px; }
+.settings-main > section[aria-labelledby], .settings-main > .settings-page { display: flex; flex-direction: column; gap: 16px; }
+.list-row { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+.list-row:last-child { border-bottom: 0; }
+.list-row-main { flex: 1 1 220px; display: flex; flex-direction: column; min-width: 0; }
+.provider-list { max-height: min(32rem, 60vh); overflow-y: auto; }
+.room-routing-row { flex-direction: column; align-items: stretch; gap: 16px; }
+.list-row-title { font-weight: 500; }
+.list-row-sub { font-size: 13px; line-height: 1.5; color: var(--muted-foreground); overflow-wrap: anywhere; }
+@media (min-width: 860px) {
+  .settings-main { flex: 1; padding: 28px 32px 40px; }
+}
+.hint code { font: 12px var(--mono); background: var(--surface-3); padding: 1px 5px; border-radius: 5px; }
+
+}
+
+/* OA-319: the reviewed shell. The classic shell keeps its layout above. */
+@layer components {
+  .desk-shell { height: 100dvh; min-height: 0; overflow: hidden; }
+  .desk-sidebar { border-color: var(--border); }
+  .desk-wordmark { display: flex; align-items: center; gap: 10px; min-height: 36px; padding: 0 8px; font-size: 18px; font-weight: 600; letter-spacing: -.03em; text-decoration: none; }
+  .desk-sidebar .desk-agent { min-height: 60px; }
+  .desk-sidebar .bot-avatar { width: 24px; height: 24px; }
+  .desk-agent-text, .desk-profile-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .desk-agent-text > span, .desk-profile strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 14px; font-weight: 500; }
+  .desk-agent-text small, .desk-profile small { font-size: 12px; color: var(--muted-foreground); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .desk-sidebar [data-slot="sidebar-footer"] { padding: 12px; gap: 12px; }
+  .desk-nav-count { margin-left: auto; color: var(--muted-foreground); font-size: 12px; font-variant-numeric: tabular-nums; }
+  .desk-device-icon { display: grid; place-items: center; width: 24px; height: 24px; border: 1px solid var(--border); border-radius: 50%; flex-shrink: 0; }
+  .desk-main { display: flex; flex: 1; flex-direction: column; min-width: 0; }
+  .desk-topbar { min-height: 60px; height: 60px; flex: 0 0 auto; display: flex; gap: 16px; align-items: center; padding: 0 24px; border-bottom: 1px solid var(--border); }
+  .desk-breadcrumb { display: flex; align-items: center; gap: 12px; min-width: 0; margin-right: auto; font-size: 14px; }
+  .desk-breadcrumb > span { color: var(--muted-foreground); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .desk-breadcrumb > [aria-current] { color: var(--ink); }
+  .desk-breadcrumb > svg { color: var(--muted-foreground); flex-shrink: 0; }
+  .desk-content { flex: 1; overflow: auto; min-width: 0; min-height: 0; padding: 28px; }
+  .desk-content-room, .desk-content-ledger, .desk-content-settings, .desk-content-bots, .desk-content-connectors, .desk-content-automations { padding: 0; }
+  .desk-shell .settings-main { width: 100%; max-width: 1040px; padding: 32px; }
+  .desk-shell .settings-main h1 { font-size: 26px; line-height: 32px; letter-spacing: -.04em; }
+  .desk-shell .settings-page { gap: 32px; }
+  .desk-shell .list-row { padding: 20px; }
+  .desk-shell .list-row > [data-slot="switch"] { flex: 0 0 auto; width: 32px; }
+  @media (max-width: 767px) {
+    .desk-topbar { gap: 8px; padding: 0 12px; }
+    .desk-breadcrumb { gap: 6px; }
+    .desk-breadcrumb > span:first-child, .desk-breadcrumb > svg, .desk-search-label { display: none; }
+    .desk-content { padding: 20px 16px; }
+    .desk-content-room, .desk-content-ledger, .desk-content-settings, .desk-content-bots, .desk-content-connectors, .desk-content-automations { padding: 0; }
+    .desk-shell .settings-main { padding: 24px 16px; }
+    .desk-shell .list-row { padding: 16px; }
+  }
+}
+
+@layer components {
+  .desk-shell .desk-content-room { overflow: hidden; }
+}
+
+/* Shared App library and installed connections. */
+.library-page { max-width: 1200px; margin-inline: auto; }
+.library-page, .library-connections { min-width: 0; }
+.library-controls { display: grid; gap: 12px; margin-block: 20px; }
+.library-machine, .library-connections-head { display: flex; align-items: center; gap: 8px; }
+.library-connections-head { justify-content: space-between; flex-wrap: wrap; }
+.library-machine, .library-meta, .library-reason { color: var(--muted-foreground); font-size: 14px; line-height: 1.6; }
+.library-filters { display: grid; grid-template-columns: minmax(0,1fr) 200px; gap: 16px; margin-block: 24px 16px; }
+.library-filters label { display: grid; gap: 8px; font-size: 14px; }
+.library-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,290px),1fr)); gap: 16px; margin-top: 20px; }
+.library-installed { display: grid; gap: 12px; margin-top: 20px; }
+.library-mark { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 1px solid var(--border); border-radius: 10px; background: var(--muted); flex-shrink: 0; }
+.library-mark img { border-radius: 6px; }
+.library-entry p, .library-detail p { font-size: 14px; line-height: 1.65; margin: 0; overflow-wrap: anywhere; }
+.library-detail { max-height: 85dvh; overflow: auto; gap: 20px; }
+.library-detail h3 { font-size: 15px; font-weight: 600; margin-bottom: 10px; }
+.library-facts { display: grid; gap: 14px; font-size: 14px; }
+.library-facts div { display: grid; grid-template-columns: 85px minmax(0,1fr); gap: 16px; }
+.library-facts dt { color: var(--muted-foreground); }
+.library-facts dd { margin: 0; overflow-wrap: anywhere; }
+.library-requirements { list-style: disc; padding-left: 20px; font-size: 14px; line-height: 1.8; }
+@media (max-width: 600px) { .library-filters { grid-template-columns: minmax(0,1fr); } .library-machine { width: 100%; overflow-wrap: anywhere; } }
+
+.library-page > .page-head { padding: 0 0 20px; border: 0; justify-content: space-between; align-items: start; }
+.desk-shell .library-page .page-intro { font-size: 14px; margin: 0; }
+
+/* Open Bot Avatar owns scene styles; neutral list entries use one static SVG. */
+:root { --text-meta:12px; --text-body:14px; --text-secondary:13px; --avatar-amber:#eeb644; --avatar-purple:#a582e8; --avatar-brown:#ab7959; --avatar-grey:#929399; --avatar-white:#f2f1ed; }
+.bot-avatar { display:inline-block; position:relative; flex-shrink:0; vertical-align:middle; }
+.bot-avatar > svg { display:block; width:100%; height:100%; overflow:visible; }
+
+@layer components {
+  .settings-main { overflow-wrap: anywhere; }
+}
+
+.desk-empty-note { margin: 0; padding: 4px 10px 8px; font-size: 0.8125rem; color: var(--muted-foreground, #8a8a8a); }
+
+/* Sidebar ordering uses a dedicated touch handle so links and scrolling stay available. */
+.desk-sortable { display: flex; align-items: center; min-width: 0; border-radius: 6px; }
+.desk-sortable-link { flex: 1; min-width: 0; overflow: hidden; }
+.desk-dragging { opacity: .5; }
+.desk-drop-target { outline: 2px solid var(--ring); outline-offset: -2px; }
+
+/* Work-state feedback stays attached to the avatar, never shifting the agent row. */
+.agent-presence { position:relative; display:inline-flex; flex:0 0 32px; padding-bottom:12px; }
+.agent-working { position:absolute; top:36px; left:0; width:32px; display:flex; justify-content:center; gap:3px; color:var(--foreground); }
+.agent-working > span { width:4px; height:4px; border-radius:50%; background:currentColor; opacity:.35; animation:agent-working 1.2s linear infinite; }
+.agent-working > span:nth-child(2) { animation-delay:.2s; }
+.agent-working > span:nth-child(3) { animation-delay:.4s; }
+@keyframes agent-working { 0%,60%,100% { opacity:.35; } 30% { opacity:1; } }
+@media (prefers-reduced-motion:reduce) { .agent-working > span { animation:none; opacity:.7; } }
+
+.dictation-prompt { animation: dictation-prompt-pulse 1.2s linear infinite; }
+@keyframes dictation-prompt-pulse { 0%, 100% { opacity: .65; } 50% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .dictation-prompt { animation: none; opacity: 1; } }
+
+/* Settings uses the installed shadcn primitives across every destination. */
+[data-slot="settings-main"] { max-width: 1120px; padding: 32px; gap: 24px; }
+[data-slot="settings-main"] > section[aria-labelledby],
+[data-slot="settings-main"] > .settings-page { display: flex; min-width: 0; flex-direction: column; gap: 24px; }
+[data-slot="settings-main"] [data-slot="tabs-content"] { padding-top: 20px; }
+[data-slot="settings-main"] [data-slot="tabs-content"][hidden] { display: none; }
+@media (max-width: 767px) {
+  [data-slot="settings-main"] { padding: 24px 16px; }
+}
+[data-slot="settings-main"] [data-slot="tabs"] { min-width: 0; }
+[data-slot="settings-main"] [data-slot="tabs-list"] { max-width: 100%; overflow-x: auto; scrollbar-width: none; }
+nav[aria-label="Settings"] { scrollbar-width: none; }
+
+/* Integration navigation stays visible while only the selected task scrolls. */
+.library-integration-detail { display: flex; flex-direction: column; gap: 0; padding: 0; overflow: hidden; height: auto; max-height: 90dvh; }
+.library-integration-detail > [data-slot=dialog-header] { padding: 24px 48px 20px 24px; display: grid; grid-template-columns: 44px minmax(0, 1fr); column-gap: 14px; row-gap: 4px; flex-shrink: 0; }
+.library-integration-detail > [data-slot=dialog-header] .library-mark { grid-row: 1 / 3; }
+.library-integration-detail .library-detail-tabs { min-height: 0; gap: 0; flex: 1; }
+.library-detail-body { display: flex; min-width: 0; flex-direction: column; gap: 20px; }
+.library-detail-body[hidden] { display: none; }
+.library-detail-body > * { flex-shrink: 0; }
+.library-integration-detail .library-detail-nav { padding-inline: 24px; flex-shrink: 0; width: 100%; justify-content: start; border-bottom: 1px solid var(--border); }
+.library-integration-detail .library-detail-body { overflow-y: auto; overscroll-behavior: contain; padding: 24px; min-height: 0; }
+.library-integration-detail h3 { margin: 0; }
+.apple-access-row + .apple-access-row { border-top: 1px solid var(--border); }
+.apple-access-icon { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; flex-shrink: 0; border: 1px solid var(--border); border-radius: 8px; background: var(--muted); color: var(--muted-foreground); }
+.apple-access-chevron { color: var(--muted-foreground); flex-shrink: 0; }
+.apple-access-actions { display: flex; flex-direction: column; gap: 12px; padding: 0 16px 16px 62px; }
+@media (max-width: 600px) {
+  .library-integration-detail > [data-slot=dialog-header] { padding: 20px 40px 16px 16px; }
+  .library-integration-detail .library-detail-nav { padding-inline: 12px; }
+  .library-integration-detail .library-detail-body { padding: 16px; }
+  .apple-access-actions { padding-left: 16px; }
+}
+.integration-tool-row + .integration-tool-row { border-top: 1px solid var(--border); }
+.library-detail .integration-tool-description { padding: 0 14px 14px; white-space: pre-wrap; }
+
+/* Formatted agent messages keep the shared desk typography and contain wide content. */
+.message-text { min-width: 0; white-space: normal; overflow-wrap: anywhere; }
+.message-text > :first-child { margin-top: 0; }
+.message-text > :last-child { margin-bottom: 0; }
+.message-text :is(h1,h2,h3,h4,h5,h6) { margin: 1em 0 .5em; font-size: 1em; line-height: 1.5; font-weight: 600; }
+.message-text p { margin: 0 0 .75em; }
+.message-text :is(ul,ol) { margin: .5em 0 .75em; padding-left: 1.5em; }
+.message-text ul { list-style: disc; }
+.message-text ol { list-style: decimal; }
+.message-text li + li { margin-top: .25em; }
+.message-text a { color: var(--foreground); text-decoration: underline; }
+.message-text :not(pre) > code { font-family: var(--mono); font-size: .9em; background: var(--muted); border-radius: .25em; padding: .1em .25em; }
+.message-text blockquote { margin: .75em 0; border-left: 2px solid var(--border); padding-left: 1em; color: var(--muted-foreground); }
+
+/* Keep frequent agent actions quiet; keyboard and touch remain immediate. */
+@media (hover: hover) and (pointer: fine) {
+  .desk-agent-options:not([data-pinned="true"]) { opacity: 0; transition: opacity 125ms ease; }
+  .desk-sortable:hover .desk-agent-options,
+  .desk-sortable:focus-within .desk-agent-options,
+  .desk-agent-options[aria-expanded="true"] { opacity: 1; }
+  .desk-sortable:focus-within .desk-agent-options { transition: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .desk-agent-options:not([data-pinned="true"]) { transition: none; }
+}
+
+/* Only the newly added pointer attachment enters; layout and retries remain immediate. */
+.desk-attachment-entry {
+  opacity: 1;
+  transform: scale(1);
+  transform-origin: left center;
+  transition: opacity 150ms cubic-bezier(0.23, 1, 0.32, 1), transform 150ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+@starting-style {
+  .desk-attachment-entry { opacity: 0; transform: scale(.98); }
+}
+
+/* The cue marks an available target, not an accepted upload. */
+.desk-file-drop-cue { opacity: 0; }
+@media (hover: hover) and (pointer: fine) {
+  .desk-file-drop-cue { transition: opacity 125ms cubic-bezier(0.23, 1, 0.32, 1); }
+  .desk-file-drop-cue[data-file-drop-active="true"] { opacity: 1; }
+}

@@ -1,0 +1,20 @@
+{
+  "result": "passed",
+  "checks": [
+    "catalogue and installed counts",
+    "custom entries and duplicate IDs",
+    "fresh hash review, no silent approval restoration, pause restart and missing dependencies",
+    "missing env and runtimes",
+    "owner/full/limited permissions and command review privacy",
+    "real local App and synthetic MCP via runner",
+    "no execution on browse",
+    "safe redacted metadata",
+    "invalid/refused/down MCP",
+    "serialized reloads",
+    "MCP disconnect event",
+    "restored interpreter registry without reload",
+    "relative and empty PATH entries execute correctly",
+    "large chunked WebRTC inventory above 256 KiB and management refusal"
+  ],
+  "temporaryDirectory": "/var/folders/x4/cs8jlkqs3hzgh5v1jcx1kk1r0000gn/T/openag-library-bp4sc6"
+}

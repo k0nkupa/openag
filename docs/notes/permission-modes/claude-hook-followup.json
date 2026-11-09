@@ -1,0 +1,71 @@
+{
+  "scope": "Raw ACP only; not OpenAg gateway, policy, receipt or filesystem-confinement acceptance",
+  "experiment": "pre-tool hook denial and failure",
+  "directory": "<owned-temporary-data>",
+  "adapters": [
+    {
+      "adapter": "claude",
+      "packageVersion": "0.97.0",
+      "stage": "settled",
+      "calls": [
+        {
+          "label": "hook-deny",
+          "mode": "bypassPermissions",
+          "sessionId": "154f5afe-ca71-48da-822c-bb5f7730e9d2",
+          "target": "<owned-temporary-data>/claude/workspace/hook-denied.txt",
+          "toolCallIds": [
+            "toolu_01QyUTqsThj7GSXFxfAdFbkx"
+          ],
+          "permissionRequestIds": [],
+          "stopReason": "end_turn",
+          "targetWritten": false,
+          "markerMatches": false,
+          "permissionRequests": 0,
+          "toolCalls": 1,
+          "executedWithoutAuthorizationCallback": false
+        },
+        {
+          "label": "hook-failure",
+          "mode": "bypassPermissions",
+          "sessionId": "154f5afe-ca71-48da-822c-bb5f7730e9d2",
+          "target": "<owned-temporary-data>/claude/workspace/hook-failed.txt",
+          "toolCallIds": [
+            "toolu_01NKoCq1x3Fxt27YSt59fsiW"
+          ],
+          "permissionRequestIds": [],
+          "stopReason": "end_turn",
+          "targetWritten": true,
+          "markerMatches": true,
+          "permissionRequests": 0,
+          "toolCalls": 1,
+          "executedWithoutAuthorizationCallback": true
+        }
+      ],
+      "sessionId": "154f5afe-ca71-48da-822c-bb5f7730e9d2",
+      "availableModes": [
+        "default",
+        "acceptEdits",
+        "plan",
+        "auto",
+        "bypassPermissions"
+      ],
+      "sameSession": true,
+      "directMappingPreservesGate": false,
+      "hookAudit": [
+        {
+          "tool": "Bash",
+          "id": "toolu_01QyUTqsThj7GSXFxfAdFbkx",
+          "phase": "deny"
+        },
+        {
+          "tool": "Bash",
+          "id": "toolu_01NKoCq1x3Fxt27YSt59fsiW",
+          "phase": "failed"
+        }
+      ],
+      "hookDenialEnforced": true,
+      "hookFailureClosed": false
+    }
+  ],
+  "directNativeMappingCompatible": false
+}

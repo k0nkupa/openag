@@ -1,0 +1,21 @@
+{
+  "servers": [
+    {
+      "id": "brave",
+      "enabled": true,
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@brave/brave-search-mcp-server"],
+      "env": { "BRAVE_API_KEY": "${BRAVE_API_KEY}" },
+      "toolClasses": { "brave_web_search": "search" },
+      "timeoutMs": 30000
+    },
+    {
+      "id": "remote",
+      "enabled": true,
+      "transport": "http",
+      "url": "https://example.com/mcp",
+      "headers": { "Authorization": "Bearer ${OPENAG_MCP_EXAMPLE_TOKEN}" }
+    }
+  ]
+}

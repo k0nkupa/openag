@@ -1,0 +1,42 @@
+{
+  "workspace": {
+    "tests": 1884,
+    "passed": 1866,
+    "failed": 18,
+    "daemon": {
+      "passed": 1493,
+      "failed": 9
+    },
+    "desk": {
+      "passed": 373,
+      "failed": 9
+    }
+  },
+  "focusedMcpAcp": {
+    "tests": 117,
+    "passed": 116,
+    "failed": 1,
+    "failures": [
+      {
+        "file": "mcp.test.ts",
+        "name": "exposes tools as mcp.<server>.<tool>, act-external by default, with the server description prefixed"
+      }
+    ]
+  },
+  "source": "f0fce62a4b2284408a44102c0e5b85ccddf970f6",
+  "liveBoundaryComparison": {
+    "observedLiveRevision": "e601aa58b084da4f0534789e2e71ce862a7d42b3",
+    "matchedFiles": [
+      "mcp.ts",
+      "mcpserver.ts",
+      "composio-connect.ts",
+      "runtimes/acp.ts",
+      "runtimes/runner.ts",
+      "runtimes/types.ts",
+      "tools/registry.ts",
+      "policy.ts",
+      "approvals.ts",
+      "action-receipts.ts"
+    ]
+  }
+}

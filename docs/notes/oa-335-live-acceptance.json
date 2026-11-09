@@ -1,0 +1,427 @@
+{
+  "localDate": "2026-11-02",
+  "method": "Temporary SQLite workspace, production model controller/runner/runtimes, real installed adapters and providers. Approval handler accepted only the named private test file; exact file content was read back. Scoped MCP exposed only write_file. Existing daemon was read-only. Temporary workspaces removed and temporary Ollama server stopped.",
+  "matrix": {
+    "date": "2026-11-01T20:40:40.334Z",
+    "environment": {
+      "OPENAI_API_KEY": true,
+      "ANTHROPIC_API_KEY": false,
+      "OPENROUTER_API_KEY": false
+    },
+    "service": {
+      "status": 200,
+      "target": "codex",
+      "model": "gpt-6-astra",
+      "reasoning": {
+        "reasoning_effort": "medium"
+      },
+      "reports": [
+        {
+          "source": "session",
+          "model": "gpt-6-astra",
+          "effort": "medium",
+          "freshness": "last-reported",
+          "at": 1793565312719,
+          "roomId": "chat-a9abd2ad9176248eeb811a2ae22d4aa2"
+        }
+      ]
+    },
+    "checks": [
+      {
+        "label": "claude real selection and turn 0",
+        "selection": {
+          "target": "claude",
+          "model": "sonnet",
+          "reasoning": {
+            "effort": "low"
+          },
+          "controls": [
+            {
+              "id": "effort",
+              "name": "Effort",
+              "values": [
+                {
+                  "value": "default",
+                  "name": "Default"
+                },
+                {
+                  "value": "low",
+                  "name": "Low"
+                },
+                {
+                  "value": "medium",
+                  "name": "Medium"
+                },
+                {
+                  "value": "high",
+                  "name": "High"
+                },
+                {
+                  "value": "xhigh",
+                  "name": "Xhigh"
+                },
+                {
+                  "value": "max",
+                  "name": "Max"
+                }
+              ]
+            }
+          ],
+          "reason": null,
+          "source": "ACP session discovery (not inference acceptance)"
+        },
+        "approvals": 1,
+        "turnStatus": "finished",
+        "reports": [
+          {
+            "turnId": "b2b505e5-a4c6-4d51-84b5-eb5c54a8f6b0",
+            "revision": "bef3e04af8389ae5ec9392ee3da86adf984a2e2cd69356efd80ec9b5c4276baa",
+            "source": "session",
+            "sessionId": "626b1298-9c29-4364-b843-13d76c8b4c62",
+            "modelName": "Sonnet 5.5",
+            "model": "sonnet",
+            "effort": "low"
+          },
+          {
+            "turnId": "b2b505e5-a4c6-4d51-84b5-eb5c54a8f6b0",
+            "revision": "bef3e04af8389ae5ec9392ee3da86adf984a2e2cd69356efd80ec9b5c4276baa",
+            "model": "claude-sonnet-5-5",
+            "source": "response",
+            "sessionId": "626b1298-9c29-4364-b843-13d76c8b4c62"
+          }
+        ],
+        "errors": [],
+        "response": "DONE",
+        "status": "passed"
+      },
+      {
+        "label": "codex real selection and turn 1",
+        "selection": {
+          "target": "codex",
+          "model": "gpt-6.1-sol",
+          "reasoning": {
+            "reasoning_effort": "low"
+          },
+          "controls": [
+            {
+              "id": "reasoning_effort",
+              "name": "Effort",
+              "values": [
+                {
+                  "value": "low",
+                  "name": "Low"
+                },
+                {
+                  "value": "medium",
+                  "name": "Medium"
+                },
+                {
+                  "value": "high",
+                  "name": "High"
+                },
+                {
+                  "value": "xhigh",
+                  "name": "Xhigh"
+                },
+                {
+                  "value": "max",
+                  "name": "Max"
+                },
+                {
+                  "value": "ultra",
+                  "name": "Ultra"
+                }
+              ]
+            }
+          ],
+          "reason": null,
+          "source": "ACP session discovery (not inference acceptance)"
+        },
+        "approvals": 1,
+        "turnStatus": "finished",
+        "reports": [
+          {
+            "turnId": "381aedaf-6e19-40cd-913c-1209caf838fe",
+            "revision": "4227dbefa218a1891fdde64bc7d71c81a7c4fbb5317eae91718e2fe71e0d8993",
+            "source": "session",
+            "sessionId": "01a198d7-f403-7332-85c1-cf6ce59ba58d",
+            "modelName": "6.1 Sol",
+            "model": "gpt-6.1-sol",
+            "effort": "low"
+          }
+        ],
+        "errors": [],
+        "response": "I\u2019ll use the OpenAg write_file tool to create `codex1.txt` with the exact text requested.DONE",
+        "status": "passed"
+      },
+      {
+        "label": "claude real selection and turn 2",
+        "selection": {
+          "target": "claude",
+          "model": "sonnet",
+          "reasoning": {
+            "effort": "low"
+          },
+          "controls": [
+            {
+              "id": "effort",
+              "name": "Effort",
+              "values": [
+                {
+                  "value": "default",
+                  "name": "Default"
+                },
+                {
+                  "value": "low",
+                  "name": "Low"
+                },
+                {
+                  "value": "medium",
+                  "name": "Medium"
+                },
+                {
+                  "value": "high",
+                  "name": "High"
+                },
+                {
+                  "value": "xhigh",
+                  "name": "Xhigh"
+                },
+                {
+                  "value": "max",
+                  "name": "Max"
+                }
+              ]
+            }
+          ],
+          "reason": null,
+          "source": "ACP session discovery (not inference acceptance)"
+        },
+        "approvals": 1,
+        "turnStatus": "finished",
+        "reports": [
+          {
+            "turnId": "a4be9a38-ec9d-4a72-b666-8402b9d88d81",
+            "revision": "bef3e04af8389ae5ec9392ee3da86adf984a2e2cd69356efd80ec9b5c4276baa",
+            "source": "session",
+            "sessionId": "5e30371f-5048-42b1-84c3-c236c815a4d6",
+            "modelName": "Sonnet 5.5",
+            "model": "sonnet",
+            "effort": "low"
+          },
+          {
+            "turnId": "a4be9a38-ec9d-4a72-b666-8402b9d88d81",
+            "revision": "bef3e04af8389ae5ec9392ee3da86adf984a2e2cd69356efd80ec9b5c4276baa",
+            "model": "claude-sonnet-5-5",
+            "source": "response",
+            "sessionId": "5e30371f-5048-42b1-84c3-c236c815a4d6"
+          }
+        ],
+        "errors": [],
+        "response": "DONE",
+        "status": "passed"
+      },
+      {
+        "label": "openai real selection, response and approval gate",
+        "selection": {
+          "target": "openai",
+          "model": "openai/gpt-4o-mini",
+          "reasoning": {},
+          "controls": [],
+          "reason": null,
+          "source": "Provider model list + installed Mastra capability catalogue (not inference acceptance)"
+        },
+        "approvals": 1,
+        "turnStatus": "finished",
+        "reports": [
+          {
+            "turnId": "99aa9452-d224-4f0e-bfa0-eb0c719943e9",
+            "revision": "67c7d4e01666c5f516b24b435fa3682d41c2af485b803e0ad10eb19501fc79fb",
+            "model": "gpt-4o-mini-2024-07-18",
+            "source": "response",
+            "warnings": []
+          }
+        ],
+        "errors": [],
+        "response": "DONE.",
+        "status": "passed"
+      },
+      {
+        "label": "anthropic real selection, response and approval gate",
+        "status": "blocked",
+        "error": "anthropic credentials are not configured. Ask the server administrator."
+      },
+      {
+        "label": "openrouter real selection, response and approval gate",
+        "status": "blocked",
+        "error": "openrouter credentials are not configured. Ask the server administrator."
+      },
+      {
+        "label": "ollama real selection, response and approval gate",
+        "selection": {
+          "target": "ollama",
+          "model": "ollama/huihui_ai/qwen3.5-abliterated:9b",
+          "reasoning": {},
+          "controls": [
+            {
+              "id": "think",
+              "name": "Thinking",
+              "values": [
+                {
+                  "value": false,
+                  "name": "false"
+                },
+                {
+                  "value": true,
+                  "name": "true"
+                }
+              ]
+            }
+          ],
+          "reason": null,
+          "source": "Ollama tags/show (not inference acceptance)"
+        },
+        "approvals": 1,
+        "turnStatus": "finished",
+        "reports": [
+          {
+            "turnId": "d963fa28-4557-496b-a03c-2f37237c5d51",
+            "revision": "86ed5e815040d3f701dc3dce40ee16962930cc5d07e43d627f4c416d9d2c712a",
+            "model": "huihui_ai/qwen3.5-abliterated:9b",
+            "source": "response"
+          }
+        ],
+        "errors": [],
+        "response": "(no answer)",
+        "status": "passed"
+      }
+    ]
+  },
+  "ollamaThinking": {
+    "date": "2026-11-01T20:41:55.486Z",
+    "environment": {
+      "OPENAI_API_KEY": true,
+      "ANTHROPIC_API_KEY": false,
+      "OPENROUTER_API_KEY": false
+    },
+    "service": {
+      "status": 200,
+      "target": "codex",
+      "model": "gpt-6-astra",
+      "reasoning": {
+        "reasoning_effort": "medium"
+      },
+      "reports": [
+        {
+          "source": "session",
+          "model": "gpt-6-astra",
+          "effort": "medium",
+          "freshness": "last-reported",
+          "at": 1793565312719,
+          "roomId": "chat-a9abd2ad9176248eeb811a2ae22d4aa2"
+        }
+      ]
+    },
+    "checks": [
+      {
+        "label": "ollama real selection, response and approval gate",
+        "selection": {
+          "target": "ollama",
+          "model": "ollama/huihui_ai/qwen3.5-abliterated:9b",
+          "reasoning": {
+            "think": false
+          },
+          "controls": [
+            {
+              "id": "think",
+              "name": "Thinking",
+              "values": [
+                {
+                  "value": false,
+                  "name": "false"
+                },
+                {
+                  "value": true,
+                  "name": "true"
+                }
+              ]
+            }
+          ],
+          "reason": null,
+          "source": "Ollama tags/show (not inference acceptance)"
+        },
+        "approvals": 1,
+        "turnStatus": "finished",
+        "reports": [
+          {
+            "turnId": "e03e9aeb-f00b-45f0-9b3c-10544ccf1650",
+            "revision": "1ec6e5e6821f3fad589f5ee5b7275cbe6281a20ceafe8c8ed66242ba07e4b8f3",
+            "model": "huihui_ai/qwen3.5-abliterated:9b",
+            "source": "response"
+          }
+        ],
+        "errors": [],
+        "response": "DONE",
+        "status": "passed"
+      }
+    ],
+    "ollamaRequests": [
+      {
+        "model": "huihui_ai/qwen3.5-abliterated:9b",
+        "think": false
+      },
+      {
+        "model": "huihui_ai/qwen3.5-abliterated:9b",
+        "think": false
+      }
+    ]
+  },
+  "openaiReasoningProbe": {
+    "selection": {
+      "target": "openai",
+      "model": "openai/gpt-5-mini",
+      "reasoning": {
+        "effort": "low"
+      },
+      "controls": [
+        {
+          "id": "effort",
+          "name": "Effort",
+          "values": [
+            {
+              "value": "minimal",
+              "name": "minimal"
+            },
+            {
+              "value": "low",
+              "name": "low"
+            },
+            {
+              "value": "medium",
+              "name": "medium"
+            },
+            {
+              "value": "high",
+              "name": "high"
+            }
+          ]
+        }
+      ],
+      "reason": null,
+      "source": "Provider model list + installed Mastra capability catalogue (not inference acceptance)"
+    },
+    "turnStatus": "finished",
+    "reports": [
+      {
+        "turnId": "026b43a0-523a-465d-a817-d528d1f1b106",
+        "revision": "7c45c092c3bfb1defd64baa993e966046fe6499eeb9ef1d698d4e38f3c28cb5f",
+        "model": "gpt-5-mini-2025-08-07",
+        "source": "response",
+        "warnings": []
+      }
+    ],
+    "errors": [],
+    "scope": "Real gpt-5-mini inference completed with low effort selected; no approval was requested in this separate probe. The gpt-4o-mini matrix run proves the approved write path."
+  },
+  "browser": "Blocked: cua.getState and direct iab getTab both returned Local browser use is disabled in Work settings."
+}

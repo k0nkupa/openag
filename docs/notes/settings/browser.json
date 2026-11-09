@@ -1,0 +1,221 @@
+{
+  "result": "passed",
+  "walk": [
+    {
+      "heading": "Bots",
+      "scroll": 1440,
+      "theme": "light",
+      "width": 1440
+    },
+    {
+      "heading": "Connectors",
+      "scroll": 1440,
+      "theme": "light",
+      "width": 1440
+    },
+    {
+      "heading": "Automations",
+      "scroll": 1440,
+      "theme": "light",
+      "width": 1440
+    },
+    {
+      "heading": "Models",
+      "scroll": 1440,
+      "theme": "light",
+      "width": 1440
+    },
+    {
+      "heading": "Proactive",
+      "scroll": 1440,
+      "theme": "light",
+      "width": 1440
+    },
+    {
+      "heading": "Memory & Skills",
+      "scroll": 1440,
+      "theme": "light",
+      "width": 1440
+    },
+    {
+      "heading": "Server & devices",
+      "scroll": 1440,
+      "theme": "light",
+      "width": 1440
+    },
+    {
+      "heading": "Bots",
+      "scroll": 1440,
+      "theme": "dark",
+      "width": 1440
+    },
+    {
+      "heading": "Connectors",
+      "scroll": 1440,
+      "theme": "dark",
+      "width": 1440
+    },
+    {
+      "heading": "Automations",
+      "scroll": 1440,
+      "theme": "dark",
+      "width": 1440
+    },
+    {
+      "heading": "Models",
+      "scroll": 1440,
+      "theme": "dark",
+      "width": 1440
+    },
+    {
+      "heading": "Proactive",
+      "scroll": 1440,
+      "theme": "dark",
+      "width": 1440
+    },
+    {
+      "heading": "Memory & Skills",
+      "scroll": 1440,
+      "theme": "dark",
+      "width": 1440
+    },
+    {
+      "heading": "Server & devices",
+      "scroll": 1440,
+      "theme": "dark",
+      "width": 1440
+    },
+    {
+      "contentScroll": 375,
+      "contentWidth": 375,
+      "heading": "Bots",
+      "scroll": 390,
+      "theme": "light",
+      "width": 390
+    },
+    {
+      "contentScroll": 375,
+      "contentWidth": 375,
+      "heading": "Connectors",
+      "scroll": 390,
+      "theme": "light",
+      "width": 390
+    },
+    {
+      "contentScroll": 375,
+      "contentWidth": 375,
+      "heading": "Automations",
+      "scroll": 390,
+      "theme": "light",
+      "width": 390
+    },
+    {
+      "contentScroll": 375,
+      "contentWidth": 375,
+      "heading": "Models",
+      "scroll": 390,
+      "theme": "light",
+      "width": 390
+    },
+    {
+      "contentScroll": 375,
+      "contentWidth": 375,
+      "heading": "Proactive",
+      "scroll": 390,
+      "theme": "light",
+      "width": 390
+    },
+    {
+      "contentScroll": 375,
+      "contentWidth": 375,
+      "heading": "Memory & Skills",
+      "scroll": 390,
+      "theme": "light",
+      "width": 390
+    },
+    {
+      "contentScroll": 375,
+      "contentWidth": 375,
+      "heading": "Server & devices",
+      "scroll": 390,
+      "theme": "light",
+      "width": 390
+    },
+    {
+      "contentScroll": 375,
+      "contentWidth": 375,
+      "heading": "Bots",
+      "scroll": 390,
+      "theme": "dark",
+      "width": 390
+    },
+    {
+      "contentScroll": 375,
+      "contentWidth": 375,
+      "heading": "Connectors",
+      "scroll": 390,
+      "theme": "dark",
+      "width": 390
+    },
+    {
+      "contentScroll": 375,
+      "contentWidth": 375,
+      "heading": "Automations",
+      "scroll": 390,
+      "theme": "dark",
+      "width": 390
+    },
+    {
+      "contentScroll": 375,
+      "contentWidth": 375,
+      "heading": "Models",
+      "scroll": 390,
+      "theme": "dark",
+      "width": 390
+    },
+    {
+      "contentScroll": 375,
+      "contentWidth": 375,
+      "heading": "Proactive",
+      "scroll": 390,
+      "theme": "dark",
+      "width": 390
+    },
+    {
+      "contentScroll": 375,
+      "contentWidth": 375,
+      "heading": "Memory & Skills",
+      "scroll": 390,
+      "theme": "dark",
+      "width": 390
+    },
+    {
+      "contentScroll": 375,
+      "contentWidth": 375,
+      "heading": "Server & devices",
+      "scroll": 390,
+      "theme": "dark",
+      "width": 390
+    }
+  ],
+  "checks": [
+    "all seven Settings pages in both themes at 1440×960 and390×844",
+    "refused bot, memory and heartbeat saves retain drafts",
+    "pending heartbeat save disables edits",
+    "lost response retains draft without success and persisted value appears after reload",
+    "memory bot switch blocked until save/discard",
+    "automation create from side sheet; trigger controls, validation, typed credential clearing and Escape draft protection",
+    "phone sheet390px and desktop sheet560px without horizontal overflow",
+    "conversation → proposal approval → exact file approval → completed receipt and zero waiting after reload",
+    "locally bundled provider SVGs loaded; monochrome contrast in dark theme",
+    "limited device blocks bot name/instructions and memory writes while retaining avatar access",
+    "concurrent bot owner edit does not replace the draft or display Saved",
+    "routing availability refresh preserves the in-flight guard and failed-save outcome",
+    "a delayed older proposal response cannot restore a proposal decided by a newer refresh",
+    "model/CLI status survives blocked router request and Refresh status recovers routing without remounting",
+    "classic shell smoke check",
+    "held router HTTP response does not delay model/CLI rendering or disable Refresh status; routing appears after release"
+  ],
+  "physicalSecondDevice": "open by owner choice",
+  "console": "no unexpected warning/error entries; deliberate network blocking produced expected request failures"
+}

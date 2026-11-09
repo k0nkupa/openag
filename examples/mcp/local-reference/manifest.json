@@ -1,0 +1,7 @@
+{
+  "id": "local-reference",
+  "name": "Local reference MCP",
+  "version": "1.0.0",
+  "description": "A bundled MCP connector that reports the current time. No account, file access or network operation is needed by its clock tool.",
+  "tools": [{ "name": "clock", "description": "Read the current time", "class": "act-external" }]
+}

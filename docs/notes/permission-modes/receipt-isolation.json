@@ -1,0 +1,160 @@
+{
+  "ticket": "OA-475",
+  "recordedAt": "2026-11-05T11:37:00.455920+13:00",
+  "baseCommit": "c8f3865478d8bd13f332426a70b9103ba06a5c88",
+  "sourceChanges": "uncommitted",
+  "nativeExecution": "disabled",
+  "deployment": false,
+  "unitTestsRun": false,
+  "sourceHashes": {
+    "apps/daemon/src/action-receipts.ts": "7b293c778146cad92679b36c7e8956f53bac134af7e56f7ae8da80d04e851cbb",
+    "apps/daemon/src/approvals.ts": "2a603cb0c82d3abd1332d60081699b314b71d4818b09c345eb18e7e05b13fa42",
+    "apps/daemon/src/apps.ts": "ade23a353283091e4d3df6acd27cf2f4adc5bcd1c7548bd7ea5f2d99d56f5a52",
+    "apps/daemon/src/db/migrations/038_effect_scopes.sql": "be5dd750af56654cee6ac84f32fc9e2653aa953cd8161996a1a888b696dd58a4",
+    "apps/daemon/src/effect-scope.ts": "8c137e1490f5b427b99777ed5a6a23dc0a44d5c22d073451835f55d607cab829",
+    "apps/daemon/src/google-connectors.ts": "57b1fcce6ff2d736f0af1d0c9d3ae1cc8c08dc1a8b3aefe0e2ecc10c4af3c734",
+    "apps/daemon/src/mcp.ts": "fc91c76e996520ef1ae1831fd58ab32ee9d99857e9f6995af7723f6b014e3fb1",
+    "apps/daemon/src/mcpserver.ts": "46985f1e45579d88be24301c0286770af9b98d8d7b030dd9aa8f9b05f2cde405",
+    "apps/daemon/src/responsibilities.ts": "6b53c42a71f14bdcdb0347f253812c8fc553f66a335ebde4098a63792f7067b6",
+    "apps/daemon/src/runtimes/acp.ts": "7d2d03d03304033353b98d2cc537f82a482397eee5e8c1f4953e35ecaab4403c",
+    "apps/daemon/src/runtimes/runner.ts": "82af8ba014f77de62248138a2534e65a6dff82c924c9cf70d65162873fd47b5f",
+    "apps/daemon/src/runtimes/types.ts": "7a6c0071830b68497c8084d417de7c96fb08124f79e25b0d33b97da50956826c",
+    "apps/daemon/src/skills.ts": "4424f45689e157178efff5a3a7bbd0a95deb369f6e75e96c7de27756dac1d0e5",
+    "apps/daemon/src/tools/avatars.ts": "ec2d0e688666b043f5bcabdc7095b7f3d2a9a959e3c3fb6b823d52ab5bfa5303",
+    "apps/daemon/src/tools/brave.ts": "58460261a087d27b79a9dd0d013180a5849f370d658d35cd0cd4cefbe878fce6",
+    "apps/daemon/src/tools/capabilities.ts": "62e301614273e4721f1ab501c235822a01c2b0eec90aa4e2701a8e7d2c4e8873",
+    "apps/daemon/src/tools/computer.ts": "ac46e470014dde0ece78885337218c321cd53bb40e9d460c2b0c7990ef6907c3",
+    "apps/daemon/src/tools/files.ts": "bba3f4b0c4911c2405422a4e7706284086160d19b6abe18e39ac94a84d7da6b8",
+    "apps/daemon/src/tools/index.ts": "f56a392d92836405dc7553a632910cb56951a3a1d70266334aff812aaa02ab12",
+    "apps/daemon/src/tools/input.ts": "ec0fd5ccb2d985a1cafc400c0f6cd10b832854a7e38ca7e0b37f70dbb108a81e",
+    "apps/daemon/src/tools/inspection.ts": "29363958491441f969e50331b90533531e7fa8b6c24ad0faf5486e089a967825",
+    "apps/daemon/src/tools/knowledge.ts": "dcaebce3c984ead72929ddc8296c68b8f13815fde2ba9421dd832c5f229a3e22",
+    "apps/daemon/src/tools/registry.ts": "be502c64903204440ac4318119df24165f91f02d3d1d720f54724d946cf0268c",
+    "apps/daemon/src/tools/skills.ts": "b12a1eb270d954f53cd0a04e4f32619374f15f41796ed93414632000c42c6942",
+    "apps/daemon/src/tools/status.ts": "8c1eb493e01ef12eee4a06d336096e70607e612cf775c351d6905a2f5af1a689",
+    "scripts/verify-acp-skill-install.mjs": "f6fe7b2e6dcc98b82c78ab0a071c28169ec7a014e2e4bd64af139a3081c19b34",
+    "scripts/verify-effect-isolation.mjs": "acf028cb772c15cf3e8623816be93dae4c03a9bee0915183f4ef79998c8bf83c",
+    "scripts/verify-permission-worlds.mjs": "1adf36e2af048d7c4847cc20bd22427a89e5a8ba59fea5ed3dc57a9f929b6b25"
+  },
+  "results": {
+    "controlledIsolation": {
+      "log": "/tmp/openag-isolation-last-controlled.log",
+      "sha256": "0ca72e5a3a55eea8222c1300e2403b833645dcd8f33f247371711ca6bfb88b03",
+      "disposableRoots": [
+        "/var/folders/x4/cs8jlkqs3hzgh5v1jcx1kk1r0000gn/T/openag-effect-isolation-ApA2I4"
+      ]
+    },
+    "earlierPairedSkillJourney": {
+      "log": "/tmp/openag-isolation-first-journey-final.log",
+      "sha256": "6ca71a4ff7884f9a101c3af0e90253431817419b9d1bcc91374e9ff641dd5e97",
+      "disposableRoots": [
+        "/var/folders/x4/cs8jlkqs3hzgh5v1jcx1kk1r0000gn/T/openag-skill-install-wq9bi8"
+      ]
+    },
+    "earlierPairedIndependentChats": {
+      "log": "/tmp/openag-isolation-real-chats.log",
+      "sha256": "2eef6aedd2d9147631d1222c958f498a705d8f035a8160dd0d38d6a7ac274620",
+      "disposableRoots": [
+        "/var/folders/x4/cs8jlkqs3hzgh5v1jcx1kk1r0000gn/T/openag-skill-install-Q2zLtq"
+      ]
+    },
+    "earlierPairedAccredo": {
+      "log": "/tmp/openag-isolation-accredo.log",
+      "sha256": "937046f8ea40391572897928a37a4925b4371b3dc4ff5c5f4d390a4bf86a9925",
+      "disposableRoots": [
+        "/var/folders/x4/cs8jlkqs3hzgh5v1jcx1kk1r0000gn/T/openag-skill-install-D84rvz"
+      ]
+    },
+    "finalCodex": {
+      "log": "/tmp/openag-isolation-final-codex-accepted.log",
+      "sha256": "c10d54c63dff2dd46001f7f0ffdc53869adda235aee42b184639e2f710e4088d",
+      "disposableRoots": [
+        "/var/folders/x4/cs8jlkqs3hzgh5v1jcx1kk1r0000gn/T/openag-skill-install-pc8J8w"
+      ]
+    },
+    "finalClaudeQuota": {
+      "log": "/tmp/openag-isolation-real-final.log",
+      "sha256": "5af88e6a87688a7b380f8babb512f34ee9477417ae9fa4783970693162241600",
+      "disposableRoots": [
+        "/var/folders/x4/cs8jlkqs3hzgh5v1jcx1kk1r0000gn/T/openag-skill-install-PeNz6c"
+      ]
+    },
+    "nativeInstructionsCapture": {
+      "log": "/tmp/openag-isolation-native-context.log",
+      "sha256": "3992527a775ea4f696e0c45024f32dc8bc105d221b9e2cf534ac901c242d81c9",
+      "disposableRoots": [
+        "/var/folders/x4/cs8jlkqs3hzgh5v1jcx1kk1r0000gn/T/openag-acp-instructions-7qWiSd"
+      ]
+    },
+    "permissionWorlds": {
+      "log": "/tmp/openag-isolation-final-permissions.log",
+      "sha256": "16ac51bbbd90eb13b4f57451909da54437c1e9315586e1dbf18a01fe5df27f38",
+      "disposableRoots": [
+        "/var/folders/x4/cs8jlkqs3hzgh5v1jcx1kk1r0000gn/T/openag-permission-worlds-Hr9Yei",
+        "/var/folders/x4/cs8jlkqs3hzgh5v1jcx1kk1r0000gn/T/openag-permission-worlds-Hr9Yei"
+      ]
+    },
+    "receiptsAndRecovery": {
+      "log": "/tmp/openag-isolation-final-receipts.log",
+      "sha256": "88ceae53d661b6f548d2c65bec3468c8246510bbb39d38c25ce50a44efd3c2cf",
+      "disposableRoots": []
+    },
+    "knowledgeDelivery": {
+      "log": "/tmp/openag-isolation-last-knowledge.log",
+      "sha256": "99b218ad5c0bff7a38ef325e82de217eb6e3b1b42b7337a8e46b37d72b2a7071",
+      "disposableRoots": []
+    },
+    "continuity": {
+      "log": "/tmp/openag-isolation-last-continuity.log",
+      "sha256": "c508ea0ce554951b99f6bc5abd9acf90527275add4f31550dc886afa04326553",
+      "disposableRoots": []
+    },
+    "trustedLifecycle": {
+      "log": "/tmp/openag-isolation-final-continuity.log",
+      "sha256": "4a3a18d11b14b0f8dd47f10c2ef224fe7bb18ff9fbc7650ccb5450229923dbe0",
+      "disposableRoots": []
+    },
+    "capabilities": {
+      "log": "/tmp/openag-isolation-capabilities-last.log",
+      "sha256": "f2e02c7de2355e3e75ece9f088b56bee38dfb71f77405023898ec0e441e3a1ac",
+      "disposableRoots": []
+    },
+    "remoteMcp": {
+      "log": "/tmp/openag-isolation-remote-last.log",
+      "sha256": "71374a41b8c1f847a1341125a220ae2a74e22bbf4852b477f39d94dfc9c30952",
+      "disposableRoots": []
+    },
+    "workspaceBuild": {
+      "log": "/tmp/openag-isolation-workspace-final.log",
+      "sha256": "7a65ed4a8b646b15821c8daac0efb048f5fc5b6c9092b854006958f0091b5871",
+      "disposableRoots": []
+    },
+    "finalReview": {
+      "log": "/tmp/openag-isolation-review-last.log",
+      "sha256": "ca1246e706c291900179a093291eed4614d0e9ae4b3847364e7c3686a67c19a1",
+      "disposableRoots": []
+    }
+  },
+  "reviews": {
+    "standards": "No remaining substantive findings after follow-up",
+    "spec": "No remaining substantive findings after epoch correction",
+    "builtin": {
+      "scope": "codex review --uncommitted",
+      "result": "No remaining substantive defects"
+    }
+  },
+  "acceptance": {
+    "controlledIsolation": "passed",
+    "pairedClaudeCodexBeforeFinalHardening": "passed fresh/reused/resumed, independent chat writes and complete local Accredo install",
+    "finalHardenedCodex": "passed fresh/reused/resumed and independent chat writes",
+    "finalHardenedClaudeSubscription": "blocked: session quota before writes; two completed directory reads; no Unknown/pending approvals",
+    "actualInstalledAdapterLocalRequestCapture": "passed both: privileged bridge and native execution absent"
+  },
+  "remainingLimits": [
+    "Final Claude subscription rerun requires quota availability",
+    "Opaque/historical unscoped writes remain conservative",
+    "Non-ASCII target scopes stay opaque; ASCII case aliases conflict conservatively across hosts",
+    "Timed-out filesystem I/O may finish later; read invocation returns by deadline and performs no mutation"
+  ],
+  "migrationRenumbering": "038 avoids current main agent-request/fork migrations 036 and 037; no schema change beyond effect_scope_json"
+}

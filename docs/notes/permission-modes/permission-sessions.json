@@ -1,0 +1,67 @@
+{
+  "checkpoint": "OA-399",
+  "realAdapters": [
+    {
+      "adapter": "claude",
+      "sameSession": "49c709de-1a9b-4962-8135-4e04c180b857",
+      "turns": [
+        "1ad587be-9e72-49c7-8846-56ae9fe0eb67",
+        "1036c0a3-ecb1-4dac-bbd7-4c8a35eee10b",
+        "1d5b58ec-5444-4d6b-a7b9-e9df3afb4454",
+        "acab5055-e2b7-4211-afe2-ab4492041b89"
+      ],
+      "persistedGatewayModes": true,
+      "automaticReceiptsWithoutHumanApproval": true,
+      "nativeBypass": "no observed file effect or daemon fallback",
+      "inheritedMcp": "not started"
+    },
+    {
+      "adapter": "codex",
+      "sameSession": "01a1a3aa-b756-7800-aa7c-9a3ab5f05bfa",
+      "turns": [
+        "e4a7ab21-fb07-492d-9e55-999970f72d9a",
+        "8e811456-d25c-46e8-aeb6-ef7d5a7aa01e",
+        "a6a79867-d1cd-47cd-86bd-c5f8edbdae2b",
+        "ec26b267-af0e-41e6-a04e-581cff2fd108"
+      ],
+      "persistedGatewayModes": true,
+      "automaticReceiptsWithoutHumanApproval": true,
+      "nativeBypass": "no observed file effect or daemon fallback",
+      "inheritedMcp": "not started"
+    }
+  ],
+  "controlledProviderTransports": [
+    "ollama/fixture",
+    "deepseek/deepseek-v4-flash",
+    "openai/gpt-5",
+    "anthropic/claude-opus-4-6",
+    "google/gemini-2.5-pro",
+    "openrouter/openai/gpt-5",
+    "groq/openai/gpt-oss-120b",
+    "nebius/Qwen/Qwen3.8-27B",
+    "xai/grok-4.6",
+    "alibaba/qwen3.8-flash",
+    "mistral/magistral-small-latest",
+    "cerebras/gpt-oss-120b",
+    "deepinfra/deepseek-ai/DeepSeek-V4-Pro",
+    "perplexity/sonar-pro"
+  ],
+  "gatewaySuite": [
+    "three presets",
+    "Ask escalation",
+    "Never refusal",
+    "passive inspection",
+    "owner/Limited authority",
+    "default snapshots",
+    "revision conflicts",
+    "delayed dispatch",
+    "pending expiry",
+    "nullable human approval",
+    "unknown-effect fence",
+    "restart",
+    "historical migration",
+    "actual React automatic receipt inspection"
+  ],
+  "hostedApiAcceptance": false,
+  "productionEnabled": false
+}

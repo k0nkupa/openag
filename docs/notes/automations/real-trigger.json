@@ -1,0 +1,13 @@
+{
+  "adapter": "installed Codex",
+  "trigger": "real cron timer",
+  "outcome": "completed",
+  "delivery": "verified bot_output in temporary local room",
+  "runId": "9d913ce3-28b2-4b29-a84d-0b63d8610f26",
+  "workId": "c42ea8b0-296b-4dd1-ab58-01501d5f78ee",
+  "startedAt": 1793495220711,
+  "endedAt": 1793495228479,
+  "externalActions": "none",
+  "liveDesk": "unchanged",
+  "dir": "/var/folders/x4/cs8jlkqs3hzgh5v1jcx1kk1r0000gn/T/openag-automation-9dDv3B"
+}
