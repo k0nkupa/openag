@@ -2,6 +2,18 @@
 
 All notable changes to OpenAg are recorded here. Versions follow [Semantic Versioning](https://semver.org); before 1.0, minor versions may change interfaces.
 
+## 0.5.1
+
+- `pnpm onboard`: one command from a fresh clone to a running daemon and a signed-in desk (detects Claude Code, Codex, API keys and Ollama; optional always-on service; `--dry-run`).
+- The desk reports "cua is not installed" instead of a raw spawn error when the Cua CLI is missing.
+- The owner's MCP server list no longer shows credentials written into a server URL by hand.
+- The sign-in relay accepts callbacks from custom remote MCP servers; the daemon still checks the issuer before any code exchange.
+- `pnpm onboard --service` no longer builds twice.
+- README logo and demo animation, recorded against demonstration data (`scripts/capture-demo.mjs`).
+- Issue and pull request templates; CONTRIBUTING explains how public contributions reach a release.
+- CI uses current GitHub Actions and type-checks the daemon's test files.
+- Releases are published with `scripts/publish-release.mjs`, which scans each snapshot before it is pushed.
+
 ## 0.5.0 — first public release
 
 OpenAg is a self-hosted, always-on desk for AI agents: one daemon (`openagd`) and a web desk, running on your own Mac.
@@ -46,5 +58,4 @@ OpenAg is a self-hosted, always-on desk for AI agents: one daemon (`openagd`) an
 ### Known limits
 - macOS only; Linux and Windows are untested.
 - The daemon speaks plain HTTP; use Tailscale or a trusted network for other devices.
-- The sign-in relay accepts callbacks only from Composio; custom remote MCP servers must use the Tailscale route.
 - Real provider acceptance for connectors is recorded per connector; see [ROADMAP.md](ROADMAP.md) for open items.

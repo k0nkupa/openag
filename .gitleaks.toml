@@ -1,0 +1,8 @@
+# Used by scripts/publish-release.mjs. Extends the default rules with narrow exceptions for known non-secrets.
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Session identifiers recorded in permission acceptance evidence"
+regexTarget = "line"
+regexes = ['''"fullAccessSessionReused": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"''']

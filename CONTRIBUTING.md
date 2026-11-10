@@ -12,6 +12,7 @@ Thanks for looking at OpenAg. It is a self-hosted agent daemon with a web desk, 
 ## Setup and checks
 
 ```sh
+pnpm onboard --dry-run   # optional: preflight and model-source detection; a plain `pnpm onboard` also builds and starts the daemon
 pnpm install
 pnpm -r build          # builds all workspaces and packages the help handbook
 pnpm -r test           # runs the Vitest suites (see the note below)
@@ -29,6 +30,7 @@ Behaviour checks live in `scripts/verify-*.mjs` (116 scripts). Run the ones that
 ```sh
 node scripts/verify-bot-knowledge.mjs   # help handbook delivery and policy
 node scripts/verify-capabilities.mjs    # capability catalogue
+node scripts/verify-onboard.mjs           # one-command setup dry run
 ```
 
 Several checks start a real daemon in a temporary data directory. Scripts that call real providers take an explicit `--real` flag; do not run those without credentials and a budget you intend to use.
@@ -49,6 +51,15 @@ Several checks start a real daemon in a temporary data directory. Scripts that c
 - Use Conventional Commit messages: `feat:`, `fix:`, `docs:`, `refactor:`, `test:`, `chore:`. Keep the subject short and imperative, for example `fix: reject unsigned webhook bodies`.
 - Open pull requests as drafts unless the change is ready for review.
 - In the PR description, include a summary of the change, the exact checks you ran with their results, and any checks you skipped and why.
+- Day-to-day development happens in a separate repository, and each release is published here as a single snapshot. A merged pull request is carried over into development by hand and ships in the next release, so its commits will not appear in this history; you remain credited in the release notes.
+
+## Releases (maintainers)
+
+1. Set the version in the root and app `package.json` files and add a `## X.Y.Z` section to `CHANGELOG.md`.
+2. Merge to `main` in the development repository, then run `node scripts/publish-release.mjs --dry-run` from a clean, up-to-date `main`.
+3. Run it again without `--dry-run`. It publishes one snapshot commit to the public repository, tags `vX.Y.Z`, creates the GitHub release from the changelog section, and tags the source commit.
+
+The script refuses to publish if the snapshot contains a personal home path, a token pattern, a gitleaks finding outside test fixtures, or any string from your private deny list (`$OPENAG_RELEASE_DENYLIST`, default `~/.config/openag/release-denylist`). Keep that list outside the repository.
 
 ## Reporting bugs and security issues
 

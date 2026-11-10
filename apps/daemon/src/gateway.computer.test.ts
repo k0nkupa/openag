@@ -1,7 +1,7 @@
 import { mkdirSync, mkdtempSync, rmSync, symlinkSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi, type Mock } from "vitest";
 import { createApprovals } from "./approvals.js";
 import { createAuth } from "./auth.js";
 import { ComputerError, NOT_RUNNING_MESSAGE, type Computer, type ComputerStatus } from "./computer.js";
@@ -15,7 +15,8 @@ const PNG = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 1, 2, 3
 let dir: string;
 let db: Db;
 let busy: boolean;
-let computer: Computer & Record<string, ReturnType<typeof vi.fn>>;
+type ComputerMock = Computer & { start: Mock<Computer["start"]>; screenshot: Mock<Computer["screenshot"]> };
+let computer: ComputerMock;
 let app: ReturnType<typeof createGateway>;
 let ownerAuth: Record<string, string>;
 let deviceAuth: Record<string, string>;
@@ -52,7 +53,7 @@ beforeEach(() => {
     stop: vi.fn(async () => status({ state: "stopped", status: "stopped" })),
     destroy: vi.fn(async () => status({ exists: false, state: "absent" })),
     screenshot: vi.fn(async () => ({ path: "computer/screens/a.png", width: 18, height: 1 })),
-  } as unknown as Computer & Record<string, ReturnType<typeof vi.fn>>;
+  } as unknown as ComputerMock;
   app = createGateway({
     db,
     ledger,

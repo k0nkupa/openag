@@ -34,8 +34,7 @@ if [ -z "$TOKEN" ] && [ -f "$DEST" ]; then
   TOKEN="$(plutil -extract EnvironmentVariables.OPENAG_TOKEN raw -o - "$DEST" 2>/dev/null || true)"
 fi
 
-echo "building"
-(cd "$ROOT" && pnpm -r build >/dev/null)
+if [ -n "${OPENAG_SKIP_BUILD:-}" ]; then echo "build skipped (already built)"; else echo "building"; (cd "$ROOT" && pnpm -r build >/dev/null); fi
 mkdir -p "$DATA/logs" "$(dirname "$DEST")"
 # Provision before an optional seed creates the DB. This prints no credential and does not start the daemon.
 if [ -z "$DRY_RUN" ]; then

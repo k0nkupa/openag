@@ -25,7 +25,7 @@ afterEach(() => {
 function setup() {
   const ledger = createLedger(db);
   const auth = createAuth({ db, ownerToken: OWNER });
-  const rtc = { reload: vi.fn(), createInvite: vi.fn(() => ({ secret: "s3cr3t-join-secret", expiresAt: Date.now() + 1000 })), status: vi.fn(() => ({ enabled: true, inert: null, subscribed: true, peers: 0, offers: 0, rejected: 0, lastError: null })) };
+  const rtc = { reload: vi.fn(), createInvite: vi.fn(() => ({ secret: "s3cr3t-join-secret", expiresAt: Date.now() + 1000 })), status: vi.fn(() => ({ enabled: true, turn: false, inert: null, subscribed: true, peers: 0, offers: 0, rejected: 0, lastError: null })) };
   const app = createGateway({ db, ledger, approvals: createApprovals(db, ledger), auth, dispatch: () => {}, deskDir: join(dir, "none"), rtc });
   const device = auth.createDevice("phone").token;
   return { app, ledger, rtc, owner: { authorization: `Bearer ${OWNER}`, "content-type": "application/json" }, dev: { authorization: `Bearer ${device}`, "content-type": "application/json" } };

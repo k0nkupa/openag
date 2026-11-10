@@ -12,6 +12,7 @@ import { addMember, createBot, createRoom } from "./rooms.js";
 import { createScheduler } from "./scheduler.js";
 import { createRunner } from "./runtimes/runner.js";
 import { defaultTools } from "./runtimes/tools.js";
+import { createWakeFilter } from "./wake.js";
 
 const TOKEN = "test-token";
 const auth = { authorization: `Bearer ${TOKEN}` };
@@ -57,7 +58,7 @@ beforeEach(() => {
     },
     tools: defaultTools,
   });
-  manager = createAutomationManager({ db, ledger, runner, scheduler: createScheduler(), tz: "UTC" });
+  manager = createAutomationManager({ db, ledger, runner, scheduler: createScheduler(), wake: createWakeFilter({ db, ledger, tz: "UTC" }), tz: "UTC" });
   app = createGateway({
     db,
     ledger,

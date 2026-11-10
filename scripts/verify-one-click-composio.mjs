@@ -105,7 +105,9 @@ try {
  const saved=readFileSync(join(dir,'connector-composio.enc'));
  const malformed=await start(); const bad=responseFor(malformed);
  assert.equal((await relayFetch(relayOrigin+bad+'&state=duplicate')).status,404);
- assert.equal((await relayFetch(relayOrigin+bad+'&iss=https%3A%2F%2Fevil.invalid')).status,404);
+ assert.equal((await relayFetch(relayOrigin+bad+'&iss=http%3A%2F%2Fevil.invalid')).status,404,'Relay refuses a non-https issuer');
+ const foreign=await start(); assert.equal((await relayFetch(relayOrigin+responseFor(foreign)+'&iss=https%3A%2F%2Fevil.invalid')).status,200,'Relay passes an https issuer through');
+ const foreignStatus=(await (await poll(foreign)).json()).status; assert.equal(foreignStatus,'failed','The daemon refuses a foreign issuer'); assert.equal(exchanges,1,'No exchange for a foreign issuer'); await req('/connectors/composio/cancel',full.token,{attempt:foreign.attempt});
  assert.equal((await relayFetch(relayOrigin+'/sessions/'+malformed.attempt,{headers:{authorization:'Bearer '+'z'.repeat(43)}})).status,404);
  assert.equal((await (await poll(malformed)).json()).status,'pending'); await req('/connectors/composio/cancel',full.token,{attempt:malformed.attempt});
 

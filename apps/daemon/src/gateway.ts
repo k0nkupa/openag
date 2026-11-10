@@ -223,11 +223,22 @@ const auditSetting = (key: string, value: unknown): unknown => {
 
 const NOT_CONFIGURED_MSG = "push is not enabled or has no topic";
 
+/** A hand-written entry can carry user:password in its URL (it is then invalid); the desk never shows it. Saving the edit writes the URL without it. */
+function hideUrlCredentials<T extends { url?: string }>(server: T): T {
+  if (!server.url) return server;
+  try {
+    const url = new URL(server.url);
+    if (!url.username && !url.password) return server;
+    url.username = ""; url.password = "";
+    return { ...server, url: url.href };
+  } catch { return server; }
+}
+
 function mcpBody(mcp: McpManager | undefined, owner = false) {
   const body = { servers: mcp?.status() ?? [], configPath: mcp?.configPath ?? null };
   if (!owner || !mcp) return body;
   // Editable detail (URL, header templates, digest) is for the owner only; an unsafe or unreadable file is reported, never half-shown.
-  try { return { ...body, entries: mcp.entries() }; }
+  try { const entries = mcp.entries(); return { ...body, entries: { ...entries, servers: entries.servers.map(hideUrlCredentials) } }; }
   catch { return { ...body, entries: null, entriesError: "mcp.json cannot be read safely; fix it on the machine first" }; }
 }
 

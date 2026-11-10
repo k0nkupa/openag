@@ -2,7 +2,8 @@ import { chmodSync, existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { createComputer, type Computer, type ComputerOptions, type Ledger, type Runner } from "../computer.js";
+import { createComputer, type Computer, type ComputerOptions, type Runner } from "../computer.js";
+import type { Ledger } from "../ledger.js";
 
 // Test-only helper: drives the fake `cua` (fake-cua.testkit.mjs) through a shell wrapper. Never the real binary.
 export const FAKE = fileURLToPath(new URL("./fake-cua.testkit.mjs", import.meta.url));

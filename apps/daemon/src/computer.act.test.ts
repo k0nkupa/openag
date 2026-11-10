@@ -144,7 +144,7 @@ describe("shell", () => {
     const quickFail = await fake.computer().shell("exit 1", 30);
     expect(quickFail.exitCode).toBe(1);
     expect(quickFail.timedOut).toBe(false);
-    const slow = await fake.computer({ sleepMs: 1300 }).shell("sleep 10", 1);
+    const slow = await fake.computer({ knobs: { sleepMs: 1300 } }).shell("sleep 10", 1);
     expect(slow.exitCode).toBe(1);
     expect(slow.timedOut).toBe(true);
   });
@@ -268,6 +268,7 @@ describe("viewLink", () => {
   it("returns the loopback origin and the ticket fragment without calling `do`", async () => {
     fake.seed({ "openag-main": "running" });
     const res = await link();
+    if (res.kind === "external") throw new Error("expected a proxy link");
     expect(res.origin).toBe("http://127.0.0.1:32768");
     expect(res.fragment).toContain("ticket=v1.faketicket");
     expect(res.expiresAt).toBeGreaterThan(Date.now());

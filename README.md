@@ -1,5 +1,10 @@
 <div align="center">
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/openag-logo-dark.svg">
+  <img src="docs/assets/openag-logo-light.svg" alt="OpenAg logo" width="96" height="96">
+</picture>
+
 # OpenAg
 
 **Your agents. One desk. Your server.**
@@ -16,11 +21,11 @@ An always-on home for AI agents that runs on your own Mac. Bring the Claude Code
 </div>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/notes/desk-shell/desktop-room-dark.jpg">
-  <img src="docs/notes/desk-shell/desktop-room-light.jpg" alt="OpenAg desk with a shared room, specialist agents, an action waiting for approval, and computer context.">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/notes/desk-shell/demo-dark.gif">
+  <img src="docs/notes/desk-shell/demo-light.gif" alt="OpenAg desk demo: a team of agents, @mentions in a room, an action waiting for review in the conversation, and paired devices.">
 </picture>
 
-*The desk with demonstration data. [Desktop and phone previews](docs/notes/desk-shell/README.md).*
+*Demonstration data with scripted agent replies (`scripts/capture-demo.mjs`). [Desktop and phone screenshots](docs/notes/desk-shell/README.md).*
 
 OpenAg is one daemon, `openagd`, plus a web desk. The daemon owns the database, memory, tools, schedules and every permission decision. Your browser and phone are just windows onto it. Keep it running on an always-on Mac and your agents keep working while you are away, then tell you only what is worth your attention.
 
@@ -61,6 +66,15 @@ Things people use it for today:
 
 ```sh
 git clone https://github.com/k0nkupa/openag.git && cd openag
+pnpm onboard
+```
+
+`pnpm onboard` checks Node and pnpm, installs and builds, detects your model sources without calling them (Claude Code, Codex, API key names, Ollama), optionally installs the always-on service, starts the daemon, and opens the desk signed in as the owner. It is safe to re-run and never overwrites your data or credentials. Use `pnpm onboard --dry-run` to see the plan first; `--yes`, `--service`, `--no-service`, `--lan`, `--skip-build` and `--ollama-model <name>` are listed under `--help`.
+
+<details>
+<summary><b>Manual steps</b></summary>
+
+```sh
 pnpm install && pnpm -r build
 pnpm --filter daemon start        # serves the desk at http://127.0.0.1:4747
 ```
@@ -71,12 +85,14 @@ In a second terminal on the same Mac:
 pnpm desk:open                    # signs this browser in as the owner
 ```
 
+</details>
+
 Say hi to **Bot**, your default agent. On first start OpenAg creates it on Claude Code, or on Codex if only Codex is installed, using your existing sign-in.
 
 <details>
 <summary><b>No Claude Code or Codex? Use Ollama or an API key</b></summary>
 
-Before starting the daemon, seed an agent on the model you have:
+`pnpm onboard` offers the Ollama option itself (`--ollama-model <name>` to choose). To do it by hand, before starting the daemon, seed an agent on the model you have:
 
 ```sh
 # Ollama (local, no key). The daemon reads http://127.0.0.1:11434 unless OPENAG_OLLAMA_URL is set.
@@ -96,7 +112,7 @@ Then start the daemon and run `pnpm desk:open` as above. The daemon reads keys f
 ### Keep it running and reach it from your phone
 
 ```sh
-scripts/install-service.sh        # per-user launchd service with KeepAlive
+pnpm onboard --service          # or: scripts/install-service.sh (per-user launchd service with KeepAlive)
 ```
 
 The daemon listens on `127.0.0.1` only. To use the desk from your phone:

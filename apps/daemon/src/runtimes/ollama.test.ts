@@ -27,12 +27,13 @@ function setup(replies: Array<Response | Error>, over: { env?: NodeJS.ProcessEnv
     toolCalls.push({ name, args });
     return { ok: true, result: { echoed: args } };
   };
+  const state: Record<string, unknown> = {};
   const ctx = {
     bot: { id: "local", name: "Local", runtime: "api", model: over.model === undefined ? "ollama/qwen3:8b" : over.model, config: {} },
     room: { id: "main", name: "main", members: ["local"], leadBotId: "local" },
     prompt: "hello there",
     hostedInput: { instructions: "You are Local, a bot in OpenAg. Be brief.", current: "hello there", data: [], history: [] },
-    state:{},saveState(patch:Record<string,unknown>){Object.assign(this.state,patch);},
+    state,saveState(patch:Record<string,unknown>){Object.assign(state,patch);},
     turnId: "t1",
     // The runtime also appends request/model telemetry events; only bot_output carries the answer.
     ledger: { append: (_room: string, _actor: string, type: string, payload: { text: string }) => { if (type === "bot_output") outputs.push(payload.text); } },

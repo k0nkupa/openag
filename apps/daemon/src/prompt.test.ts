@@ -5,7 +5,7 @@ import { buildPrompt } from "./prompt.js";
 const bot = (id: string, config: unknown = {}): Bot => ({ id, name: id, runtime: "api", model: null, config });
 const CONSULT = "For a bounded consultation with another existing agent, use agent_list then agent_consult. Its accepted result is admission only; finish with progress and synthesize the attributed findings when they return. Use agent_request_cancel to stop your outstanding requests when asked. Do not create Work or also delegate that request in prose.";
 const WORK = "Ordinary conversation, plans and delegation do not create Work. To propose tracked Work, use create_work with an objective and assignee in this conversation. Creation requires explicit review; if review is refused, no Work is created. Accepted Work is ready-to-start only; the owner starts it separately. Never claim prose has created or started Work.";
-const room: Room = { id: "main", name: "Main", leadBotId: "boss", members: ["boss", "coder"] };
+const room: Room = { id: "main", name: "Main", leadBotId: "boss", kind: "room", members: ["boss", "coder"] };
 
 describe("buildPrompt", () => {
   test("wraps the body in the context block with persona, roster and delegation rules", () => {

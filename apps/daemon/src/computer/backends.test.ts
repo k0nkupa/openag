@@ -55,7 +55,7 @@ describe("inert without configuration", () => {
     await expect(make("docker", { PATH: "/nonexistent-dir" }).router.start()).rejects.toMatchObject({ message: "docker is not installed" });
     await expect(make("ssh", { PATH: "/nonexistent-dir" }).router.start()).rejects.toMatchObject({ message: "ssh is not installed" });
     const { router } = make("cua");
-    expect(router.peek().backend).toBe("cua"); // passive: does not need the cua CLI on the test machine
+    expect(router.peek!().backend).toBe("cua"); // passive: does not need the cua CLI on the test machine
   });
 });
 

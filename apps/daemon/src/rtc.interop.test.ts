@@ -12,8 +12,8 @@ import { createRtcService, newRtcTopic, type RtcService, type Signaling } from "
 import { addMember, createBot, createRoom } from "./rooms.js";
 import { setSetting } from "./settings.js";
 // The REAL desk transport (browser code), driven against the REAL daemon service over real werift peers.
-import { createRtcTransport, type RtcPeerLike } from "../../desk/src/rtc/transport";
-import { createRtcFetch } from "../../desk/src/rtc/rtcFetch";
+import { createRtcTransport, type RtcPeerLike } from "../../desk/src/rtc/transport.js";
+import { createRtcFetch } from "../../desk/src/rtc/rtcFetch.js";
 
 const OWNER = "owner-interop-token";
 let dir: string;

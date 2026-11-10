@@ -44,6 +44,8 @@ Hardening after the OA-105 review: the viewer's RPC fetches (credentials omitted
 
 ## Status inspection and recovery
 
+If the `cua` CLI is not on the daemon's PATH, status and actions fail with "cua is not installed". Install Cua on the daemon host (or choose another backend) and refresh.
+
 The desk's full and contextual computer views have Refresh status and explain absent, stopped, running and unknown states. Unknown is not absence: refresh and inspect the backend on the daemon host if it remains unknown. The desk does not offer Start or Destroy as recovery for unknown status, and lifecycle controls are blocked while busy, under human control, after a status error or while a backend change is pending.
 
 Only the Cua CLI's not-found exit establishes absence. Malformed/non-object info output, missing state or invalid status types raise a status error; they never authorise creation. A parsed but unrecognised state remains unknown. No automatic recreation, destruction or lifecycle retry is added.

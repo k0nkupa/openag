@@ -62,7 +62,9 @@ async function waitFor(cond: () => boolean, ms = 3000): Promise<void> {
 
 async function setup(opts: { maxWaitMs?: number; maxCallsPerTurn?: number } = {}) {
   const db: Db = openDb(dir);
-  closers.push(async () => db.close());
+  closers.push(async () => {
+    db.close();
+  });
   createBot(db, { id: "boss", runtime: "api" });
   createBot(db, { id: "coder", runtime: "acp" });
   createRoom(db, { id: "main", leadBotId: "boss" });

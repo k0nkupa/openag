@@ -1,6 +1,6 @@
 import { execFile } from "node:child_process";
 import { chmodSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync } from "node:fs";
-import { join, resolve } from "node:path";
+import { basename, join, resolve } from "node:path";
 import type { Ledger } from "./ledger.js";
 import { getDefaultRedactor } from "./redact.js";
 
@@ -184,10 +184,12 @@ export const defaultRunner: Runner = (bin, args, opts) =>
         const e = err as NodeJS.ErrnoException & { killed?: boolean; signal?: string | null };
         const timedOut = e.killed === true && e.signal != null;
         const code = typeof e.code === "number" ? e.code : null;
+        // A missing binary is a setup problem, not a CLI failure: say so instead of Node's "spawn cua ENOENT".
+        const missing = e.code === "ENOENT" ? `${basename(bin)} is not installed` : undefined;
         resolveRun({
           code,
           stdout: typeof stdout === "string" ? stdout : "",
-          stderr: typeof stderr === "string" && stderr !== "" ? stderr : e.message,
+          stderr: missing ?? (typeof stderr === "string" && stderr !== "" ? stderr : e.message),
           timedOut,
         });
       },

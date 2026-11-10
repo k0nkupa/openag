@@ -30,7 +30,7 @@ function make(overrides: { fire?: (t: HookTarget, i: HookFire) => { accepted: bo
 }
 
 const post = (body: string | Buffer, headers: Record<string, string> = {}) =>
-  new Request("http://x/hooks/s", { method: "POST", body, headers: { "content-type": "application/json", ...headers } });
+  new Request("http://x/hooks/s", { method: "POST", body: typeof body === "string" ? body : new Uint8Array(body), headers: { "content-type": "application/json", ...headers } });
 const ghSig = (body: string, secret = SECRET) => `sha256=${createHmac("sha256", secret).update(body).digest("hex")}`;
 const slackSig = (body: string, ts: string, secret = SECRET) => `v0=${createHmac("sha256", secret).update(`v0:${ts}:${body}`).digest("hex")}`;
 const tsNow = () => String(Math.floor(clock / 1000));

@@ -113,7 +113,13 @@ const byName = (m: McpManager, name: string) => {
   if (!exec) throw new Error(`no executor ${name}`);
   return exec;
 };
-const ctx = { botId: "boss", dataDir: dir };
+// `dir` is assigned per test (beforeEach), so read it lazily.
+const ctx = {
+  botId: "boss",
+  get dataDir() {
+    return dir;
+  },
+};
 
 describe("config loading", () => {
   test("a missing file means no servers and no connector calls", async () => {

@@ -3,7 +3,7 @@
 Use App library to discover integrations, review requirements and start setup. Added integrations link to their selected details in Settings, Connectors, which owns ongoing account and runtime management. The library's Manage connections link replaces its old Installed tab. Selected integration URLs survive refresh; old App library and Connectors list URLs remain valid. A configured or detected integration may still need access or setup.
 
 
-Computer opens the managed-computer controls. The default backend is Cua; optional backends depend on administrator configuration. A configured backend is not proof a session is running. Shell availability varies by backend.
+Computer opens the managed-computer controls. The default backend is Cua; optional backends depend on administrator configuration. A configured backend is not proof a session is running. "cua is not installed" means the Cua CLI is missing on the OpenAg machine; install it there or choose another backend. Shell availability varies by backend.
 
 Computer actions share a lock. Human takeover pauses bot input while screenshots remain available. Computer shell is an external action. Clicking a submit button cannot reliably be detected from pixels, so input actions ask by default. Do not recommend making all input automatic as a way around action review.
 

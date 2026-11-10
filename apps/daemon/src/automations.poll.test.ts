@@ -50,8 +50,9 @@ const fake: BotRuntime = {
   },
 };
 
-const emit = (ctx: TurnContext, text: string) =>
+const emit = (ctx: TurnContext, text: string): void => {
   ctx.ledger.append(ctx.room.id, ctx.bot.id, "bot_output", { turnId: ctx.turnId, text });
+};
 const verdictJson = (verdict: string, key: string) =>
   JSON.stringify({ verdict, reason: `reason ${key}`, urgency: "high", dedupe_key: key });
 

@@ -3,9 +3,12 @@ import { join } from "node:path";
 import {
   agent,
   type AgentConnection,
+  type AgentRequestContext,
   methods,
   type PermissionOption,
+  type PromptRequest,
   type RequestPermissionRequest,
+  type StopReason,
   type Stream,
 } from "@agentclientprotocol/sdk/unstable";
 
@@ -23,7 +26,7 @@ export interface FakeAdapterOptions {
   /** tool_call updates sent before the permission request. Default: one "Write hello.txt" update for t1. */
   priorToolCalls?: PriorCalls | ((server: string) => PriorCalls);
   /** Replaces the default prompt behaviour. Returns the stop reason. */
-  onPrompt?: (p: { sessionId: string; text: string; server: string; client: Parameters<Parameters<ReturnType<typeof agent>["onRequest"]>[1]>[0]["client"] }) => Promise<string>;
+  onPrompt?: (p: { sessionId: string; text: string; server: string; client: AgentRequestContext<PromptRequest>["client"] }) => Promise<StopReason>;
 }
 
 /** In-process fake ACP agent: asks permission to Write hello.txt on a prompt containing "create", and writes it only if allowed. */

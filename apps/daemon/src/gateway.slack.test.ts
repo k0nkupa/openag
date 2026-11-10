@@ -23,7 +23,7 @@ afterEach(() => {
 function setup() {
   const ledger = createLedger(db);
   const auth = createAuth({ db, ownerToken: OWNER });
-  const slack = { reload: vi.fn(), status: vi.fn(() => ({ enabled: true, inert: null, connected: true, received: 1, sent: 2, dropped: 0, lastError: null, lastEventAt: null })) };
+  const slack = { reload: vi.fn(), status: vi.fn(() => ({ enabled: true, inert: null, connected: true, received: 1, sent: 2, dropped: 0, lastError: null, lastEventAt: null, lastFrameAt: null })) };
   const app = createGateway({ db, ledger, approvals: createApprovals(db, ledger), auth, dispatch: () => {}, deskDir: join(dir, "none"), slack });
   const device = auth.createDevice("phone").token;
   return { app, slack, owner: { authorization: `Bearer ${OWNER}`, "content-type": "application/json" }, dev: { authorization: `Bearer ${device}`, "content-type": "application/json" } };

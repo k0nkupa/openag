@@ -4,7 +4,7 @@ import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, test } from "vitest";
 import { ComputerError } from "../computer.js";
 import { createDriverComputer } from "./driver.js";
-import { createDockerDriver, type DockerRunner, dockerAvailability } from "./docker.js";
+import { createDockerDriver, type DockerRunner, type DockerRunResult, dockerAvailability } from "./docker.js";
 
 const SECRET = "SECRET-leak-7c21";
 
@@ -35,7 +35,7 @@ const fail = (code: number | null, stderr = "", extra: { timedOut?: boolean } = 
 });
 
 /** A fake docker CLI with a tiny state machine. */
-function fakeDocker(override?: (args: string[]) => ReturnType<typeof ok> | undefined) {
+function fakeDocker(override?: (args: readonly string[]) => DockerRunResult | undefined) {
   const state = { exists: false, running: false };
   const calls: Call[] = [];
   const run: DockerRunner = async (bin, args, o) => {

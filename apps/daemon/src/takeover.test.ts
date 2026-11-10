@@ -48,9 +48,9 @@ describe("takeover and agent input", () => {
   });
 
   it("another principal is refused with `held`; the same one can refresh", async () => {
-    await tk.take({ kind: "device", deviceId: "d1", name: "phone" });
-    await expect(tk.take({ kind: "device", deviceId: "d2", name: "tablet" })).rejects.toBeInstanceOf(TakeoverError);
-    await expect(tk.take({ kind: "device", deviceId: "d1", name: "phone" })).resolves.toBeDefined();
+    await tk.take({ kind: "device", deviceId: "d1", name: "phone", access: "full" });
+    await expect(tk.take({ kind: "device", deviceId: "d2", name: "tablet", access: "full" })).rejects.toBeInstanceOf(TakeoverError);
+    await expect(tk.take({ kind: "device", deviceId: "d1", name: "phone", access: "full" })).resolves.toBeDefined();
   });
 
   it("session ids are single-holder secrets: only live ones check out, and release invalidates them", async () => {
@@ -64,7 +64,7 @@ describe("takeover and agent input", () => {
 });
 
 describe("takeover hardening", () => {
-  const principal = (id: string) => ({ kind: "device", deviceId: id, name: id }) as const;
+  const principal = (id: string) => ({ kind: "device", deviceId: id, name: id, access: "full" }) as const;
   const slowComputer = (tickets: string[], delayMs = 20) => {
     let n = 0;
     return {
@@ -172,7 +172,7 @@ describe("external takeovers", () => {
     const tk = createTakeover({ computer: computerWith(extLink(Date.now() + 600_000)), ledger: createLedger(db), checkEveryMs: 3_600_000 });
     const seen: Array<[string, boolean]> = [];
     tk.onRelease((reason, external) => seen.push([reason, external]));
-    await tk.take({ kind: "device", deviceId: "d1", name: "phone" });
+    await tk.take({ kind: "device", deviceId: "d1", name: "phone", access: "full" });
     tk.releaseIfHeldBy("d1", "revoked");
     expect(seen).toEqual([["revoked", true]]);
     tk.dispose();

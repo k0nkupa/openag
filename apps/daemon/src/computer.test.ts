@@ -3,7 +3,8 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import { childEnv, ComputerError, createComputer, defaultRunner, type Computer, type Ledger, type Runner } from "./computer.js";
+import { childEnv, ComputerError, createComputer, defaultRunner, type Computer, type Runner } from "./computer.js";
+import type { Ledger } from "./ledger.js";
 
 const FAKE = fileURLToPath(new URL("./computer/fake-cua.testkit.mjs", import.meta.url));
 const PNG_MAGIC = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
@@ -50,7 +51,7 @@ function sandbox(state: string, status: string) {
   return { id: "local:openag-main", name: "openag-main", image: "img:1", kind: "container", runtime: "gvisor", state, status };
 }
 
-function seed(state: "running" | "stopped" | null, status = state === "running" ? "ready" : "stopped") {
+function seed(state: "running" | "stopped" | "weird" | null, status = state === "running" ? "ready" : "stopped") {
   writeFileSync(statePath, JSON.stringify(state ? { "openag-main": sandbox(state, status) } : {}));
 }
 
@@ -216,6 +217,13 @@ describe("lifecycle", () => {
     const b = c.withLock(async () => order.push("b"));
     await Promise.all([a, b]);
     expect(order).toEqual(["a-start", "a-end", "b"]);
+  });
+});
+
+describe("missing cua", () => {
+  it("reports that cua is not installed instead of a spawn error", async () => {
+    const computer = createComputer({ dataDir: dir, cuaBin: join(dir, "missing", "cua"), ledger });
+    await expect(computer.status()).rejects.toMatchObject({ message: "cua is not installed" });
   });
 });
 

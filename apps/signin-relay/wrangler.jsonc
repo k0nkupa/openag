@@ -5,6 +5,8 @@
   "compatibility_date": "2026-11-02",
   "compatibility_flags": ["nodejs_compat"],
   "workers_dev": true,
+  // Only the production address serves callbacks; per-version preview URLs add nothing.
+  "preview_urls": false,
   // Callback URLs contain authorization codes. Never collect invocation URLs or traces.
   "observability": { "enabled": false },
   "durable_objects": { "bindings": [{ "name": "SESSIONS", "class_name": "RelaySession" }] },

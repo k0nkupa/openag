@@ -39,8 +39,9 @@ const fake: BotRuntime = {
   },
 };
 
-const emit = (ctx: TurnContext, text: string) =>
+const emit = (ctx: TurnContext, text: string): void => {
   ctx.ledger.append(ctx.room.id, ctx.bot.id, "bot_output", { turnId: ctx.turnId, text });
+};
 
 const hookBase = { name: "Hook", triggerKind: "webhook", botId: "boss", prompt: "Summarise the event" } as const;
 const verdictJson = (verdict: string, key: string) =>
@@ -189,8 +190,9 @@ describe("hook runs", () => {
   test("act-* and bash tools are denied in the default isolated hook turn", async () => {
     const results: string[] = [];
     turnHook = async (ctx) => {
-      results.push((await ctx.authorize("Bash", { command: "ls" })).status);
-      results.push((await ctx.authorize("Read", { file_path: "/tmp/x" })).status);
+      const outcome = (r: Awaited<ReturnType<TurnContext["authorize"]>>) => (r.allowed ? "allowed" : r.status);
+      results.push(outcome(await ctx.authorize("Bash", { command: "ls" })));
+      results.push(outcome(await ctx.authorize("Read", { file_path: "/tmp/x" })));
       emit(ctx, verdictJson("silent", "k"));
     };
     const c = manager.create({ ...hookBase, name: "Iso" }, "o").automation;
@@ -202,7 +204,7 @@ describe("hook runs", () => {
   });
 
   test("with allowTools only read/search/browse tools run; bash stays denied", async () => {
-    const results: string[] = [];
+    const results: boolean[] = [];
     turnHook = async (ctx) => {
       results.push((await ctx.authorize("Bash", { command: "ls" })).allowed);
       // First-party offline-safe read tool (Claude's native "Read" is not a daemon tool and is refused).

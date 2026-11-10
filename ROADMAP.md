@@ -78,6 +78,7 @@ Unticked items in the former queue. Each needs its own acceptance before it is m
 - OA-215 GitHub polling trigger without a tunnel (the code exists; ticket not closed).
 - OA-306 Desk WebRTC transport and pairing.
 - OA-307 TURN and reconnect for WebRTC.
+- Web Push notifications for 0.6.0: end-to-end encrypted pushes to the installed desk (no extra app), with subscriptions tied to paired devices so revoking a device stops its notifications. Needs an HTTPS desk origin (Tailscale Serve). Keep ntfy as an option for plain-HTTP LAN setups and self-hosted ntfy servers.
 
 **Deferred**
 - OA-440 Investigate LFM3 tool-result generation, only if the model is reprioritised.

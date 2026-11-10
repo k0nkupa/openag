@@ -34,7 +34,7 @@ const commitCount = () => Number(git("rev-list", "--count", "HEAD"));
 const errorEvents = () =>
   db.prepare("SELECT payload_json FROM events WHERE type = 'error'").all() as { payload_json: string }[];
 const propose = (toolName: string, body: unknown) =>
-  approvals.request({ roomId: "main", botId: "boss", turnId: null, toolName, toolClass: "act-local", payload: body }).approvalId;
+  approvals.request({ roomId: "main", botId: "boss", toolName, toolClass: "act-local", payload: body }).approvalId;
 
 /** The applier wired exactly as main.ts does it. */
 function applier() {

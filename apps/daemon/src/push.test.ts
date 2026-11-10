@@ -108,10 +108,9 @@ describe("request shape", () => {
 
   test("approval payload with paths and content never reaches the message", async () => {
     configure();
-    await pusher().notifyApproval({
-      actor: "boss",
-      payload: { approvalId: "ap-9", toolName: "write_file", file_path: "/etc/passwd", content: "secret" },
-    });
+    // Extra fields beyond the declared shape are deliberate: they must never reach the message.
+    const payload = { approvalId: "ap-9", toolName: "write_file", file_path: "/etc/passwd", content: "secret" };
+    await pusher().notifyApproval({ actor: "boss", payload });
     const msg = String(sent().body.message);
     expect(msg).not.toContain("/etc/passwd");
     expect(msg).not.toContain("secret");
@@ -232,7 +231,7 @@ describe("failures", () => {
 describe("wake integration", () => {
   test("only a delivered ping calls the pusher", async () => {
     configure();
-    const notifyPing = vi.fn(async () => undefined);
+    const notifyPing = vi.fn(async (_notice: PingNotice) => undefined);
     const wake = createWakeFilter({
       db,
       ledger,

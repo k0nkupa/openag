@@ -4,7 +4,7 @@ import type { Server } from "node:http";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { serve } from "@hono/node-server";
-import { methods, type RequestPermissionRequest } from "@agentclientprotocol/sdk";
+import { methods, type RequestPermissionRequest } from "@agentclientprotocol/sdk/unstable";
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { StreamableHTTPClientTransport } from "@modelcontextprotocol/sdk/client/streamableHttp.js";
 import { afterEach, beforeEach, expect, test } from "vitest";
@@ -56,7 +56,9 @@ const closers: Array<() => Promise<void> | void> = [];
 beforeEach(() => {
   dir = mkdtempSync(join(tmpdir(), "openag-acp-mcp-e2e-"));
   db = openDb(dir);
-  closers.push(() => db.close());
+  closers.push(() => {
+    db.close();
+  });
   createBot(db, { id: "coder", runtime: "acp" });
   createRoom(db, { id: "main", leadBotId: "coder" });
   addMember(db, "main", "coder");
@@ -128,7 +130,8 @@ test("the ACP prompt is not a second gate: the MCP server decides once per actio
           results.push((await mcpClient.callTool({ name: "computer_screenshot", arguments: {} })) as Result);
         } else if (text.includes("click")) {
           // Claude's adapter asks first (we auto-allow our own tools), then makes the call.
-          const decision = await client.request(methods.client.session.requestPermission, { sessionId, ...ownClick(mcp[0]!.name) });
+          const request: RequestPermissionRequest = { sessionId, ...ownClick(mcp[0]!.name) };
+          const decision = await client.request(methods.client.session.requestPermission, request);
           results.push(decision.outcome.outcome === "selected" ? decision.outcome.optionId : "cancelled");
           results.push((await mcpClient.callTool({ name: "computer_click", arguments: { x: 5, y: 6 } })) as Result);
         }

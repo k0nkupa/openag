@@ -113,9 +113,9 @@ Explicit `OPENAG_COMPOSIO_REDIRECT_URI` / `OPENAG_PUBLIC_URL` overrides and a sa
 
 On a Full access device, open **App library** → **Composio** and choose **Connect Composio** (or **Reconnect** under Settings → Connectors). The provider tab should return to `https://openag-signin.<your-subdomain>.workers.dev/composio-connect` and show "Return to OpenAg"; the original desk then shows the result. Reaching that page only proves the relay received a response; the desk's **Connected** state is the real check.
 
-## Remote MCP OAuth limitation
+## Remote MCP sign-in
 
-The relay accepts an RFC 9207 `iss` callback parameter only when it equals `https://connect.composio.dev` (`apps/signin-relay/src/index.ts`). A custom remote MCP server whose provider sends a different `iss` is refused at the relay with "Sign-in unavailable or expired". Use the Tailscale route for such servers.
+Composio and custom remote MCP servers share the relay's `/composio-connect` callback. The relay accepts any RFC 9207 `iss` that is a plain `https` URL (no credentials, query or fragment) and stores it with the callback. The daemon then compares it with the issuer it discovered for that attempt before any code exchange, so a callback from the wrong provider fails without spending the code.
 
 ## Updating
 
@@ -150,7 +150,7 @@ Sign-in then uses the private Tailscale callback. Saved connections are unaffect
 | Invalid hosted sign-in response / Invalid sign-in response | While waiting for the callback, the URL answered with something other than this relay's format (wrong host, or a proxy rewriting responses). The attempt stops. |
 | Invalid sign-in route configuration | `OPENAG_SIGNIN_ROUTE` is not `auto`, `hosted` or `tailscale`. |
 | Sign-in is temporarily unavailable. The OpenAg operator needs to check hosted sign-in or Tailscale access. | `auto` mode: the relay failed (or is not set) and the Tailscale route failed too. |
-| Callback tab shows "Sign-in unavailable or expired" | The attempt expired (five minutes), was already used or cancelled, or (remote MCP) the provider sent a non-Composio `iss`. Start Connect again. |
+| Callback tab shows "Sign-in unavailable or expired" | The attempt expired (five minutes), was already used or cancelled, or the provider sent an `iss` that is not a plain `https` URL. Start Connect again. |
 | `wrangler deploy` fails on a `ratelimits` entry | Another Worker in your account may already use that `namespace_id`. Change the ids in `wrangler.jsonc` to unused integers. |
 
 In `auto` mode an unreachable relay does not show an error: sign-in quietly uses Tailscale. Set `OPENAG_SIGNIN_ROUTE=hosted` while testing the relay so failures surface.

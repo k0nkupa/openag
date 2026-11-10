@@ -36,6 +36,13 @@ function receivedPage() {
   return new Response(`<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Return to OpenAg</title><script nonce="${nonce}">history.replaceState(null,'','/done');window.close();</script><h1>Return to OpenAg</h1><p>Your sign-in response was received. OpenAg will check the connection. You can close this tab.</p></html>`, { headers: { ...headers, "Content-Type": "text/html; charset=utf-8", "Content-Security-Policy": `default-src 'none'; script-src 'nonce-${nonce}'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'` } });
 }
 
+// Composio and remote MCP servers share this callback. The daemon matches `iss` to the issuer it discovered before any
+// code exchange (RFC 9207); the relay only refuses values that cannot be an issuer.
+function validIssuer(iss: string) {
+  if (iss.length > 2048) return false;
+  try { const url = new URL(iss); return url.protocol === "https:" && !url.username && !url.password && !url.search && !url.hash; } catch { return false; }
+}
+
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     try {
@@ -54,7 +61,7 @@ export default {
       if (url.pathname === "/composio-connect" && request.method === "GET") {
         const callback: Record<string, string> = {};
         for (const key of ["state", "code", "error", "iss"]) { const values = url.searchParams.getAll(key); if (values.length > 1) return refused(); if (values.length) callback[key] = values[0]!; }
-        if (!statePattern.test(callback.state ?? "") || (!!callback.code === !!callback.error) || (callback.code?.length ?? 0) > 4096 || (callback.error?.length ?? 0) > 256 || callback.iss && callback.iss !== "https://connect.composio.dev") return refused();
+        if (!statePattern.test(callback.state ?? "") || (!!callback.code === !!callback.error) || (callback.code?.length ?? 0) > 4096 || (callback.error?.length ?? 0) > 256 || callback.iss !== undefined && !validIssuer(callback.iss)) return refused();
         const result = await env.SESSIONS.get(env.SESSIONS.idFromName(callback.state!)).fetch(new Request("https://session/callback", { method: "POST", body: JSON.stringify(callback) }));
         return result.ok ? receivedPage() : refused();
       }

@@ -42,7 +42,7 @@ afterEach(() => {
 const memory = () => readFileSync(memoryPath(dir, "boss"), "utf8");
 const commits = () => execFileSync("git", ["log", "--format=%an %s"], { cwd: dir, encoding: "utf8" }).trim().split("\n");
 const propose = (toolName: string, payload: unknown) =>
-  approvals.request({ roomId: "main", botId: "boss", turnId: null, toolName, toolClass: "act-local", payload }).approvalId;
+  approvals.request({ roomId: "main", botId: "boss", toolName, toolClass: "act-local", payload }).approvalId;
 
 describe("reflection applier", () => {
   test("nothing is written when the approval is only pending", async () => {

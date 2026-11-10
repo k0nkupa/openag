@@ -57,7 +57,7 @@ test("resolving twice fails and does not append another event", () => {
 });
 
 test("resolving an unknown id fails", () => {
-  expect(() => createApprovals(db, createLedger(db)).resolve("nope", { kind: "accept" })).toThrow(/not found/);
+  expect(() => createApprovals(db, createLedger(db)).resolve("nope", { kind: "accept" }, "unknown-version")).toThrow(/not found/);
 });
 
 test("pending approvals remain after the DB is closed and reopened", async () => {

@@ -35,6 +35,9 @@ const usage = {
   inputTokens: { total: 1, noCache: 1, cacheRead: 0, cacheWrite: 0 },
   outputTokens: { total: 1, text: 1, reasoning: 0 },
 };
+// ai's MockLanguageModelV3 is a valid LanguageModelV3 at runtime (Mastra resolves it), but its doGenerate typing does not
+// line up with Mastra's MastraLanguageModelV3 structural type, so it is cast once here.
+const asRuntimeModel = (m: MockLanguageModelV3) => m as unknown as NonNullable<Parameters<typeof createApiRuntime>[0]>["model"];
 function scriptedModel(args: unknown) {
   let calls = 0;
   return new MockLanguageModelV3({
@@ -83,7 +86,7 @@ const say = (p: ReturnType<typeof processWith>, botId: string, text: string) => 
 const turnStatuses = () => (db.prepare("SELECT status FROM turns ORDER BY created_at, rowid").all() as { status: string }[]).map((r) => r.status);
 
 test("recover() marks running turns interrupted and leaves pending approvals pending", async () => {
-  const a = processWith({ api: createApiRuntime({ model: scriptedModel({ path: "a.txt", content: "x" }) }) });
+  const a = processWith({ api: createApiRuntime({ model: asRuntimeModel(scriptedModel({ path: "a.txt", content: "x" })) }) });
   void say(a, "boss", "write a.txt");
   const pending = await pendingApproval(a.approvals);
 
@@ -96,12 +99,12 @@ test("recover() marks running turns interrupted and leaves pending approvals pen
 });
 
 test("API turn: restart while waiting -> accept resumes the turn with a pregrant, no second approval", async () => {
-  const a = processWith({ api: createApiRuntime({ model: scriptedModel({ path: "hello.txt", content: "hi" }) }) });
+  const a = processWith({ api: createApiRuntime({ model: asRuntimeModel(scriptedModel({ path: "hello.txt", content: "hi" })) }) });
   void say(a, "boss", "write hello.txt");
   const pending = await pendingApproval(a.approvals);
 
   // "Restart": a fresh process over the same DB. Process A's in-memory turn is gone as far as B is concerned.
-  const b = processWith({ api: createApiRuntime({ model: scriptedModel({ path: "hello.txt", content: "hi" }) }) });
+  const b = processWith({ api: createApiRuntime({ model: asRuntimeModel(scriptedModel({ path: "hello.txt", content: "hi" })) }) });
   b.runner.recover();
   expect(b.approvals.listPending().map((x) => x.id)).toEqual([pending.id]);
   expect(existsSync(join(botWorkDir(dir, "boss"), "hello.txt"))).toBe(false);
@@ -121,10 +124,10 @@ test("API turn: restart while waiting -> accept resumes the turn with a pregrant
 });
 
 test("ignore on an interrupted turn abandons it; nothing runs", async () => {
-  const a = processWith({ api: createApiRuntime({ model: scriptedModel({ path: "x.txt", content: "x" }) }) });
+  const a = processWith({ api: createApiRuntime({ model: asRuntimeModel(scriptedModel({ path: "x.txt", content: "x" })) }) });
   void say(a, "boss", "write x.txt");
   const pending = await pendingApproval(a.approvals);
-  const b = processWith({ api: createApiRuntime({ model: scriptedModel({ path: "x.txt", content: "x" }) }) });
+  const b = processWith({ api: createApiRuntime({ model: asRuntimeModel(scriptedModel({ path: "x.txt", content: "x" })) }) });
   b.runner.recover();
   resolveReviewed(b.approvals, pending.id, { kind: "ignore" });
   await b.runner.idle();
@@ -134,7 +137,7 @@ test("ignore on an interrupted turn abandons it; nothing runs", async () => {
 });
 
 test("a decision on a normal (running) turn does not trigger a resume", async () => {
-  const a = processWith({ api: createApiRuntime({ model: scriptedModel({ path: "n.txt", content: "n" }) }) });
+  const a = processWith({ api: createApiRuntime({ model: asRuntimeModel(scriptedModel({ path: "n.txt", content: "n" })) }) });
   const turn = say(a, "boss", "write n.txt");
   resolveReviewed(a.approvals, (await pendingApproval(a.approvals)).id, { kind: "accept" });
   await turn;

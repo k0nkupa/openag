@@ -1,12 +1,13 @@
 {
   "name": "daemon",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "private": true,
   "license": "MIT",
   "type": "module",
   "scripts": {
     "build": "rm -rf dist && tsc -p . && rm -rf dist/db/migrations && cp -R src/db/migrations dist/db/migrations && node ../../scripts/build-apple-calendar.mjs && node ../../scripts/build-knowledge.mjs",
     "test": "vitest run",
+    "typecheck:tests": "tsc -p tsconfig.test.json",
     "dev": "pnpm run build && node dist/main.js",
     "seed": "node dist/seed.js",
     "start": "node dist/main.js"

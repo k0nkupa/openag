@@ -199,7 +199,7 @@ describe("screenshot and actions", () => {
     expect((await d.act(["click", "10", "20", "right"])).message).toBe("clicked (10, 20) [right]");
     const mouse = cdp.calls.filter((c) => c.method === "Input.dispatchMouseEvent").map((c) => c.params.type);
     expect(mouse).toEqual(["mouseMoved", "mousePressed", "mouseReleased"]);
-    expect(cdp.calls.find((c) => c.params.type === "mousePressed").params).toMatchObject({ x: 10, y: 20, button: "right", clickCount: 1 });
+    expect(cdp.calls.find((c) => c.params.type === "mousePressed")!.params).toMatchObject({ x: 10, y: 20, button: "right", clickCount: 1 });
     expect((await d.act(["click", "1", "2"])).message).toBe("clicked (1, 2) [left]");
   });
 
@@ -209,7 +209,7 @@ describe("screenshot and actions", () => {
     await d.create();
     const long = "x".repeat(60);
     expect((await d.act(["type", "--", long])).message).toBe(`typed: "${"x".repeat(40)}"`);
-    expect(cdp.calls.find((c) => c.method === "Input.insertText").params).toEqual({ text: long });
+    expect(cdp.calls.find((c) => c.method === "Input.insertText")!.params).toEqual({ text: long });
   });
 
   test("key sends keyDown and keyUp; enter carries text", async () => {
@@ -222,7 +222,7 @@ describe("screenshot and actions", () => {
     expect(keys[0].params).toMatchObject({ key: "Enter", code: "Enter", windowsVirtualKeyCode: 13, text: "\r" });
     expect(keys[1].params.text).toBeUndefined();
     await d.act(["key", "a"]);
-    expect(cdp.calls.filter((c) => c.method === "Input.dispatchKeyEvent").at(-2).params).toMatchObject({ key: "a", code: "KeyA", text: "a" });
+    expect(cdp.calls.filter((c) => c.method === "Input.dispatchKeyEvent").at(-2)!.params).toMatchObject({ key: "a", code: "KeyA", text: "a" });
   });
 
   test("key table covers named keys and rejects unknown ones", async () => {
@@ -284,7 +284,7 @@ describe("screenshot and actions", () => {
     const { d } = driverWith(happy, cdp);
     await d.create();
     expect((await d.act(["open", "--", "https://example.com/a"])).message).toBe("opened example.com");
-    expect(cdp.calls.find((c) => c.method === "Page.navigate").params).toEqual({ url: "https://example.com/a" });
+    expect(cdp.calls.find((c) => c.method === "Page.navigate")!.params).toEqual({ url: "https://example.com/a" });
     for (const bad of ["file:///etc/passwd", "javascript:alert(1)", "ftp://x.test", "not a url"]) {
       await expect(d.act(["open", "--", bad])).rejects.toMatchObject({ code: "failed", message: "invalid argument: only http(s) URLs" });
     }

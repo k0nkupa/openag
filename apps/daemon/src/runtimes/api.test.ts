@@ -20,6 +20,10 @@ const usage = {
   outputTokens: { total: 1, text: 1, reasoning: 0 },
 };
 
+// ai's MockLanguageModelV3 is a valid LanguageModelV3 at runtime (Mastra resolves it), but its doGenerate typing does not
+// line up with Mastra's MastraLanguageModelV3 structural type, so it is cast once here.
+const asRuntimeModel = (m: MockLanguageModelV3) => m as unknown as NonNullable<Parameters<typeof createApiRuntime>[0]>["model"];
+
 /** First model call requests write_file(args); the second answers with `finalText`. */
 function scriptedModel(args: unknown, finalText = "done") {
   let calls = 0;
@@ -73,7 +77,7 @@ function harness(model: MockLanguageModelV3) {
     approvals,
     permissions,
     dataDir: dir,
-    runtimes: { api: createApiRuntime({ model }) },
+    runtimes: { api: createApiRuntime({ model: asRuntimeModel(model) }) },
     tools: defaultTools,
   });
   const message = ledger.append("main", "user", "message", { text: "make hello.txt" });

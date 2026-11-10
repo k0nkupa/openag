@@ -32,7 +32,7 @@ const bow: Embedder = {
         for (const c of w) h = (h * 31 + c.charCodeAt(0)) % 1000003;
         v[h % 16] += 1;
       }
-      if (v.every((x) => x === 0)) v[0] = 1;
+      if (v.every((x): boolean => x === 0)) v[0] = 1; // explicit boolean: no inferred `x is 0` predicate narrowing `v` to 0[]
       const n = Math.sqrt(v.reduce((s, x) => s + x * x, 0));
       return v.map((x) => x / n);
     });

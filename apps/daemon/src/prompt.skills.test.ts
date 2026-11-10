@@ -4,7 +4,7 @@ import { buildPrompt } from "./prompt.js";
 import { INDEX_MAX_CHARS, skillsIndex } from "./skills.js";
 
 const bot = (id: string): Bot => ({ id, name: id, runtime: "api", model: null, config: {} });
-const room: Room = { id: "main", name: "Main", leadBotId: "boss", members: ["boss"] };
+const room: Room = { id: "main", name: "Main", leadBotId: "boss", kind: "room", members: ["boss"] };
 const boss = bot("boss");
 
 describe("buildPrompt skills", () => {

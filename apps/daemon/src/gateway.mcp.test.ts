@@ -72,7 +72,7 @@ describe("MCP API", () => {
   test("GET /mcp/servers returns status only, with no secrets or URLs", async () => {
     const res = await app.request("/mcp/servers", { headers: auth });
     expect(res.status).toBe(200);
-    const body = (await res.json()) as { servers: Array<Record<string, unknown>>; configPath: string };
+    const body = (await res.json()) as { servers: Array<Record<string, unknown>>; configPath: string; entries: { servers: Array<{ id: string; url?: string }> } };
     expect(body.configPath).toBe(join(dir, "mcp.json"));
     expect(body.servers.map((s) => s.id)).toEqual(["brave", "remote", "bad"]);
     expect(body.servers[0]).toEqual({ id: "brave", transport: "stdio", origin: "custom", enabled: true, offerToAgents: true, state: "skipped", detail: "missing env BRAVE_API_KEY_NOT_SET_IN_TESTS", toolCount: 0, tools: [], requirements: ["BRAVE_API_KEY_NOT_SET_IN_TESTS"] });
@@ -88,6 +88,9 @@ describe("MCP API", () => {
     expect(full).not.toContain(RESOLVED_HEADER_VALUE);
     expect(full).not.toContain(TOKEN);
     expect(full).toContain("Bearer ${MCP_GW_TEST_TOKEN}");
+    // Credentials written into a URL by hand are never echoed, even to the owner.
+    expect(full).not.toContain("user:pw");
+    expect(body.entries.servers.find((s) => s.id === "bad")!.url).toBe("https://example.com/mcp");
   });
 
   test("a limited device gets status only: no editable entries, URLs or templates", async () => {

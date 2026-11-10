@@ -1,0 +1,20 @@
+name: Feature request
+description: Suggest something OpenAg should do.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to do?
+      description: The task or situation, not the solution.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What would help?
+  - type: textarea
+    id: safety
+    attributes:
+      label: Permissions and safety
+      description: Would this let an agent act on something new (files, accounts, network, devices)? How should approval work?

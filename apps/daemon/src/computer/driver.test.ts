@@ -62,7 +62,7 @@ function fakeDriver(o: FakeOpts = {}) {
 }
 const make = (o?: FakeOpts, extra: Parameters<typeof createDriverComputer>[1] = { dataDir: dir }) => {
   const f = fakeDriver(o);
-  return { ...f, computer: createDriverComputer(f.driver, { dataDir: dir, timing: { pollMs: 5, startWaitMs: 200, stopWaitMs: 200 }, ...extra }) };
+  return { ...f, computer: createDriverComputer(f.driver, { timing: { pollMs: 5, startWaitMs: 200, stopWaitMs: 200 }, ...extra }) };
 };
 
 describe("lifecycle", () => {
